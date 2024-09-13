@@ -32,6 +32,7 @@ import TheWelcome from '../components/TheWelcome.vue'
     position: relative;
     top: 0;
     width: 100vw;
+
     height: 100vh;
     margin: 0 auto;
     background-color: #fff;
@@ -71,7 +72,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 
   .logo_company_ct {
     position: relative;
-    top: -2.5rem;
+    top: -2rem;
     padding: 0.25rem 0.5rem;
     font-size: calc(22px + 0.3vw);
     transform: skew(2deg);
@@ -114,12 +115,12 @@ import TheWelcome from '../components/TheWelcome.vue'
 
   .home_btn_wrapper {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3rem;
     width: 36%;
     display: flex;
     justify-content: center;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.85);
-    transform: scale(0.92);
+    transform: scale(0.95);
   }
 
   .home_btn_wrapper .btn_home {
@@ -130,6 +131,36 @@ import TheWelcome from '../components/TheWelcome.vue'
     font-size: calc(13px + 0.15vw);
     border-radius: 5px;
     outline: 2px solid #555;
+  }
+}
+
+@media (min-width: 180px) and (max-width: 780px) and (orientation: landscape) {
+  .logo_company_ct {
+    position: relative;
+    top: -1.4rem;
+    font-size: calc(23px + 0.3vw);
+  }
+
+  .home_btn_wrapper {
+    position: absolute;
+    bottom: 1.2rem;
+  }
+}
+
+@media (min-width: 860px) {
+  .logo_company_ct {
+    position: relative;
+    top: -3rem;
+    font-size: calc(30px + 0.3vw);
+  }
+
+  .home_btn_wrapper {
+    position: absolute;
+    bottom: 4rem;
+  }
+
+  .home_btn_wrapper .btn_home {
+    font-size: calc(20px + 0.2vw);
   }
 }
 </style>
