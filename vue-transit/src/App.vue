@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import HomeView from './views/HomeView.vue'
 import SigningView from './views/SigningView.vue'
+import FeaturesView from './views/FeaturesView.vue'
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import SigningView from './views/SigningView.vue'
 
   <!-- <RouterView /> -->
 
-  <SigningView />
+  <FeaturesView />
 </template>
 
 <style scoped></style>
