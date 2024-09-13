@@ -5,19 +5,20 @@
       <div class="design_top"></div>
 
       <div class="signing_logo">
-        <h3 class="text-xl mt-3 py-2 px-1 krub-regular-italic">transi\com</h3>
+        <h3 class="text-xl mt-2 py-2 px-1 krub-regular-italic">transi\com</h3>
       </div>
 
       <div class="land_account">
         <div class="pitch_registering">
           <div class="register_lab px-2 relative top-2 flex_row_center">
-            <a class="text-sm text-blue-400 roboto-light">Register</a>
+            <a class="text-sm lg:text-sm text-blue-400 roboto-light">Register</a>
           </div>
           <form class="transit_registering flex_col_center">
             <div class="reg_form_control">
               <label class="text-sm roboto-light">Email</label>
               <input id="email" type="text" class="input_reg email" placeholder="Enter Email" />
             </div>
+
             <div class="reg_form_control">
               <label class="text-sm roboto-light">Username</label>
               <input
@@ -27,6 +28,7 @@
                 placeholder="Enter Username"
               />
             </div>
+
             <div class="reg_form_control">
               <label class="text-sm roboto-light">Password</label>
               <input
@@ -36,13 +38,24 @@
                 placeholder="Enter Username"
               />
             </div>
+
+            <div class="reg_form_control">
+              <label class="text-sm">Custom</label>
+              <input id="custom" type="text" class="input_reg custom" placeholder="custom" />
+            </div>
+
+            <div class="submit_form_wrap flex_row_center w-full mt-4 py-1">
+              <button class="btn_submit_reg w-full h-8 py-1 text-white bg-gray-900 rounded">
+                apply
+              </button>
+            </div>
           </form>
         </div>
 
         <div class="pitch_login">
           <div class="connector_label flex_col_center relative mt-3">
             <div></div>
-            <div class="flex_col_center gap-1 text-xs roboto-light">
+            <div class="flex_col_center gap-1 text-xs lg:text-sm roboto-light">
               <span>OR</span>
               <span class="text-blue-500">log in using An Account</span>
             </div>
@@ -102,7 +115,7 @@
   .signing_wrap {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding: 0;
     margin: 0 auto;
   }
@@ -170,10 +183,10 @@
 
   .design_bottom {
     width: 100%;
-    position: absolute;
+    position: fixed;
     height: 4rem;
     border-radius: 3px;
-    bottom: 0;
+    bottom: 0rem;
     @apply bg-gray-400;
   }
 
@@ -191,7 +204,7 @@
   }
 
   .pitch_login {
-    padding-top: 2.75rem;
+    padding-top: 4rem;
   }
 }
 
@@ -217,6 +230,21 @@
 
   .land_account {
     width: 68%;
+  }
+}
+
+@media (min-width: 520px) and (max-width: 1045px) and (orientation: landscape) {
+  .land_account {
+    width: 100%;
+    margin: 2rem auto;
+  }
+  .pitch_login {
+    padding-top: 3.25rem;
+  }
+
+  .design_bottom {
+    position: relative;
+    bottom: -2.5rem;
   }
 }
 </style>
