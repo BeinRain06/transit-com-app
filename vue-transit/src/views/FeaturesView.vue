@@ -5,14 +5,27 @@ import router from '../router/index.ts'
 type ModalType = {
   content_1: string
   content_2: string
+  content_3?: string
+}
+
+type ModalFeedType = {
+  msg: string
+  buttonLabel: string
 }
 
 const modal = reactive<ModalType>({
   content_1: '',
-  content_2: ''
+  content_2: '',
+  content_3: ''
 })
 
-const modal_toggle: boolean = ref(false)
+const modalFeed = reactive<ModalFeedType>({
+  msg_a: 'work , focus and better communicate with all teams',
+  msg_b: 'collaboration, treatment and interconnectivity',
+  msg_c: 'monthly feeds'
+})
+
+const isFeatureA: boolean = ref(true)
 
 const modFeatures = ref()
 
@@ -21,23 +34,26 @@ function selectedFeature(label: string) {
 
   switch (label) {
     case 'request':
+      isFeatureA.value = true
       modal.content_1 = 'INTERNAL OPERATION'
       modal.content_2 = 'EXTERNAL OPERATION'
       break
-    case 'feedback':
-      modal.content_1 = 'SEND A FEEDBACK'
-      modal.content_2 = 'ASK FOR FEEDBACK'
-      break
     case 'stat':
+      isFeatureA.value = true
       modal.content_1 = 'DIVISION STATS'
       modal.content_2 = 'INDIVIDUAL STATS'
       break
+    case 'feedback':
+      isFeatureA.value = false
+      modal.content_1 = 'SEND A FEEDBACK'
+      modal.content_2 = 'ASK FOR FEEDBACK'
+      modal.content_3 = 'BROWSE FEEDS'
     default:
       throw Error('something went wrong in selectedFeature')
   }
 }
 
-function routingModal(e, id: number, label: string) {
+function routingModal(e, id: number, label_1: string, label_2?: string) {
   console.log(e.target)
   if (id === 1) {
     // router push
@@ -83,6 +99,9 @@ function closeModal() {
           <div id="stat_ft" class="feature_com" @click.prevent="() => selectedFeature('stat')">
             <h3 class="featute_title">STATS</h3>
           </div>
+          <div id="emergency_ft" class="feature_com">
+            <h3 class="featute_title">EMERGENCY</h3>
+          </div>
         </div>
       </div>
       <div class="lan_wrapper">
@@ -97,20 +116,70 @@ function closeModal() {
           <div class="btn_modal_wrapper">
             <button class="btn_close_modal" @click.prevent="closeModal">&#x2715;</button>
           </div>
-          <div class="modal_features_content">
+          <div class="modal_features_content_A" v-if="isFeatureA">
             <div
               id="modal_base_1"
-              class="modal_base flex_row_center"
+              class="modal_base_A flex_row_center"
               @click.prevent="(e) => routingModal(e, 1, modal.content_1)"
             >
               <h4 class="modal_title text-center">{{ modal.content_1 }}</h4>
             </div>
             <div
               id="modal_base_2"
-              class="modal_base flex_row_center"
+              class="modal_base_A flex_row_center"
               @click.prevent="(e) => routingModal(e, 2, modal.content_2)"
             >
               <h4 class="modal_title text-center">{{ modal.content_2 }}</h4>
+            </div>
+          </div>
+          <div class="modal_features_content_B" v-else>
+            <div
+              id="modal_feed_1"
+              class="modal_base_B flex_col_center"
+              @click.prevent="(e) => routingModal(e, 1, modal.content_1, modalFeed.msg_a)"
+            >
+              <p
+                class="add_message text-center mx-auto mb-2 px-2 py-1 text-yellow-100 hover:text-white"
+              >
+                {{ modalFeed.msg_a }}
+              </p>
+              <h4
+                class="modal_title w-44 md:w-52 text-lg text-center text-white font-bold mt-4 lg:mt-6 mx-auto bg-gray-600"
+              >
+                {{ modal.content_1 }}
+              </h4>
+            </div>
+            <div
+              id="modal_feed_2"
+              class="modal_base_B flex_col_center"
+              @click.prevent="(e) => routingModal(e, 2, modal.content_2, modalFeed.msg_b)"
+            >
+              <p
+                class="add_message text-center mx-auto mb-2 px-2 py-1 text-gray-700 hover:text-white"
+              >
+                {{ modalFeed.msg_b }}
+              </p>
+              <h4
+                class="modal_title w-44 md:w-52 text-lg text-center text-white font-bold mt-4 lg:mt-6 mx-auto bg-gray-600"
+              >
+                {{ modal.content_2 }}
+              </h4>
+            </div>
+            <div
+              id="modal_feed_3"
+              class="modal_base_B flex_col_center"
+              @click.prevent="(e) => routingModal(e, 2, modal.content_3, modalFeed.msg_c)"
+            >
+              <p
+                class="add_message text-center mx-auto mb-2 px-2 py-1 text-yellow-300 font-bold hover:text-white"
+              >
+                {{ modalFeed.msg_c }}
+              </p>
+              <h4
+                class="modal_title w-40 text-lg text-center text-white font-bold mt-4 lg:mt-6 mx-auto bg-gray-600"
+              >
+                {{ modal.content_3 }}
+              </h4>
             </div>
           </div>
         </div>
@@ -127,7 +196,7 @@ function closeModal() {
   .gen_features_wrap {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 132vh;
     padding: 0.5rem 1rem;
     z-index: 1;
   }
@@ -184,6 +253,16 @@ function closeModal() {
   .feature_com:hover {
     outline: 3px solid rgb(243, 243, 243);
     @apply bg-green-300;
+  }
+
+  #emergency_ft.feature_com {
+    outline: 3px dashed rgb(92, 92, 92);
+    @apply bg-purple-400;
+  }
+
+  #emergency_ft.feature_com:hover {
+    outline: 3px solid rgb(243, 243, 243);
+    animation: anim-emergency-btn 2s ease reverse infinite;
   }
 
   /** modal features **/
@@ -258,7 +337,8 @@ function closeModal() {
     @apply bg-gray-800;
   }
 
-  .modal_features_content {
+  .modal_features_content_A,
+  .modal_features_content_B {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -269,7 +349,7 @@ function closeModal() {
     @apply flex flex-col justify-center items-center;
   }
 
-  .modal_base {
+  .modal_base_A {
     position: relative;
     margin: 1rem 0;
     border-radius: 10px;
@@ -278,6 +358,47 @@ function closeModal() {
     outline: 2px solid rgba(114, 134, 40, 0.89);
     transition: all 1s ease;
     @apply w-4/5 h-24 bg-gray-300 hover:bg-green-500;
+  }
+
+  .modal_base_B {
+    position: relative;
+    padding-top: 0.75rem;
+    margin: 2rem 0 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+    outline: 2px solid rgba(114, 134, 40, 0.89);
+    transition: all 1s ease;
+    @apply w-11/12 h-28;
+  }
+
+  .modal_base_B::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  #modal_feed_1.modal_base_B {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/desola-lanre-ologun-unsplash.jpg') no-repeat center
+      center/cover;
+  }
+
+  #modal_feed_2.modal_base_B {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/campaign-creators-unsplash.jpg') no-repeat center center/cover;
+  }
+
+  #modal_feed_3.modal_base_B {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/andrew-neel-unsplash.jpg') no-repeat center center/cover;
   }
 
   .modal_features .modal_title {
@@ -300,6 +421,10 @@ function closeModal() {
 }
 
 @media (min-width: 760px) {
+  .gen_features_wrap {
+    min-height: 112vh;
+  }
+
   .signing_logo {
     position: absolute;
     bottom: unset;
@@ -315,7 +440,7 @@ function closeModal() {
     height: 20rem;
     grid-template-areas:
       ' req_lab req_lab feed_lab feed_lab '
-      ' . stats_lab stats_lab . ';
+      ' stats_lab stats_lab emer_lab emer_lab ';
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 140px;
     place-items: center;
@@ -343,17 +468,33 @@ function closeModal() {
     grid-area: stats_lab;
   }
 
+  #emergency_ft.feature_com {
+    width: 100%;
+    grid-area: emer_lab;
+  }
+
   .lan_wrapper {
     position: absolute;
     top: unset;
     bottom: 1rem;
     right: 1rem;
   }
+
+  .modal_base_B {
+    padding-top: 2.5rem;
+    @apply w-4/5 h-28;
+  }
+}
+
+@media (min-width: 1045px) {
+  .gen_features_wrap {
+    height: 100vh;
+  }
 }
 
 @media (min-width: 300px) and (max-width: 960px) and (orientation: landscape) {
   .gen_features_wrap {
-    min-height: 190vh;
+    min-height: 250vh;
   }
 }
 
@@ -380,6 +521,19 @@ function closeModal() {
     opacity: 0;
     transform: scale(0.35);
     background-color: rgba(0, 0, 0, 0.35);
+  }
+}
+
+@keyframes anim-emergency-btn {
+  0% {
+    opacity: 0.45;
+    visibility: hidden;
+    @apply bg-green-700 text-white;
+  }
+  100% {
+    opacity: 0.9;
+    visibility: visible;
+    @apply bg-red-400 text-gray-100;
   }
 }
 </style>
