@@ -37,14 +37,19 @@ const work_posts = ref<string[]>([
   <div class="settings_service_wrapper">
     <div class="settings_service_content w-full my-2">
       <div class="service_wrapper">
-        <div>
-          <h4 class="title_stage_city">Choose a service</h4>
-        </div>
-        <div class="service_stage_ct">
-          <div :id="innerElt.id" class="service_act_wrap" v-for="innerElt in services_doc">
-            <div class="service_act">
-              <span class="service_act_label"> {{ innerElt.name }} </span>
+        <div class="service_office">
+          <div>
+            <h4 class="title_stage_city">Choose a service</h4>
+          </div>
+          <div class="service_stage_ct">
+            <div :id="innerElt.id" class="service_act_wrap" v-for="innerElt in services_doc">
+              <div class="service_act">
+                <span class="service_act_label"> {{ innerElt.name }} </span>
+              </div>
             </div>
+          </div>
+          <div class="stage_btn_wrap">
+            <button class="btn_stage_next">next</button>
           </div>
         </div>
         <div class="service_target">
@@ -93,7 +98,7 @@ const work_posts = ref<string[]>([
         </div>
       </div>
       <div class="btn_settings_wrap w-full flex_row_center">
-        <button class="btn_apply_set bg-green-600">Apply Settings</button>
+        <button class="btn_apply_set bg-green-400">Apply Settings</button>
       </div>
     </div>
   </div>
@@ -111,7 +116,7 @@ const work_posts = ref<string[]>([
   .settings_service_wrapper {
     width: 100vw;
     min-height: 100vh;
-    padding: 1rem 0.5rem 1.5rem;
+    padding: 0 0.5rem 1.5rem;
     margin: 0 auto;
   }
 
@@ -120,14 +125,18 @@ const work_posts = ref<string[]>([
     @apply flex flex-col justify-center items-center w-full;
   }
 
-  /** service stage **/
+  /** service office **/
+
+  .service_office {
+    width: 100%;
+  }
 
   .title_stage_city {
-    margin: 1rem 0;
+    margin: 1rem;
+    text-align: center;
   }
 
   .service_stage_ct {
-    flex-basis: 100%;
     inline-size: 100%;
     margin: 0 auto;
     display: grid;
@@ -161,7 +170,7 @@ const work_posts = ref<string[]>([
     padding: 0.5rem;
     text-align: center;
     border-radius: 5px;
-    @apply text-white text-xs md:text-xl bg-blue-900 border-2 border-solid border-gray-200;
+    @apply text-white text-xs md:text-sm bg-blue-900 border-2 border-solid border-gray-200;
   }
 
   #human_integration_service.service_act_wrap {
@@ -178,6 +187,18 @@ const work_posts = ref<string[]>([
   }
   #maintenance_service.service_act_wrap {
     grid-area: maint;
+  }
+
+  /** button next **/
+  .stage_btn_wrap {
+    width: 100%;
+    margin: 0.75rem auto 0;
+  }
+
+  .btn_stage_next {
+    width: 100%;
+    padding: 0.25rem 0;
+    @apply text-gray-50 bg-gray-500;
   }
 
   /** priority stage **/
@@ -296,9 +317,19 @@ const work_posts = ref<string[]>([
 }
 
 @media (min-width: 460px) {
+  .title_stage_city {
+    margin: 1rem;
+    text-align: left;
+  }
+
   .text_label {
     font-size: calc(16px + 0.15vw);
   }
+
+  .stage_btn_wrap {
+    width: 92%;
+  }
+
   .recipient_info {
     padding: 1.5rem 0 0.5rem;
     margin: 1rem 0;
@@ -318,12 +349,16 @@ const work_posts = ref<string[]>([
 
 @media (min-width: 790px) {
   .title_stage_city {
-    margin: 1.5rem 0 2rem;
-    font-size: calc(16px + 0.1vw);
+    margin: 1.5rem 1rem 2rem;
+    @apply text-lg;
   }
 
   .settings_service_wrapper {
     padding: 1rem 0.5rem 3rem;
+  }
+
+  .stage_btn_wrap {
+    margin: 1.25rem auto 0;
   }
 
   .service_stage_ct {
@@ -347,6 +382,28 @@ const work_posts = ref<string[]>([
     width: 84%;
     height: 100%;
     border-radius: 24px;
+  }
+}
+
+@media (min-width: 960px) {
+  .title_stage_city {
+    margin: 0 auto;
+    height: 92px;
+    text-align: center;
+  }
+
+  .service_wrapper {
+    height: 100%;
+    flex-wrap: wrap;
+    @apply flex flex-row justify-center items-center w-full;
+  }
+
+  .service_office {
+    width: 50%;
+  }
+
+  .service_target {
+    width: 50%;
   }
 }
 </style>
