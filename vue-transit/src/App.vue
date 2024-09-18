@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import BasicsSelection from './components/BasicsSelection.vue'
 import HomeView from './views/HomeView.vue'
 import SigningView from './views/SigningView.vue'
 import FeaturesView from './views/FeaturesView.vue'
@@ -18,7 +19,7 @@ import FeaturesView from './views/FeaturesView.vue'
 
   <!-- <RouterView /> -->
 
-  <FeaturesView />
+  <BasicsSelection />
 </template>
 
 <style scoped></style>
