@@ -5,9 +5,6 @@ import TheWelcome from '../components/TheWelcome.vue'
 <template>
   <main id="transit_landing_page">
     <div class="transit_wrapper">
-      <div class="landing_upper_picture">
-        <div></div>
-      </div>
       <div class="company_wrap">
         <div class="logo_company_ct righteous-regular">
           <p class="text-gray-400">

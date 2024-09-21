@@ -42,7 +42,7 @@ const work_posts = ref<string[]>([
             <h4 class="title_stage_city">Choose a service</h4>
           </div>
           <div class="service_stage_ct">
-            <div :id="innerElt.id" class="service_act_wrap" v-for="innerElt in services_doc">
+            <div :key="innerElt.id" class="service_act_wrap" v-for="innerElt in services_doc">
               <div class="service_act">
                 <span class="service_act_label"> {{ innerElt.name }} </span>
               </div>
@@ -86,7 +86,7 @@ const work_posts = ref<string[]>([
               </div>
               <div class="recipient_choices_wrap">
                 <div class="recipient_choices_ct">
-                  <div class="recipient_choice" v-for="duty in work_posts">
+                  <div :key="i" class="recipient_choice" v-for="(duty, i) in work_posts">
                     <div class="recipient_inner_choice">
                       <span>{{ duty }}</span>
                     </div>
