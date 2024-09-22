@@ -26,9 +26,11 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
             &quest;
           </div>
         </div>
-        <div class="board_reason w-full my-4">
+        <div class="board_reason w-full max-w-5xl my-4 mx-auto">
           <ul class="listen_wrap_reason flex_row_center text-center m-auto">
-            <li class="tag_reason h-full flex_row_center"><h3 class="title_ask">Reason</h3></li>
+            <li class="tag_reason h-full flex_row_center">
+              <h3 class="title_ask">Reason</h3>
+            </li>
             <li class="tag_angle h-full flex_row_center">
               <div class="toggle_selection_reason">&#62;</div>
             </li>
@@ -49,7 +51,7 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
             </div>
           </div>
         </div>
-        <div class="details_feed mt-12">
+        <div class="details_feed w-full max-w-5xl mt-12 mx-auto">
           <div class="details_paragraph">
             <ul class="w-full flex_col_center gap-2">
               <li class="details_title w-full h-8 inline-flex items-center gap-2">
@@ -72,7 +74,7 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
                   <div
                     class="print_text_paragraph w-full my-2 inline-flex justify-end items-center"
                   >
-                    <button class="btn_print_text text-blue-300">
+                    <button class="btn_print_text text-blue-400">
                       see result<span class="symbol_raquo mx-2">&raquo;</span>
                     </button>
                   </div>
@@ -86,12 +88,14 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
             </ul>
           </div>
         </div>
-        <div class="optional_file_container w-full">
+        <div class="optional_file_container w-full max-w-5xl mx-auto">
           <div class="optional_label my-4">
             <h3 class="title_ask">Optional</h3>
           </div>
           <div class="optional_file_content w-full">
-            <ul class="organizing_files w-full flex_col_center mx-auto">
+            <ul
+              class="organizing_files w-full flex_col_center mx-auto border-2 border-dotted border-gray-300 rounded"
+            >
               <li class="w-full">
                 <div class="organize_to_add">
                   <div
@@ -195,14 +199,15 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
   }
 
   .toggle_selection_reason {
-    @apply w-4 h-4 mx-2 bg-gray-200 grid place-content-center;
+    @apply relative w-4 h-4 mx-2 bg-gray-200 grid place-content-center;
   }
 
   .reason_spotted_wrap {
     position: relative;
+    right: calc(5%);
     width: 100%;
     height: 100%;
-    margin-left: 1rem;
+    margin-left: calc(10%);
     font-size: calc(12px + 0.15vw);
     border-radius: 8px;
     @apply border border-solid border-gray-400;
@@ -274,6 +279,8 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
   .optional_file_content .organize_to_add {
     width: 100%;
     height: 100%;
+    max-width: 500px;
+    padding: 0.5rem 1rem;
     margin: 1rem auto;
     display: grid;
     grid-auto-columns: 100%;
@@ -309,8 +316,8 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    display: grid;
-    place-content: center;
+    display: flex;
+    justify-content: flex-start;
   }
 
   .area_send .further_need_li {
@@ -331,6 +338,12 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
   .input_check {
     width: 12px;
     height: 12px;
+  }
+}
+
+@media (min-width: 1045px) {
+  .reason_spotted_wrap {
+    width: 50%;
   }
 }
 </style>

@@ -6,7 +6,49 @@ export const useAskFeedStore = defineStore('askfeed', {
       spec: [
         {
           domain: 'tech',
-          archive: ['purcha_order', 'inventory Goods last months', 'inventory Goods 03 past months']
+          archive: ['month purchase order', 'past month supply', 'past three months supply']
+        },
+        {
+          domain: 'human',
+          archive: [
+            'month conveyence schedule',
+            'event company agenda',
+            'meetings request with outsider'
+          ]
+        },
+        {
+          domain: 'accounting',
+          archive: [
+            'month purchase order',
+            'past month supply',
+            'past three months supply',
+            'decision salaries payment',
+            'decision taxes payment'
+          ]
+        },
+        {
+          domain: 'law',
+          archive: [
+            'year task payment',
+            'year bank deposit',
+            'purchase order',
+            'companies policies review',
+            'holiday for x or y employee',
+            'purchase books'
+          ]
+        },
+        {
+          domain: 'management',
+          archive: [
+            'month purchase order',
+            'past month supply',
+            'past three months supply',
+            'agenda meetings with outsider',
+            'review law instance',
+            'year bank deposit',
+            'month expenses',
+            'month incomes'
+          ]
         }
       ]
     },
