@@ -1,16 +1,4 @@
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { ComputedRef } from 'vue'
-import { useAskFeedStore } from '@/stores/ask-feed-store'
-
-const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefined)[]> = computed(
-  () => {
-    const useAskFeed = useAskFeedStore()
-    const newUseAskFeed = useAskFeed.reasonFetched()
-    return newUseAskFeed
-  }
-)
-</script>
+<script setup lang="ts"></script>
 <template>
   <main id="ask_feed">
     <div class="ask_feed_container">
@@ -38,24 +26,12 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
               <div class="reason_spotted">shortage resources</div>
             </li>
           </ul>
-          <div class="reason_table_wrap">
-            <div class="reason_table_content">
-              <div class="reason_item_wrap" :key="item?.domain" v-for="item in platformFeed">
-                <ul class="flex_col_center w-full h-full">
-                  <li class="reason_number w-full text-red-300"></li>
-                  <li class="reason_fire w-full">
-                    <p class="reason_item flex_row_center w-full p-2 leading-relaxed"></p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="details_feed w-full max-w-5xl mt-12 mx-auto">
           <div class="details_paragraph">
             <ul class="w-full flex_col_center gap-2">
               <li class="details_title w-full h-8 inline-flex items-center gap-2">
-                <h3 class="title_ask">details</h3>
+                <h3 class="title_ask">details issue</h3>
                 <div
                   class="w-4 h-4 p-0 text-xs flex_row_center border border-solid border-black bg-gray-200"
                   style="border-radius: 50%"
@@ -65,23 +41,15 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
               </li>
               <li class="box_text_paragraph w-full">
                 <div class="box_text_wrap py-1 px-2 w-full h-full rounded">
-                  <textarea
-                    class="text_paragraph w-full rounded h-full"
-                    rows="2"
-                    cols="50"
-                    autofocus
-                  ></textarea>
-                  <div
-                    class="print_text_paragraph w-full my-2 inline-flex justify-end items-center"
-                  >
-                    <button class="btn_print_text text-blue-400">
-                      see result<span class="symbol_raquo mx-2">&raquo;</span>
-                    </button>
-                  </div>
                   <div
                     class="text_display_wrap w-full h-auto mx-auto my-4 px-1 py-4 bg-gray-200 rounded"
                   >
-                    <p class="text_display flex_row_center text-justify leading-relaxed"></p>
+                    <p class="text_display flex_row_center text-justify leading-relaxed p-2">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae facilis
+                      tenetur pariatur modi, architecto, dolore non eveniet corporis omnis aliquid
+                      tempora ipsam voluptas? Nam aliquid unde quis quo quas a quod fugiat, sequi
+                      vero magni quasi dicta possimus quidem odio!
+                    </p>
                   </div>
                 </div>
               </li>
@@ -141,24 +109,30 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
         <div class="area_send mt-8 mb-6">
           <ul class="further_need w-full flex_col_center gap-1">
             <li class="further_need_li">
-              <div class="input_check_wrap">
-                <input type="checkbox" class="input_check w-full h-full" />
+              <div class="div_check_wrap">
+                <div id="check_quick" class="div_check w-full h-full">&check;</div>
               </div>
               <h4 class="mx-2">Quick Report</h4>
             </li>
             <li class="further_need_li">
-              <div class="input_check_wrap">
-                <input type="checkbox" class="input_check w-full h-full" />
+              <div class="div_check_wrap">
+                <div id="check_presence" class="div_check w-full h-full"></div>
               </div>
               <h4 class="mx-2">May request your presence</h4>
             </li>
           </ul>
-          <ul class="btn_validation_wrap w-full flex_row_center gap-4 mt-6">
-            <li class="w-24 h-8 p-1 bg-green-400 text-white flex_row_center rounded">
-              <button>send</button>
+          <ul
+            class="btn_validation_wrap relative w-full xl:w-4/5 xl:px-5 h-12 mt-6 mx-auto flex justify-center flex-col-reverse gap-6 sm:justify-between sm: flex-row sm: gap-0 sm: items-center sm:mt-12 lg:mt-6 lg:flex-row"
+          >
+            <li class="w-auto h-full flex_row_center">
+              <div class="h-2 sm:h-6 bg-red-200 rounded-xl">
+                <p class="text-red-400 sm:text-red-600 px-8 mt-4 sm:mt-0">initialization</p>
+              </div>
             </li>
-            <li class="w-24 h-8 p-1 bg-black text-white flex_row_center rounded">
-              <button>abort</button>
+            <li class="w-auto h-full flex_row_center">
+              <div class="h-8 bg-gray-300">
+                <p class="text-gray-500 font-bold py-1 px-4">Feedback Request</p>
+              </div>
             </li>
           </ul>
         </div>
@@ -219,56 +193,11 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    height: 92%;
+    height: 100%;
     padding: 0;
     margin: auto;
     border-radius: 8px;
     @apply border-2 border-solid border-gray-200 text-gray-400 flex_row_center;
-  }
-
-  .reason_table_wrap {
-    position: relative;
-    width: 100%;
-    height: 9rem;
-    margin: 2.25rem 0 1rem;
-  }
-
-  .reason_table_wrap .reason_table_content {
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    grid-auto-columns: 70px;
-  }
-
-  .reason_item_wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    border-radius: 5px;
-    @apply border border-solid border-red-200;
-  }
-
-  .reason_item_wrap::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    @apply border-2 border-solid border-gray-300;
-  }
-
-  .details_feed .text_paragraph {
-    outline: none;
-    border: none;
-    padding: 10px;
-    box-shadow: 0px 0px 6px rgb(150, 190, 149);
   }
 
   .optional_file_container h3 {
@@ -329,15 +258,19 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     align-items: center;
   }
 
-  .input_check_wrap {
+  .div_check_wrap {
     width: 16px;
     height: 100%;
     @apply flex_row_center;
   }
 
-  .input_check {
+  .div_check {
     width: 12px;
     height: 12px;
+    display: grid;
+    place-content: center;
+    font-size: calc(14px + 0.2vw);
+    font-weight: bold;
   }
 }
 

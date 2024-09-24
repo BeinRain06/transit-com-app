@@ -2,8 +2,10 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import BasicsSelection from './components/BasicsSelection.vue'
-import AskFeedback from './components/AskFeedback.vue'
-import ReplyFeedback from './components/ReplyFeedBack.vue'
+import AskFormFeedback from './components/AskFormFeedback.vue'
+import AskSheetFeedback from './components/AskSheetFeedback.vue'
+import ReplyFormFeedback from './components/ReplyFormFeedBack.vue'
+import ReplySheetFeedback from './components/ReplySheetFeedback.vue'
 import HomeView from './views/HomeView.vue'
 import SigningView from './views/SigningView.vue'
 import FeaturesView from './views/FeaturesView.vue'
@@ -21,7 +23,7 @@ import FeaturesView from './views/FeaturesView.vue'
 
   <!-- <RouterView /> -->
 
-  <ReplyFeedback />
+  <AskSheetFeedback />
 </template>
 
 <style scoped></style>
