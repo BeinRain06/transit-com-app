@@ -6,6 +6,7 @@ import AskFormFeedback from './components/AskFormFeedback.vue'
 import AskSheetFeedback from './components/AskSheetFeedback.vue'
 import ReplyFormFeedback from './components/ReplyFormFeedBack.vue'
 import ReplySheetFeedback from './components/ReplySheetFeedback.vue'
+import TemplateMonthsFeedback from './components/TemplateMonthsFeedback.vue'
 import HomeView from './views/HomeView.vue'
 import SigningView from './views/SigningView.vue'
 import FeaturesView from './views/FeaturesView.vue'
@@ -23,7 +24,7 @@ import FeaturesView from './views/FeaturesView.vue'
 
   <!-- <RouterView /> -->
 
-  <AskSheetFeedback />
+  <TemplateMonthsFeedback />
 </template>
 
 <style scoped></style>
