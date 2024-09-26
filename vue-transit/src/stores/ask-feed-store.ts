@@ -52,7 +52,8 @@ export const useAskFeedStore = defineStore('askfeed', {
         }
       ]
     },
-    selectedDomain: 'tech'
+    selectedDomain: 'tech',
+    monthsConsultFeed: null
   }),
   getters: {},
   actions: {
@@ -63,6 +64,22 @@ export const useAskFeedStore = defineStore('askfeed', {
         }
       })
       return reasonObj
+    },
+
+    selectMonthsArrFeed(label: string) {
+      switch (label) {
+        case 'current-month':
+          //something that affect new value **monthsConsultFeed**
+          break
+        case 'last-month':
+          //something that affect new value **monthsConsultFeed**
+          break
+        case 'past-three-months':
+          //something that affect new value **monthsConsultFeed**
+          break
+        default:
+          throw Error('unexpected case error selecting months array feedback')
+      }
     }
   }
 })
