@@ -11,6 +11,7 @@ import RequestSubmit from './components/request-queries/RequestSubmit.vue'
 import HomeView from './views/HomeView.vue'
 import SigningView from './views/SigningView.vue'
 import FeaturesView from './views/FeaturesView.vue'
+import LoadingBtnContinue from './components/loading/LoadingBtnContinue.vue'
 </script>
 
 <template>
@@ -25,7 +26,7 @@ import FeaturesView from './views/FeaturesView.vue'
 
   <!-- <RouterView /> -->
 
-  <RequestSubmit />
+  <LoadingBtnContinue />
 </template>
 
 <style scoped></style>

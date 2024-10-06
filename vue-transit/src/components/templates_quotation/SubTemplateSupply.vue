@@ -46,6 +46,10 @@ const labelIn: ComputedRef<ISubText> = computed(() => {
 })
 
 function handleEndModal(isBtnValid: boolean) {
+  const baseFtSize = 13
+
+  playOnClickBtn(baseFtSize)
+
   if (isBtnValid) {
     //do something --OK--
   } else {
@@ -137,11 +141,11 @@ function handleApplyOrEdit(isBtnValid: boolean): any {
             <div class="template_btn_wrap">
               <ShortModalButtonA
                 :style-infos="grabElementStyleButton('apply_template', 'YES', '3.2rem', 'green')"
-                :onClick="() => handleApplyOrEdit(true)"
+                :on-click="() => handleApplyOrEdit(true)"
               />
               <ShortModalButtonA
                 :style-infos="grabElementStyleButton('edit_template', 'EDIT', '3.2rem', '#ddd')"
-                :onClick="() => handleApplyOrEdit(true)"
+                :on-click="() => handleApplyOrEdit(true)"
               />
             </div>
           </div>
