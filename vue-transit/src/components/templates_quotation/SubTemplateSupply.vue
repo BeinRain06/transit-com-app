@@ -3,9 +3,9 @@ import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
 
-import ModalPromptButton from '../modals/ModalPromptButton.vue'
+import ModalPromptButton from '../modals/ModalPromptForButton.vue'
 
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playOnclickButton'
+import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 interface ISubText {
   newTitle: string

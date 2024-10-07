@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playOnclickButton'
-import ModalPromptButton from '../modals/ModalPromptButton.vue'
+import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import ModalPromptButton from '../modals/ModalPromptForButton.vue'
 
 const props = defineProps<{
   labelDpt: string

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import type { Ref, ComputedRef, Reactive } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
 
-import SubSingleInputBox from '../sub-mini-tags/SubSingleInputBox.vue'
-import RadioWrapButton from '../sub-mini-tags/RadioWrapButton.vue'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+
+import SubSingleInputTextBox from '../mini-tags-components/SubSingleInputTextBox.vue'
+import RadioWrapButton from '../buttons/RadioWrapButton.vue'
 const props = defineProps<{
   label: string
 }>()
@@ -18,6 +19,15 @@ interface IBoxItem {
     isInput: Boolean
     numberRows?: string
     numberColumns?: string
+  }[]
+}
+
+interface IRadioBonusItem {
+  radioDetails: {
+    id: string
+    label: string
+    classItem: string
+    modelRadio: boolean
   }[]
 }
 
@@ -47,6 +57,23 @@ const boxItem: Reactive<IBoxItem> = reactive({
       isInput: false,
       numberColumns: '5',
       numberRows: '3'
+    }
+  ]
+})
+
+const radioBonus: IRadioBonusItem = reactive({
+  radioDetails: [
+    {
+      id: 'manage_up',
+      label: 'yes',
+      classItem: 'radio_input',
+      modelRadio: false
+    },
+    {
+      id: 'manage_down',
+      label: 'no',
+      classItem: 'radio_input',
+      modelRadio: false
     }
   ]
 })
@@ -145,7 +172,10 @@ const referenceGet: ComputedRef<string> = computed(() => {
             <li>
               <div>
                 <p>can you manage working sometimes without this device</p>
-                <RadioWrapButton />
+                <RadioWrapButton
+                  question="can you manage working sometimes without this device ?"
+                  :radio-emit="radioBonus.radioDetails"
+                />
               </div>
               <div class="amount_support">
                 <div><p>how long could it be ?</p></div>

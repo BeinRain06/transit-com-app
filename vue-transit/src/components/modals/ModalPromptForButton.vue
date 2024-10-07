@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { ComputedRef } from 'vue'
 import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import { grabElementStyleButton } from '../snippets-function-ts/playOnclickButton'
+import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 const props = defineProps<{
   typeMod: string
@@ -24,6 +24,9 @@ const styleConfirm = computed(() => {
       break
     case 'send':
       newStyleConfirm = grabElementStyleButton('send_request', 'send', '3.2rem', 'green')
+      break
+    case 'ok':
+      newStyleConfirm = grabElementStyleButton('send_request', 'OK', '3.2rem', 'green')
       break
     default:
       throw Error('styleConfirm Error validation in --ModalPromptButton--')

@@ -1,22 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  question: string
+  radioEmit: {
+    id: string
+    label: string
+    classItem: string
+    modelRadio: boolean
+  }[]
+}>()
+</script>
 <template>
   <div class="radio_wrap">
-    <div class="time_assertion">
-      <div>
-        <span>yes</span>
-      </div>
-      <div id="radio_assert_yes" class="radio_input">
-        <div class="radio_inner_box"></div>
-      </div>
-    </div>
-    <div class="time_assertion">
-      <div>
-        <span>no</span>
-      </div>
-      <div id="radio_assetr_no" class="radio_input">
-        <div class="radio_inner_box"></div>
-      </div>
-    </div>
+    <ul class="time_assertion">
+      <li
+        class="radio_broadcast"
+        :key="item.id"
+        v-for="(item, i) in props.radioEmit"
+        @click="$emit('onUpdateRadio', i)"
+      >
+        <div>
+          <span>{{ item.label }}</span>
+        </div>
+        <div :id="item.id" :class="item.classItem">
+          <div class="radio_inner_box"></div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 <style scoped></style>

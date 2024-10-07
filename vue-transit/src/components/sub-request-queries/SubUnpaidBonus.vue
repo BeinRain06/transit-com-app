@@ -1,142 +1,241 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
+import SubSingleInputTextBox from '../mini-tags-components/SubSingleInputTextBox.vue'
+import SubCheckBox from '../mini-tags-components/SubCheckBox .vue'
+import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
+import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
+import RadioWrapButton from '../buttons/RadioWrapButton.vue'
+import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
+import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
-let isSubumitted: Ref<boolean> = ref(false)
+interface IModelCheckBoxItem {
+  checkDetails: {
+    id: string
+    label: string
+    status: boolean
+  }[]
+}
+
+interface IRadioBonusItem {
+  radioDetails: {
+    id: string
+    label: string
+    classItem: string
+    modelRadio: boolean
+  }[]
+}
+
+let isSubmitted: Ref<boolean> = ref(false)
+
+let isClaimConfirmed: Ref<boolean> = ref(false)
+
+const promptParagraphsOne: Ref<string[]> = ref([
+  'you are about to submit a claim for unpaid bonus',
+  'are you sure all informations about the claim are valid ?'
+])
+
+const promptParagraphsTwo: Ref<string[]> = ref([
+  'You will be soon reached out by accounting or human integrations service',
+  'Thanks You for trusting the company'
+])
+
+/* You will be soon reached out by accounting or human integrations service */
+/*     Thanks You for trusting the company */
 
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
-  if (isSubumitted.value) {
+  if (isSubmitted.value) {
     //after request registering sendback **request id** and affect --newRef-- var
   }
   return newRef
 })
+
+const infoEmployee: { dpt: string; post: string } = reactive({
+  dpt: '',
+  post: ''
+})
+
+const modelOne: IModelCheckBoxItem = reactive({
+  checkDetails: [
+    {
+      id: 'choice_agree',
+      label: 'yes',
+      status: false
+    },
+    {
+      id: 'choice_refute',
+      label: 'no',
+      status: false
+    }
+  ]
+})
+
+const modelTwo: IModelCheckBoxItem = reactive({
+  checkDetails: [
+    {
+      id: 'disciplinary_up',
+      label: 'yes',
+      status: false
+    },
+    {
+      id: 'disciplinary_down',
+      label: 'no',
+      status: false
+    }
+  ]
+})
+
+const modelThree: IModelCheckBoxItem = reactive({
+  checkDetails: [
+    {
+      id: 'time_unpaid_one',
+      label: '01 time',
+      status: false
+    },
+    {
+      id: 'time_unpaid_two',
+      label: '02 times',
+      status: false
+    },
+    {
+      id: 'time_unpaid_three',
+      label: 'more than 02 times',
+      status: false
+    }
+  ]
+})
+
+const radioBonus: IRadioBonusItem = reactive({
+  radioDetails: [
+    {
+      id: 'department_bonus',
+      label: 'General Bonus',
+      classItem: 'radio_input',
+      modelRadio: false
+    },
+    {
+      id: 'self_bonus',
+      label: 'Individual Bonus',
+      classItem: 'radio_input',
+      modelRadio: false
+    }
+  ]
+})
+
+function handleRadioToggle(i: number) {
+  // do something
+  // --> map radioBonus array and add class "active" to the clicked box --SWITCH--
+}
+
+function handleClaim() {
+  const baseFtSize = 13
+  playOnClickBtn(baseFtSize)
+  // do something
+  // --> open the modal confirm container(isClaimConfirmed set to **true**)
+}
+
+function handleSubmit() {
+  const baseFtSize = 13
+  playOnClickBtn(baseFtSize)
+
+  // --> couple actions --SUBMITTION--
+}
+
+function handleEndModalContainer() {
+  // --> couple actions --RESET--, --CLOSE MODAL CONTAINER--
+}
 </script>
 <template>
   <div id="req_unpaid_bonus" class="unpaid_bonus_container">
     <div class="unpaid_bonus_content">
-      <ul class="request_lab">
-        <li>
-          <span>Unpaid Bonus</span>
-        </li>
-        <li>
-          <div>i</div>
-        </li>
-      </ul>
+      <SubSecondaryTitle label="bonus" />
+
       <div class="department_details">
-        <div class="dpt_inquirement">
-          <span>Your Department</span>
-          <input type="text" id="dpt_concern" class="inquirement_input" />
-        </div>
-        <div class="dpt_inquirement">
-          <span>Your Post</span>
-          <input type="text" id="post_concern" class="inquirement_input" />
-        </div>
+        <SubSingleInputTextBox
+          question="Your Department"
+          label="dpt_concern"
+          :model="infoEmployee.dpt"
+          :isInput="false"
+        />
+
+        <SubSingleInputTextBox
+          question="Your Post"
+          label="post_concern"
+          :model="infoEmployee.post"
+          :isInput="false"
+        />
       </div>
       <div class="track_bonus_details">
         <div class="track_box">
-          <span>Which Bonus do you claimed</span>
+          <RadioWrapButton
+            question="Which Bonus do you claimed ?"
+            :radio-emit="radioBonus.radioDetails"
+            @on-update-radio="(i) => handleRadioToggle(i)"
+          />
+
           <div class="bonus_track_wrap">
-            <ul class="bonus_type">
-              <li class="bonus_type_item">
-                <div id="gen_bonus" class="radio_bonus">
-                  <div class="radio_inner_bonus"></div>
-                </div>
-                <span>General Bonus</span>
-              </li>
-              <li class="bonus_type_item">
-                <div id="ind_bonus" class="radio_bonus">
-                  <div class="radio_inner_bonus"></div>
-                </div>
-                <span>Individual Bonus</span>
-              </li>
-            </ul>
             <ul class="details_joining">
               <li>
                 <div class="joining_item">
                   <span>Phone 1</span>
-                  <input type="text" id="phone_1" class="joining_input" />
+                  <input type="number" id="phone_1" class="joining_input" />
                 </div>
               </li>
               <li>
                 <div class="joining_item">
                   <span>Phone 2</span>
-                  <input type="text" id="phone_2" class="joining_input" />
+                  <input type="number" id="phone_2" class="joining_input" />
                 </div>
               </li>
               <li>
                 <div class="joining_item">
-                  <span>Phone 1</span>
+                  <span>Email</span>
                   <input type="email" id="email" class="joining_input" />
                 </div>
               </li>
             </ul>
             <div class="actions_on_process">
               <div class="action_process">
-                <div class="process_question">
-                  <span>have you an ongoing Credit ? </span>
-                  <div class="choices_process">
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="choice_agree" />
-                      <span>yes</span>
-                    </div>
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="choice_refute" />
-                      <span>no</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="process_question">
-                  <span>have you a disciplinary action intend on you ? </span>
-                  <div class="choices_process">
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="discipline_agree" />
-                      <span>yes</span>
-                    </div>
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="discipline_refute" />
-                      <span>no</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="process_question">
-                  <span
-                    >how many times have you already experienced that situation under the year ?
-                  </span>
-                  <div class="choices_process">
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="time_unpaid_one" />
-                      <span> 01 time</span>
-                    </div>
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="time_unpaid_two" />
-                      <span>02 times</span>
-                    </div>
-                    <div class="choice_to_check">
-                      <input type="checkbox" id="time_unpaid_three" />
-                      <span>more than 02 times</span>
-                    </div>
-                  </div>
-                </div>
+                <SubCheckBox
+                  question="have you an ongoing Credit ?"
+                  :check-info="modelOne.checkDetails"
+                />
+
+                <SubCheckBox
+                  question="have you a disciplinary action intend on you ?"
+                  :check-info="modelTwo.checkDetails"
+                />
+
+                <SubCheckBox
+                  question="how many times have you already experienced that situation under the year ?"
+                  :check-info="modelThree.checkDetails"
+                />
                 <div class="amount_money_unreceived">
                   <span>How much money you are intended to have</span>
-                  <input id="money_unpaid" class="money_unpaid" />
+                  <input type="number" id="money_unpaid" class="money_unpaid" />
                 </div>
                 <div class="submit_claimed_wrapper">
-                  <div class="submit_box">
-                    <button class="btn_submit_unpaid">submit your claim</button>
-                  </div>
-                  <div class="modal_submit_unpaid">
-                    <div class="modal_unpaid_ct">
-                      <p>you are about to submit a claim for unpaid bonus</p>
-
-                      <p>are you sure all informations about the claim are valid ?</p>
-                      <div class="modal_unpaid_btn">
-                        <button>Yes</button>
-                        <button>No</button>
-                      </div>
-                    </div>
+                  <ShortModalButtonA
+                    :style-infos="
+                      grabElementStyleButton(
+                        'continue_toggler',
+                        'continue',
+                        '7rem',
+                        'green',
+                        '#fff'
+                      )
+                    "
+                    :on-click="() => handleClaim()"
+                  />
+                  <div class="modal_wrap" v-if="isClaimConfirmed">
+                    <ModalPromptForButton
+                      typeMod="yes"
+                      :list-paragraph="promptParagraphsOne"
+                      :on-deeper-click="handleSubmit"
+                    />
                   </div>
                 </div>
                 <div>
@@ -152,13 +251,11 @@ const referenceGet: ComputedRef<string> = computed(() => {
         </div>
       </div>
       <div class="gen_modal_container">
-        <div class="end_unpaid_msg">
-          <p>You will be soon reached out by accounting or human integrations service</p>
-          <p>Thanks You for trusting the company</p>
-          <div class="btn_unpaid_box">
-            <button class="btn_unpaid_end">OK</button>
-          </div>
-        </div>
+        <ModalPromptForContainer
+          typeMod="OK"
+          :list-paragraph="promptParagraphsTwo"
+          :on-deeper-click="handleEndModalContainer"
+        />
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@ import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
 import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 import LoadingBtnContinue from '../loading/LoadingBtnContinue.vue'
 import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playOnclickButton'
+import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 let isSubmitted: Ref<boolean> = ref(false)
 

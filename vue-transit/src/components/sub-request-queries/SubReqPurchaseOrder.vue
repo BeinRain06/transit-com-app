@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import type { Ref, Reactive, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
-import SubSecondaryTitle from '../../mini-tags-components/SubSecondaryTitle.vue'
-import ProposalPurchaseOrder from './ProposalPurchaseOrder.vue'
+
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
+import ProposalPurchaseOrder from '../templates_quotation/ProposalPurchaseOrder.vue'
 
 let infoPage: Reactive<{
   req_id: string
