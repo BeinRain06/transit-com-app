@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
+import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
+import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
+import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 
 let isSubmitted: Ref<boolean> = ref(false)
+
+const listOneParagraghs = ref([
+  'Keep watching your notification page in the app. As soon as Our resource end study your request. You will be shortly Join.',
+  'Thanks you Trusting Human Integration Service!'
+])
 
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
@@ -12,18 +21,19 @@ const referenceGet: ComputedRef<string> = computed(() => {
   }
   return newRef
 })
+
+function handleSubmit() {
+  // actions --SUBMITTION--
+}
+
+function handleEndModalContainer() {
+  // actions --CLOSE MODAL CONTAINER--
+}
 </script>
 <template>
   <div id="request_human_integration" class="req_integration_container">
     <div class="req_integration_content">
-      <ul class="request_lab">
-        <li>
-          <span>Human Integration</span>
-        </li>
-        <li>
-          <div>i</div>
-        </li>
-      </ul>
+      <SubSecondaryTitle label="human" />
       <div class="about_two_agent">
         <div class="department_concerned_people">
           <ul class="inside_dpt">
@@ -82,6 +92,7 @@ const referenceGet: ComputedRef<string> = computed(() => {
             >Resume in 04 to 05 sentences max what is the matter that make your concern with your
             peer</span
           >
+          <textarea rows="3" columns="5" class="problem_on_fire"></textarea>
         </div>
         <div>
           <h3>
@@ -239,19 +250,19 @@ const referenceGet: ComputedRef<string> = computed(() => {
           </div>
           <!--Here we are-->
           <div class="submit_board_btn">
-            <button class="btn_submit_req">submit</button>
+            <ShortModalButtonA
+              :style-infos="
+                grabElementStyleButton('btn_submit_req', 'submit', '3.2rem', 'green', '#fff')
+              "
+              :on-click="() => handleSubmit()"
+            />
           </div>
           <div class="value_message_add">
-            <div class="value_msg_ct">
-              <p>
-                Keep watching your notification page in the app. As soon as Our resource end study
-                your request. You will be shortly Join.
-              </p>
-              <p>Thank you Trusting Human Integration Service!</p>
-              <div class="btn_msg_wrap">
-                <button class="btn_end_value">OK</button>
-              </div>
-            </div>
+            <ModalPromptForContainer
+              typeMod="OK"
+              :list-paragraph="listOneParagraghs"
+              :on-deeper-click="handleEndModalContainer"
+            />
           </div>
         </div>
       </div>

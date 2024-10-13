@@ -52,7 +52,7 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
       inside.symbol = 'i'
       break
     case 'salary':
-      inside.text = 'Advance Salary'
+      inside.text = 'Salary Advance'
       inside.symbol = 'i'
       break
     case 'bonus':
@@ -61,6 +61,10 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
       break
     case 'purchase':
       inside.text = 'Quotation'
+      inside.symbol = 'i'
+      break
+    case 'repairment':
+      inside.text = 'Request Repairment'
       inside.symbol = 'i'
       break
     default:

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import type { Ref, ComputedRef, Reactive } from 'vue'
 
 import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 
 import SubSingleInputTextBox from '../mini-tags-components/SubSingleInputTextBox.vue'
+import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
 import RadioWrapButton from '../buttons/RadioWrapButton.vue'
+import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
+import { slapLoadingTime } from '../snippets-function-ts/reusable-mini-function'
+import { ButtonStore } from '@/stores/button-store'
+import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
+
 const props = defineProps<{
   label: string
 }>()
@@ -30,6 +38,17 @@ interface IRadioBonusItem {
     modelRadio: boolean
   }[]
 }
+
+onMounted(() => {
+  const useButtonStore = ButtonStore()
+
+  useButtonStore.$patch({ loading: { isProcessing: false, isEnd: false } })
+})
+
+const promptParagraphs: Ref<string[]> = ref([
+  'Thanks to allow us to better understand the dificulties you are facing...',
+  'The technical board will analyze your request and send back to you a response soon when finshed.'
+])
 
 const boxItem: Reactive<IBoxItem> = reactive({
   obj: [
@@ -61,7 +80,24 @@ const boxItem: Reactive<IBoxItem> = reactive({
   ]
 })
 
-const radioBonus: IRadioBonusItem = reactive({
+const radioProblem: IRadioBonusItem = reactive({
+  radioDetails: [
+    {
+      id: 'problem_up',
+      label: 'yes',
+      classItem: 'radio_input',
+      modelRadio: false
+    },
+    {
+      id: 'problem_down',
+      label: 'no',
+      classItem: 'radio_input',
+      modelRadio: false
+    }
+  ]
+})
+
+const radioManage: IRadioBonusItem = reactive({
   radioDetails: [
     {
       id: 'manage_up',
@@ -80,6 +116,8 @@ const radioBonus: IRadioBonusItem = reactive({
 
 let isSubmitted: Ref<boolean> = ref(false)
 
+let isClaimConfirmed: Ref<boolean> = ref(false)
+
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
@@ -87,14 +125,41 @@ const referenceGet: ComputedRef<string> = computed(() => {
   }
   return newRef
 })
+
+const modelInput = reactive({
+  issue: '',
+  dpt: '',
+  office: ''
+})
+
+function handleRadioToggle(i: number) {
+  // do something
+  // --> map radio (manage or problem) array and add class "active" to the clicked box --SWITCH--
+}
+
+function handleContinue() {
+  const baseFtSize = 13
+  playOnClickBtn(baseFtSize)
+
+  if (modelInput.issue !== '' && modelInput.dpt !== '' && modelInput.office !== '') {
+    slapLoadingTime()
+  } else {
+    return
+  }
+}
+
+function handleSubmit() {
+  const baseFtSize = 13
+  playOnClickBtn(baseFtSize)
+
+  // --> couple actions --SUBMITTION--
+}
 </script>
 <template>
   <div id="request_repair" class="request_repair_container">
     <div class="request_repair_content">
       <div class="main_title">
-        <div class="main_title_ct">
-          <h2>Request Repairment</h2>
-        </div>
+        <SubSecondaryTitle label="repairment" />
       </div>
 
       <div class="device_infos">
@@ -102,25 +167,45 @@ const referenceGet: ComputedRef<string> = computed(() => {
           <li>
             <div>
               <span>{{ props.label }} Name*</span>
-              <input type="text" id="issue_device" class="issue_device" />
+              <input
+                type="text"
+                id="issue_device"
+                class="issue_device"
+                v-model="modelInput.issue"
+              />
             </div>
           </li>
           <li>
             <div>
               <span>Department **</span>
-              <input type="text" id="issue_device_dpt" class="issue_device" />
+              <input
+                type="text"
+                id="issue_device_dpt"
+                class="issue_device"
+                v-model="modelInput.dpt"
+              />
             </div>
           </li>
           <li>
             <div>
               <span>Office ***</span>
-              <input type="text" id="issue_device_office" class="issue_device" />
+              <input
+                type="text"
+                id="issue_device_office"
+                class="issue_device"
+                v-model="modelInput.office"
+              />
             </div>
           </li>
         </ul>
         <div class="validate_pre_info">
           <div class="validate_pre_content">
-            <button class="btn_continue">continue</button>
+            <ShortModalButtonA
+              :style-infos="
+                grabElementStyleButton('continue_toggler', 'continue', '3.2rem', 'green', '#fff')
+              "
+              :on-click="() => handleContinue()"
+            />
           </div>
         </div>
       </div>
@@ -142,24 +227,12 @@ const referenceGet: ComputedRef<string> = computed(() => {
             </li>
             <li class="problem_time">
               <div>
-                <span>Is it the first time ?</span>
-                <div class="radio_wrap">
-                  <div class="time_assertion">
-                    <div>
-                      <span>yes</span>
-                    </div>
-                    <div id="radio_assert_yes" class="radio_input">
-                      <div class="radio_inner_box"></div>
-                    </div>
-                  </div>
-                  <div class="time_assertion">
-                    <div>
-                      <span>no</span>
-                    </div>
-                    <div id="radio_assetr_no" class="radio_input">
-                      <div class="radio_inner_box"></div>
-                    </div>
-                  </div>
+                <div class="dity_radio">
+                  <RadioWrapButton
+                    question="Is it the first time ?"
+                    :radio-emit="radioProblem.radioDetails"
+                    @on-update-radio="(i) => handleRadioToggle(i)"
+                  />
                 </div>
               </div>
             </li>
@@ -171,10 +244,9 @@ const referenceGet: ComputedRef<string> = computed(() => {
             </li>
             <li>
               <div>
-                <p>can you manage working sometimes without this device</p>
                 <RadioWrapButton
                   question="can you manage working sometimes without this device ?"
-                  :radio-emit="radioBonus.radioDetails"
+                  :radio-emit="radioManage.radioDetails"
                 />
               </div>
               <div class="amount_support">
@@ -189,16 +261,12 @@ const referenceGet: ComputedRef<string> = computed(() => {
           </ul>
         </div>
         <div class="info_record_box">
-          <div class="info_record_spec">
-            <p>Thanks to allow us to better understand the dificulties you are facing...</p>
-            <p>
-              The technical board will analyze your request and send back to you a response soon
-              when finshed.
-            </p>
-            <div class="end_valid_repair">
-              <button class="btn_record_confirm">confirm</button>
-              <button class="btn_record_cancel">cancel</button>
-            </div>
+          <div class="modal_wrap" v-if="isClaimConfirmed">
+            <ModalPromptForButton
+              typeMod="confirm"
+              :list-paragraph="promptParagraphs"
+              :on-deeper-click="handleSubmit"
+            />
           </div>
         </div>
       </div>

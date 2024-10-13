@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
-import SubSecondaryTitle from '../../mini-tags-components/SubSecondaryTitle.vue'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
 import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
 
 let isSubmitted: Ref<boolean> = ref(false)

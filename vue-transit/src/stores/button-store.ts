@@ -11,8 +11,13 @@ export const ButtonStore = defineStore('button', {
       bgColor: '',
       borderRadius: '5px',
       textColor: 'black',
+      margin: '0 auto',
       fontSize: 'calc(13px + 0.15vw)',
       transition: 'all 300ms ease-in-out'
+    },
+    loading: {
+      isProcessing: false,
+      isEnd: false
     }
   }),
   getters: {},
@@ -23,6 +28,7 @@ export const ButtonStore = defineStore('button', {
       newWidth?: string,
       background?: string,
       color?: string,
+      margin?: string,
       fontSize?: string
     ) {
       this.$patch({
@@ -32,6 +38,7 @@ export const ButtonStore = defineStore('button', {
           width: newWidth ? newWidth : this.$state.btnModalOne.width,
           bgColor: background ? background : this.$state.btnModalOne.defaultBgColor,
           textColor: color ? color : this.$state.btnModalOne.textColor,
+          margin: margin ? margin : this.$state.btnModalOne.margin,
           fontSize: fontSize ? fontSize : this.$state.btnModalOne.fontSize
         }
       })

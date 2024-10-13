@@ -17,6 +17,7 @@ export const grabElementStyleButton = (
   newWidth?: string,
   background?: string,
   color?: string,
+  margin?: string,
   fontSize?: string
 ) => {
   const useButtonStore = ButtonStore()
@@ -27,6 +28,7 @@ export const grabElementStyleButton = (
     newWidth,
     background,
     color,
+    margin,
     fontSize
   )
 

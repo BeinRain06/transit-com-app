@@ -51,14 +51,12 @@
   font-family: 'Krub', sans-serif;
   font-weight: 300;
   font-style: italic;
-  background-color: rgba(114, 134, 40, 0.89);
 }
 
 .krub-regular-italic {
   font-family: 'Krub', sans-serif;
   font-weight: 400;
   font-style: italic;
-  /*  color:rgb(243, 243, 243); */
 }
 
 .krub-medium-italic {

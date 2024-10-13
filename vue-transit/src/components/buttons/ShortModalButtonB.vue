@@ -6,7 +6,8 @@ const btnInside: Ref<HTMLDivElement | undefined> = ref()
 
 const props = defineProps<{
   styleInfos: IStyleInfos
-  onClick: () => void
+  isBtnSubmit: boolean
+  onClick: (isBtnSubmit: boolean) => void
 }>()
 
 const storeBtn = computed(() => {
@@ -46,7 +47,7 @@ function addOpacity() {
 </script>
 <template>
   <div
-    class="btn_wrapper w-full"
+    class="btn_wrapper w-auto h-auto"
     style="transition: all 1s ease"
     ref="btnInside"
     @hover="() => addOpacity()"
@@ -55,7 +56,7 @@ function addOpacity() {
       :id="storeBtn.btnId"
       class="btn_template w-full py-2"
       :style="styleFn"
-      @click.prevent="props.onClick"
+      @click.prevent="() => props.onClick(isBtnSubmit)"
     >
       {{ storeBtn.btnLab }}
     </button>

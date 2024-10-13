@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 
 let isSubmitted: Ref<boolean> = ref(false)
 

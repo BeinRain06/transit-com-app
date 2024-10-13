@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { reactive, computed } from 'vue'
 import type { ComputedRef } from 'vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
+import ShortModalButtonB from '../buttons/ShortModalButtonB.vue'
 import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 const props = defineProps<{
@@ -9,6 +9,11 @@ const props = defineProps<{
   listParagraph: string[]
   onDeeperClick: (isBtnValid: boolean) => any
 }>()
+
+const isBtnValid: { notCase: boolean; case: boolean } = reactive({
+  notCase: false,
+  case: true
+})
 
 const archiveParagraph: ComputedRef<string[]> = computed(() => {
   const allParagraph = props.listParagraph
@@ -28,6 +33,12 @@ const styleConfirm = computed(() => {
     case 'ok':
       newStyleConfirm = grabElementStyleButton('send_request', 'OK', '3.2rem', 'green')
       break
+    case 'confirm':
+      newStyleConfirm = grabElementStyleButton('record_confirm', 'confirm', '4rem', 'green')
+      break
+    case 'submit':
+      newStyleConfirm = grabElementStyleButton('confirm_request', 'Submit', '4rem', 'green')
+      break
     default:
       throw Error('styleConfirm Error validation in --ModalPromptButton--')
   }
@@ -43,7 +54,13 @@ const styleReject = computed(() => {
       newStyleConfirm = grabElementStyleButton('valid_no', 'NO', '3.2rem', '#ddd')
       break
     case 'send':
-      newStyleConfirm = grabElementStyleButton('reject_request', 'reject', '3.2rem', 'green')
+      newStyleConfirm = grabElementStyleButton('reject_request', 'reject', '3.2rem', '#ddd')
+      break
+    case 'confirm':
+      newStyleConfirm = grabElementStyleButton('record_cancel', 'cancel', '4rem', '#ddd')
+      break
+    case 'submit':
+      newStyleConfirm = grabElementStyleButton('cancel_request', 'cancel', '4rem', '#ddd')
       break
     default:
       throw Error('styleConfirm Error rejection in --ModalPromptButton--')
@@ -59,8 +76,16 @@ const styleReject = computed(() => {
         <li :key="i" v-for="(elt, i) in archiveParagraph">{{ elt }}</li>
       </ul>
       <div class="btn_wrapper">
-        <ShortModalButtonA :style-infos="styleConfirm" :onClick="() => props.onDeeperClick(true)" />
-        <ShortModalButtonA :style-infos="styleReject" :onClick="() => props.onDeeperClick(false)" />
+        <ShortModalButtonB
+          :style-infos="styleConfirm"
+          :is-btn-submit="isBtnValid.case"
+          :onClick="() => props.onDeeperClick(isBtnValid.case)"
+        />
+        <ShortModalButtonB
+          :style-infos="styleReject"
+          :is-btn-submit="isBtnValid.notCase"
+          :onClick="() => props.onDeeperClick(isBtnValid.notCase)"
+        />
       </div>
     </div>
   </div>

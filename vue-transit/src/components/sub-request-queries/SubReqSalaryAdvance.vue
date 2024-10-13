@@ -1,14 +1,45 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../../mini-tags-components/RequestOrFeedReference.vue'
-const department = defineModel()
-const nameEmployee = defineModel()
-const postOffice = defineModel()
-const reasonUnderHood = defineModel()
-const amountMoney = defineModel()
+import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
+import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
+import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
+import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
+import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+
+interface IModelForm {
+  department: string
+  nameEmployee: string
+  postOffice: string
+  reasonUnderHood: string
+}
+
+const modelForm: IModelForm = reactive({
+  department: '',
+  nameEmployee: '',
+  postOffice: '',
+  reasonUnderHood: ''
+})
+
+const manage: {
+  amountMoney: string
+  textRefund: string
+} = reactive({
+  amountMoney: '',
+  textRefund: ''
+})
 
 let isSubmitted: Ref<boolean> = ref(false)
+
+const listOneParagraghs: Ref<string[]> = ref([
+  ' You are about to send the request. Click Submit if all the information are accurate'
+])
+
+const listTwoParagraghs: Ref<string[]> = ref([
+  ' You will soon be notify by the accounting Services.',
+  'Thanks you for Trusting us.'
+])
 
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
@@ -17,18 +48,31 @@ const referenceGet: ComputedRef<string> = computed(() => {
   }
   return newRef
 })
+
+function handleConfirm() {
+  // actions --CONFIRMATION--
+}
+
+function handleCancel() {
+  // actions --CANCELLATION--
+}
+
+function handleValidation() {
+  // actions --VALIDATION--
+}
+
+function handleSubmit() {
+  // actions --SUBMITTION--
+}
+
+function handleEndModalContainer() {
+  // actions --CLOSE MODAL CONTAINER--
+}
 </script>
 <template>
   <div id="req_salary_advance" class="salary_advance_container">
     <div class="salary_advance_content">
-      <ul class="request_lab">
-        <li>
-          <span>Salary Advance</span>
-        </li>
-        <li>
-          <div>i</div>
-        </li>
-      </ul>
+      <SubSecondaryTitle label="salary" />
       <div class="details_worker">
         <div>
           <span>Personal Info</span>
@@ -41,26 +85,57 @@ const referenceGet: ComputedRef<string> = computed(() => {
             </legend>
             <div class="formal_info_item">
               <label for="department" class="info_label"> department </label>
-              <input type="text" id="dpt_input" class="info_input" v-model="department" />
+              <input type="text" id="dpt_input" class="info_input" v-model="modelForm.department" />
             </div>
             <div class="formal_info_item">
               <label for="name" class="info_label"> Name </label>
-              <input type="text" id="name_input" class="info_input" v-model="nameEmployee" />
+              <input
+                type="text"
+                id="name_input"
+                class="info_input"
+                v-model="modelForm.nameEmployee"
+              />
             </div>
             <div class="formal_info_item">
               <label for="post" class="info_label"> office post </label>
-              <input type="text" id="post_input" class="info_input" v-model="postOffice" />
+              <input
+                type="text"
+                id="post_input"
+                class="info_input"
+                v-model="modelForm.postOffice"
+              />
             </div>
             <div class="formal_info_item">
               <label for="reason" class="info_label"> reason why you want an advancement </label>
-              <input type="text" id="reason_input" class="info_input" v-model="reasonUnderHood" />
+              <input
+                type="text"
+                id="reason_input"
+                class="info_input"
+                v-model="modelForm.reasonUnderHood"
+              />
             </div>
             <div class="field_btn_wrap">
               <div class="btn_wrap_confirm">
-                <button class="btn_confirm_detail">confirm</button>
+                <ShortModalButtonA
+                  :style-infos="
+                    grabElementStyleButton(
+                      'btn_confirm_detail',
+                      'confirm',
+                      '3.2rem',
+                      'green',
+                      '#fff'
+                    )
+                  "
+                  :on-click="() => handleConfirm()"
+                />
               </div>
               <div class="btn_wrap_cancel">
-                <button class="btn_cancel_detail">edit</button>
+                <ShortModalButtonA
+                  :style-infos="
+                    grabElementStyleButton('btn_cancel_detail', 'edit', '3.2rem', '#ddd', '#444')
+                  "
+                  :on-click="() => handleCancel()"
+                />
               </div>
             </div>
           </fieldset>
@@ -69,7 +144,7 @@ const referenceGet: ComputedRef<string> = computed(() => {
       <div class="details_money_management">
         <div class="amount_to_release">
           <span>Specify the amount money you might want(in $ dollars)</span>
-          <input type="number" class="amount_money" v-model="amountMoney" />
+          <input type="number" class="amount_money" v-model="manage.amountMoney" />
           <div class="amount_money_display">
             <div class="money_display_content"><span>1345</span> <span>$(dollars)</span></div>
           </div>
@@ -79,7 +154,7 @@ const referenceGet: ComputedRef<string> = computed(() => {
             <span>How do you intend to refund this advancement</span>
             <span>( this information is capital)</span>
           </div>
-          <textarea rows="3" columns="5"></textarea>
+          <textarea rows="3" columns="5" v-model="manage.textRefund"></textarea>
           <div class="intention_refund_display">
             <div class="intend_display_content">
               <p>
@@ -101,23 +176,26 @@ const referenceGet: ComputedRef<string> = computed(() => {
         </div>
       </div>
       <div class="validate_req_box">
-        <button class="btn_salary_validate">Validate</button>
+        <ShortModalButtonA
+          :style-infos="
+            grabElementStyleButton('btn_salary_validate', 'edit', '4.8rem', 'green', '#fff')
+          "
+          :on-click="() => handleValidation()"
+        />
         <div class="salary_modal_box">
-          <div class="modal_box_content">
-            <p>
-              You are about to send the request. Click Submit if all the information are accurate
-            </p>
-            <div class="modal_submit_box">
-              <button id="btn_mod_submit" class="btn_mod">Submit</button>
-              <button id="btn_mod_reject" class="btn_mod">Reject</button>
-            </div>
-          </div>
+          <ModalPromptForButton
+            typeMod="submit"
+            :list-paragraph="listOneParagraghs"
+            :on-deeper-click="() => handleSubmit()"
+          />
         </div>
       </div>
       <div class="end_closing_message">
-        <p>You will soon be notify by the accounting Services.</p>
-        <p>Thanks you for Trusting us.</p>
-        <div class="btn_ok_end">OK</div>
+        <ModalPromptForContainer
+          typeMod="OK"
+          :list-paragraph="listTwoParagraghs"
+          :on-deeper-click="handleEndModalContainer"
+        />
       </div>
       <div>
         <RequestOrFeedReference element="request" label="salary-advance" :id-fetch="referenceGet" />

@@ -11,6 +11,10 @@ const props = defineProps<{
 </script>
 <template>
   <div class="radio_wrap">
+    <div class="question_tag">
+      <span>{{ props.question }}</span>
+    </div>
+
     <ul class="time_assertion">
       <li
         class="radio_broadcast"
