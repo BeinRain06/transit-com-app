@@ -2,13 +2,15 @@
 import { reactive, computed } from 'vue'
 import type { ComputedRef } from 'vue'
 import ShortModalButtonB from '../buttons/ShortModalButtonB.vue'
-import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import { grabElementStyleButtonPrompt } from '../snippets-function-ts/playClickButton'
 
 const props = defineProps<{
   typeMod: string
   listParagraph: string[]
-  onDeeperClick: (isBtnValid: boolean) => any
+  onDeeperClick: () => void
 }>()
+
+const modelSubmittion = defineModel()
 
 const isBtnValid: { notCase: boolean; case: boolean } = reactive({
   notCase: false,
@@ -25,19 +27,37 @@ const styleConfirm = computed(() => {
 
   switch (props.typeMod) {
     case 'yes':
-      newStyleConfirm = grabElementStyleButton('valid_yes', 'YES', '3.2rem', 'green')
+      newStyleConfirm = grabElementStyleButtonPrompt('valid_yes', 'YES', true, '3.2rem', 'green')
       break
     case 'send':
-      newStyleConfirm = grabElementStyleButton('send_request', 'send', '3.2rem', 'green')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'send_request',
+        'send',
+        true,
+        '3.2rem',
+        'green'
+      )
       break
     case 'ok':
-      newStyleConfirm = grabElementStyleButton('send_request', 'OK', '3.2rem', 'green')
+      newStyleConfirm = grabElementStyleButtonPrompt('send_request', 'OK', true, '3.2rem', 'green')
       break
     case 'confirm':
-      newStyleConfirm = grabElementStyleButton('record_confirm', 'confirm', '4rem', 'green')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'record_confirm',
+        'confirm',
+        true,
+        '4rem',
+        'green'
+      )
       break
     case 'submit':
-      newStyleConfirm = grabElementStyleButton('confirm_request', 'Submit', '4rem', 'green')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'confirm_request',
+        'Submit',
+        true,
+        '4rem',
+        'green'
+      )
       break
     default:
       throw Error('styleConfirm Error validation in --ModalPromptButton--')
@@ -51,16 +71,34 @@ const styleReject = computed(() => {
 
   switch (props.typeMod) {
     case 'yes':
-      newStyleConfirm = grabElementStyleButton('valid_no', 'NO', '3.2rem', '#ddd')
+      newStyleConfirm = grabElementStyleButtonPrompt('valid_no', 'NO', false, '3.2rem', '#ddd')
       break
     case 'send':
-      newStyleConfirm = grabElementStyleButton('reject_request', 'reject', '3.2rem', '#ddd')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'reject_request',
+        'reject',
+        false,
+        '3.2rem',
+        '#ddd'
+      )
       break
     case 'confirm':
-      newStyleConfirm = grabElementStyleButton('record_cancel', 'cancel', '4rem', '#ddd')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'record_cancel',
+        'cancel',
+        false,
+        '4rem',
+        '#ddd'
+      )
       break
     case 'submit':
-      newStyleConfirm = grabElementStyleButton('cancel_request', 'cancel', '4rem', '#ddd')
+      newStyleConfirm = grabElementStyleButtonPrompt(
+        'cancel_request',
+        'cancel',
+        false,
+        '4rem',
+        '#ddd'
+      )
       break
     default:
       throw Error('styleConfirm Error rejection in --ModalPromptButton--')
@@ -68,6 +106,16 @@ const styleReject = computed(() => {
 
   return newStyleConfirm
 })
+
+function handleSubmitOrNot(isBtnValidCase: boolean) {
+  if (isBtnValidCase) {
+    modelSubmittion.value = true
+  } else {
+    modelSubmittion.value = false
+  }
+
+  props.onDeeperClick()
+}
 </script>
 <template>
   <div class="prompt_wrapper">
@@ -78,13 +126,11 @@ const styleReject = computed(() => {
       <div class="btn_wrapper">
         <ShortModalButtonB
           :style-infos="styleConfirm"
-          :is-btn-submit="isBtnValid.case"
-          :onClick="() => props.onDeeperClick(isBtnValid.case)"
+          :on-click="() => handleSubmitOrNot(isBtnValid.case)"
         />
         <ShortModalButtonB
           :style-infos="styleReject"
-          :is-btn-submit="isBtnValid.notCase"
-          :onClick="() => props.onDeeperClick(isBtnValid.notCase)"
+          :on-click="() => handleSubmitOrNot(isBtnValid.notCase)"
         />
       </div>
     </div>

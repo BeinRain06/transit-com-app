@@ -14,6 +14,7 @@ export const playOnClickBtn = (baseFtSize: number) => {
 export const grabElementStyleButton = (
   id: string,
   label: string,
+  isBtnApplication: boolean,
   newWidth?: string,
   background?: string,
   color?: string,
@@ -22,15 +23,68 @@ export const grabElementStyleButton = (
 ) => {
   const useButtonStore = ButtonStore()
 
-  const selectInStore = useButtonStore.applyBtnStyleOne(
-    id,
-    label,
-    newWidth,
-    background,
-    color,
-    margin,
-    fontSize
-  )
+  if (isBtnApplication) {
+    const selectInStore = useButtonStore.applyBtnStyleOne(
+      id,
+      label,
+      newWidth,
+      background,
+      color,
+      margin,
+      fontSize
+    )
 
-  return selectInStore
+    return selectInStore
+  } else {
+    const selectInStore = useButtonStore.applyBtnStyleTwo(
+      id,
+      label,
+      newWidth,
+      background,
+      color,
+      margin,
+      fontSize
+    )
+
+    return selectInStore
+  }
+}
+
+export const grabElementStyleButtonPrompt = (
+  id: string,
+  label: string,
+  isBtnApplication: boolean,
+  newWidth?: string,
+  background?: string,
+  color?: string,
+  margin?: string,
+  fontSize?: string
+) => {
+  const useButtonStore = ButtonStore()
+
+  if (isBtnApplication) {
+    const selectInStore = useButtonStore.applyBtnStyleThree(
+      id,
+      label,
+      newWidth,
+      background,
+      color,
+      margin,
+      fontSize
+    )
+
+    return selectInStore
+  } else {
+    const selectInStore = useButtonStore.applyBtnStyleFour(
+      id,
+      label,
+      newWidth,
+      background,
+      color,
+      margin,
+      fontSize
+    )
+
+    return selectInStore
+  }
 }

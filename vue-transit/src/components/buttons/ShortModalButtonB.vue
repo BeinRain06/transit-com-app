@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
-
-const btnInside: Ref<HTMLDivElement | undefined> = ref()
+import { computed } from 'vue'
 
 const props = defineProps<{
   styleInfos: IStyleInfos
-  isBtnSubmit: boolean
-  onClick: (isBtnSubmit: boolean) => void
+  onClick: () => void
 }>()
 
 const storeBtn = computed(() => {
@@ -40,23 +36,14 @@ export interface IStyleInfos {
   fontSize: string
   transition: string
 }
-
-function addOpacity() {
-  ;(btnInside.value as HTMLDivElement).style.opacity = '0.9'
-}
 </script>
 <template>
-  <div
-    class="btn_wrapper w-auto h-auto"
-    style="transition: all 1s ease"
-    ref="btnInside"
-    @hover="() => addOpacity()"
-  >
+  <div class="btn_wrapper w-auto h-auto" style="transition: all 1s ease">
     <button
       :id="storeBtn.btnId"
       class="btn_template w-full py-2"
       :style="styleFn"
-      @click.prevent="() => props.onClick(isBtnSubmit)"
+      @click.prevent="() => props.onClick()"
     >
       {{ storeBtn.btnLab }}
     </button>

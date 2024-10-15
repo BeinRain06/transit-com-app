@@ -64,7 +64,14 @@ function handleContinue() {
           <div class="continue_wrap">
             <ShortModalButtonA
               :style-infos="
-                grabElementStyleButton('continue_toggler', 'continue', '3.2rem', 'green', '#fff')
+                grabElementStyleButton(
+                  'continue_toggler',
+                  'continue',
+                  true,
+                  '3.2rem',
+                  'green',
+                  '#fff'
+                )
               "
               :on-click="() => handleContinue()"
             />

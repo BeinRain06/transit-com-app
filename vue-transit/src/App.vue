@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import LoadingBtnContinue from './components/loading/LoadingBtnContinue.vue'
 import SubReqFuelOrOil from './components/sub-request-queries/SubReqFuelOrOil.vue'
+import SubEngineRepairComponents from './components/sub-request-queries/SubEngineRepairComponents.vue'
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import SubReqFuelOrOil from './components/sub-request-queries/SubReqFuelOrOil.vu
 
   <!-- <RouterView /> -->
 
-  <SubReqFuelOrOil />
+  <SubEngineRepairComponents />
 </template>
 
 <style scoped></style>

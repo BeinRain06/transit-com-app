@@ -2,14 +2,26 @@
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-
 import ModalPromptButton from '../modals/ModalPromptForButton.vue'
-
 import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+import { SubTemplateStore } from '@/stores/subtemplate-store'
 
 interface ISubText {
   newTitle: string
   textQuotation: string
+}
+
+interface ITemplate {
+  mob: {
+    id: string
+    title: string
+    modelInput: string
+  }[][]
+  desk: {
+    id: string
+    title: string
+    modelInput: string
+  }[][]
 }
 
 const props = defineProps<{ label: string }>()
@@ -18,6 +30,8 @@ const arrParagraphs: Ref<string[]> = ref([
   'Your Performance and Request will be thoroughly analyze before Reply.',
   'Are you sure you want to confirm the request ?'
 ])
+
+const modelSubmit: Ref<boolean> = ref(false)
 
 const labelIn: ComputedRef<ISubText> = computed(() => {
   let subText: ISubText = {
@@ -35,7 +49,7 @@ const labelIn: ComputedRef<ISubText> = computed(() => {
       subText.textQuotation = 'Tools'
       break
     case 'engine':
-      subText.newTitle = 'Fill Quotation with engine component(s) for repairments'
+      subText.newTitle = 'Quotation engine component(s) for repairments'
       subText.textQuotation = 'Components'
       break
     default:
@@ -45,24 +59,45 @@ const labelIn: ComputedRef<ISubText> = computed(() => {
   return subText
 })
 
-function handleEndModal(isBtnValid: boolean) {
+const isMinus: Ref<boolean> = ref(false)
+
+const arrToUseTemplate: ComputedRef<ITemplate> = computed(() => {
+  const useSubTemplateStore = SubTemplateStore()
+
+  return {
+    mob: useSubTemplateStore.$state.arrInputMob,
+    desk: useSubTemplateStore.$state.arrInputDesk
+  }
+})
+
+function addRowTemplate() {
+  // create a new row obj and push into **arrTempMob**
+  // add **button minus** when clicked for the first time (v-if --isMinus)
+}
+
+function removeRowTemplate() {
+  //remove the last item row until the count row remains === 3
+  //when count == 3 remove **button minus** (v-if -isMinus)
+}
+
+function handleEndModal() {
   const baseFtSize = 13
 
   playOnClickBtn(baseFtSize)
 
-  if (isBtnValid) {
+  if (modelSubmit.value) {
     //do something --OK--
   } else {
     //do something --NO--
   }
 }
 
-function handleApplyOrEdit(isBtnValid: boolean): any {
+function handleApplyOrEdit(isBtnApply: boolean) {
   const baseFtSize = 13
 
   playOnClickBtn(baseFtSize)
 
-  if (isBtnValid) {
+  if (isBtnApply) {
     //do some action --APPLY--
   } else {
     //do something --EDIT--
@@ -73,64 +108,110 @@ function handleApplyOrEdit(isBtnValid: boolean): any {
   <div class="resources_template_container">
     <div class="resources_template_content">
       <div class="rsc_main_question">
-        <h3>{{ labelIn.newTitle }}</h3>
+        <h3 class="roboto-light">{{ labelIn.newTitle }}</h3>
       </div>
-      <div class="rsc_main_view">
-        <div>
-          <span>Template</span>
+      <div class="rsc_main_view w-full">
+        <div class="py-1">
+          <span class="font-semibold">Template</span>
         </div>
-        <div class="rsc_template">
-          <div class="rsc_main_header">
-            <ul class="rsc_main_title">
+        <!--  HERE WE ARE -->
+        <div class="rsc_template_mob block py-2 sm:hidden">
+          <ul class="rsc_mob_in">
+            <li
+              class="mob_template_frame"
+              :key="item[i].id"
+              v-for="(item, i) in arrToUseTemplate.mob"
+            >
+              <div>
+                <h3 class="roboto-light">{{ item[i].title }}</h3>
+                <input class="mob_frame_input" :name="item[i].title" v-model="item[i].modelInput" />
+              </div>
+              <div>
+                <h3 class="roboto-light">{{ item[i].title }}</h3>
+                <input class="mob_frame_input" :name="item[i].title" v-model="item[i].modelInput" />
+              </div>
+              <div>
+                <h3 class="roboto-light">{{ item[i].title }}</h3>
+                <input class="mob_frame_input" :name="item[i].title" v-model="item[i].modelInput" />
+              </div>
+            </li>
+          </ul>
+          <div class="w-full flex justify-end items-center">
+            <div v-if="isMinus">
+              <button
+                class="w-10 py-1 text-white rounded bg-gray-600"
+                @click.prevent="removeRowTemplate"
+              >
+                &minus;
+              </button>
+            </div>
+            <div>
+              <button
+                class="w-10 py-1 text-white rounded bg-red-600"
+                @click.prevent="addRowTemplate"
+              >
+                &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rsc_template_desk w-full hidden sm:block">
+          <div class="rsc_main_header h-6 w-full flex justify-center gap-1">
+            <ul class="rsc_desc_title">
               <li>
                 <h3>{{ labelIn.textQuotation }}</h3>
               </li>
               <li><h3>Quantity</h3></li>
               <li><h3>approximate price</h3></li>
             </ul>
-            <button>&plus;</button>
+            <div class="h-full flex justify-start items-center px-2">
+              <div>
+                <button class="w-8 py-2 text-white rounded bg-red-600" @click="addRowTemplate">
+                  &plus;
+                </button>
+              </div>
+              <div v-if="isMinus">
+                <button
+                  class="w-8 py-2 text-white rounded bg-red-600"
+                  @click.prevent="removeRowTemplate"
+                >
+                  &minus;
+                </button>
+              </div>
+            </div>
           </div>
           <ul class="rsc_main_template">
-            <li class="rsc_row">
-              <div class="rsc_column">
-                <div class="rsc_column_item">
-                  <input type="text" id="col_rsc_1" name="resouce_1" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_rsc_2" name="resouce_2" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_rsc_3" name="resouce_3" />
-                </div>
+            <li class="rsc_column" :key="item[i].id" v-for="(item, i) in arrToUseTemplate.desk">
+              <div class="rsc_column_item">
+                <input
+                  type="text"
+                  :id="item[i].title"
+                  class="col_rsc"
+                  :name="item[i].title"
+                  v-model="item[i].modelInput"
+                />
               </div>
-            </li>
-            <li class="rsc_row">
-              <div class="rsc_column">
-                <div class="rsc_column_item">
-                  <input type="text" id="col_qty_1" name="quantity_1" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_qty_2" name="quantity_2" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_qty_3" name="quantity_3" />
-                </div>
+              <div class="rsc_column_item">
+                <input
+                  type="text"
+                  :id="item[i].title"
+                  class="col_rsc"
+                  :name="item[i].title"
+                  v-model="item[i].modelInput"
+                />
               </div>
-            </li>
-            <li class="rsc_row">
-              <div class="rsc_column">
-                <div class="rsc_column_item">
-                  <input type="text" id="col_price_1" name="price_1" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_price_2" name="price_2" />
-                </div>
-                <div class="rsc_column_item">
-                  <input type="text" id="col_price_3" name="price_3" />
-                </div>
+              <div class="rsc_column_item">
+                <input
+                  type="text"
+                  :id="item[i].title"
+                  class="col_rsc"
+                  :name="item[i].title"
+                  v-model="item[i].modelInput"
+                />
               </div>
             </li>
           </ul>
+          <!-- Next Step after HERE WE ARE -->
           <div class="rsc_template_button">
             <div class="rsc_display_toggle">
               <div class="see_template">
@@ -138,16 +219,25 @@ function handleApplyOrEdit(isBtnValid: boolean): any {
                 <div>&raquo;</div>
               </div>
             </div>
-            <div class="template_btn_wrap">
-              <ShortModalButtonA
-                :style-infos="grabElementStyleButton('apply_template', 'YES', '3.2rem', 'green')"
-                :on-click="() => handleApplyOrEdit(true)"
-              />
-              <ShortModalButtonA
-                :style-infos="grabElementStyleButton('edit_template', 'EDIT', '3.2rem', '#ddd')"
-                :on-click="() => handleApplyOrEdit(true)"
-              />
-            </div>
+            <ul class="template_btn_wrap">
+              <li class="template_btn">
+                <ShortModalButtonA
+                  :style-infos="
+                    grabElementStyleButton('apply_template', 'APPLY', true, '4rem', 'green', '#fff')
+                  "
+                  :on-click="() => handleApplyOrEdit(true)"
+                />
+              </li>
+
+              <li class="template_btn">
+                <ShortModalButtonA
+                  :style-infos="
+                    grabElementStyleButton('edit_template', 'EDIT', false, '4rem', '#ddd', '#444')
+                  "
+                  :on-click="() => handleApplyOrEdit(false)"
+                />
+              </li>
+            </ul>
           </div>
           <div class="table_result_view">
             <div>
@@ -193,6 +283,7 @@ function handleApplyOrEdit(isBtnValid: boolean): any {
               typeMod="yes"
               :list-paragraph="arrParagraphs"
               :on-deeper-click="handleEndModal"
+              v-model="modelSubmit"
             />
           </div>
         </div>
@@ -200,4 +291,31 @@ function handleApplyOrEdit(isBtnValid: boolean): any {
     </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+@media (min-width: 180px) {
+  ul {
+    list-style: none;
+  }
+
+  .resources_template_content {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /** template **/
+  .rsc_main_question {
+    width: 100%;
+    font-size: calc(12px + 0.15vw);
+    padding: 0.5rem 0;
+    @apply flex justify-start items-center;
+  }
+
+  .rsc_mob_in .mob_frame_input {
+    width: 100%;
+    height: 2rem;
+    margin: 0.25rem 0 1rem;
+    border-radius: 5px;
+    @apply border border-solid border-gray-300;
+  }
+}
+</style>
