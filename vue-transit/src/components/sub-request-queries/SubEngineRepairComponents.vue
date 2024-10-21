@@ -2,11 +2,16 @@
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
-
+import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
 import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
 import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 
-let isSubmitted: Ref<boolean> = ref(false)
+let isSubmitted: Ref<boolean> = ref(true)
+
+const arrParagraphs: Ref<string[]> = ref([
+  'Your Performance and Request will be thoroughly analyze before Reply.',
+  'Are you sure you want to confirm the request ?'
+])
 
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
@@ -16,8 +21,18 @@ const referenceGet: ComputedRef<string> = computed(() => {
   return newRef
 })
 
+function handleEndModal() {
+  if (isSubmitted.value) {
+    //do something --OK--
+  } else {
+    //do something --NO--
+  }
+}
+
 function handleSubmit() {
   playOnClickBtn(13)
+
+  isSubmitted.value = true
   // do some **ACTIONS** submit request
 }
 </script>
@@ -72,7 +87,7 @@ function handleSubmit() {
           </div>
 
           <div class="req_send_box">
-            <div class="req_send_city my-2">
+            <div class="req_send_city my-4">
               <button
                 id="btn_send"
                 class="btn_send btn_gen_green w-full mb-2 mx-auto"
@@ -80,6 +95,14 @@ function handleSubmit() {
               >
                 Send
               </button>
+              <div class="prompt_end_msg w-full flex justify-center mt-4">
+                <ModalPromptForButton
+                  typeMod="yes"
+                  :list-paragraph="arrParagraphs"
+                  :on-deeper-click="handleEndModal"
+                  v-model="isSubmitted"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -100,7 +123,9 @@ function handleSubmit() {
   .engine_repair_content {
     --text-size-one: calc(13px + 0.3vw);
     width: 100vw;
+    max-width: 960px;
     min-height: 100vh;
+    padding: 0 1rem;
     margin: 1rem auto;
     font-size: var(--text-size-one);
   }
