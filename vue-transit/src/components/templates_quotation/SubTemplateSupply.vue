@@ -49,6 +49,10 @@ const labelIn: ComputedRef<ISubText> = computed(() => {
       subText.newTitle = 'Quotation engine component(s) for repairments'
       subText.textQuotation = 'Components'
       break
+    case 'ordering':
+      subText.newTitle = 'Purchase Order'
+      subText.textQuotation = 'Components'
+      break
     default:
       throw Error('Something went wrong in SubTemplateSupply - labelIn')
   }
@@ -93,7 +97,7 @@ function handleApplyOrEdit(isBtnApply: boolean) {
   <div class="resources_template_container">
     <div class="resources_template_content">
       <div class="rsc_main_question">
-        <h3 class="roboto-light">{{ labelIn.newTitle }}</h3>
+        <h2 class="text_query_label roboto-light">{{ labelIn.newTitle }}</h2>
       </div>
       <div class="rsc_main_view w-full">
         <div class="py-1 sm:py-4 sm:mt-8">
@@ -137,6 +141,13 @@ function handleApplyOrEdit(isBtnApply: boolean) {
               >
                 &plus;
               </button>
+            </div>
+          </div>
+
+          <div class="rsc_display_toggle my-4">
+            <div class="see_template">
+              <span>see template</span>
+              <div class="inline-block mx-2">&raquo;</div>
             </div>
           </div>
 
@@ -192,6 +203,7 @@ function handleApplyOrEdit(isBtnApply: boolean) {
             </ul>
           </div>
         </div>
+
         <div class="rsc_template_desk w-full hidden sm:block">
           <div class="rsc_main_header h-6 w-full flex justify-center gap-1">
             <ul class="rsc_desc_title">
@@ -325,6 +337,10 @@ function handleApplyOrEdit(isBtnApply: boolean) {
   .resources_template_content {
     width: 100%;
     margin: 0 auto;
+  }
+
+  .text_query_label {
+    font-size: calc(14px + 0.15vw);
   }
 
   /** template **/

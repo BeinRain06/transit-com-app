@@ -102,70 +102,9 @@ function handleValidation() {
               <div>&raquo;</div>
             </div>
           </div>
-          <div class="btn_wrapper">
-            <ShortModalButtonA
-              :style-infos="
-                grabElementStyleButton('proposal_validation', 'APPLY', '3.2rem', 'green')
-              "
-              :onClick="handleApplication(true)"
-            />
-            <ShortModalButtonA
-              :style-infos="grabElementStyleButton('proposal_rejection', 'EDIT', '3.2rem', '#ddd')"
-              :onClick="handleApplication(false)"
-            />
+          <div class="subtemplate_wrapper w-full">
+            <SubTemplateSupply label="engine" />
           </div>
-        </div>
-        <div class="table_result_view">
-          <div>
-            <span>Service Demands</span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Resources</th>
-                <th>Quantity</th>
-                <th>approximate price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Resource A</td>
-                <td>Qty A</td>
-                <td>Price A</td>
-              </tr>
-              <tr>
-                <td>Resource B</td>
-                <td>Qty B</td>
-                <td>Price B</td>
-              </tr>
-              <tr>
-                <td>Resource C</td>
-                <td>Qty C</td>
-                <td>Price C</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Total Price</td>
-                <td></td>
-                <td>Price D</td>
-              </tr>
-            </tfoot>
-          </table>
-          <div class="valid_btn_wrapper">
-            <button class="valid_btn">validate</button>
-            <ShortModalButtonA
-              :style-infos="
-                grabElementStyleButton('process_validation', 'Validate', '3.2rem', 'green')
-              "
-              :onClick="handleValidation"
-            />
-          </div>
-          <ModalPromptButton
-            typeMod="send"
-            :list-paragraph="arrParagraphs"
-            :on-deeper-click="handleEndModal"
-          />
         </div>
       </div>
     </div>

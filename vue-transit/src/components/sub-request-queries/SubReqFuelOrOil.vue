@@ -2,8 +2,6 @@
 import { ref, reactive, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
-import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
 
 const fuelAsInput: Ref<HTMLInputElement | undefined> = ref()
 const oilAsInput: Ref<HTMLInputElement | undefined> = ref()
@@ -113,12 +111,7 @@ function handleSubmit() {
         </div>
         <div class="fuel_wrap_submittion w-full mx-auto">
           <div class="btn_wrap_submit">
-            <ShortModalButtonA
-              :style-infos="
-                grabElementStyleButton('btn_end_submit', 'Submit', 'calc(100%)', '#f5a570', '#fff')
-              "
-              :on-click="() => handleSubmit()"
-            />
+            <button class="btn_submit btn_gen_green">Submit</button>
           </div>
           <div class="modal_liquid_box my-4 w-full">
             <div class="modal_liquid_ct">

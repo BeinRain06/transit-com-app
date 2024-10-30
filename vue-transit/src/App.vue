@@ -4,6 +4,8 @@ import HelloWorld from './components/HelloWorld.vue'
 import LoadingBtnContinue from './components/loading/LoadingBtnContinue.vue'
 import SubReqFuelOrOil from './components/sub-request-queries/SubReqFuelOrOil.vue'
 import SubEngineRepairComponents from './components/sub-request-queries/SubEngineRepairComponents.vue'
+import SubReqMaintenanceTools from './components/sub-request-queries/SubReqMaintenanceTools.vue'
+import SubReqPurchaseOrder from './components/sub-request-queries/SubReqPurchaseOrder.vue'
 </script>
 
 <template>
@@ -18,7 +20,7 @@ import SubEngineRepairComponents from './components/sub-request-queries/SubEngin
 
   <!-- <RouterView /> -->
 
-  <SubEngineRepairComponents />
+  <SubReqPurchaseOrder />
 </template>
 
 <style scoped></style>

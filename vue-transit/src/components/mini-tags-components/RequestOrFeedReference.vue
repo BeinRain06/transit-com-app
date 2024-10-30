@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
   <div class="req_feed_container">
-    <div class="req_feed_ct w-full my-2">
+    <div class="req_feed_ct w-full my-2 flex justify-center md:justify-end">
       <ul class="req_feed_text krub-light-italic text-xs">
         <li class="">
           <span>{{ props.element }}- {{ props.label }}</span>

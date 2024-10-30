@@ -13,7 +13,7 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
   switch (props.label) {
     case 'request':
       inside.text = 'Request'
-      inside.symbol = '&quest;'
+      inside.symbol = '?'
       break
     case 'feedback_one':
       inside.text = 'About feedback'
@@ -21,7 +21,7 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
       break
     case 'feedback_two':
       inside.text = 'feedback queries'
-      inside.symbol = '&quest;'
+      inside.symbol = '?'
       break
     case 'response':
       inside.text = 'Response'
@@ -67,6 +67,10 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
       inside.text = 'Request Repairment'
       inside.symbol = 'i'
       break
+    case 'human':
+      inside.text = 'Human Integration'
+      inside.symbol = 'i'
+      break
     default:
       throw Error('Error labText In SubSecondaryTitle')
   }
@@ -76,12 +80,14 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
 </script>
 <template>
   <div class="req_lab_container">
-    <ul class="request_lab">
+    <ul class="request_lab flex gap-1">
       <li>
         <span>{{ labText.text }}</span>
       </li>
       <li>
-        <div>{{ labText.symbol }}</div>
+        <div class="w-5 h-5 bg-gray-300 grid place-items-center" style="border-radius: 50%">
+          <span>{{ labText.symbol }}</span>
+        </div>
       </li>
     </ul>
   </div>

@@ -5,10 +5,8 @@ import type { Ref, ComputedRef, Reactive } from 'vue'
 import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
 
 import SubSingleInputTextBox from '../mini-tags-components/SubSingleInputTextBox.vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
 import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
 import RadioWrapButton from '../buttons/RadioWrapButton.vue'
-import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
 import { slapLoadingTime } from '../snippets-function-ts/reusable-mini-function'
 import { ButtonStore } from '@/stores/button-store'
@@ -200,12 +198,7 @@ function handleSubmit() {
         </ul>
         <div class="validate_pre_info">
           <div class="validate_pre_content">
-            <ShortModalButtonA
-              :style-infos="
-                grabElementStyleButton('continue_toggler', 'continue', '3.2rem', 'green', '#fff')
-              "
-              :on-click="() => handleContinue()"
-            />
+            <button class="btn_continue btn_gen_green">continue</button>
           </div>
         </div>
       </div>
