@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ComputedRef } from 'vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 const props = defineProps<{
   typeMod: string
@@ -15,34 +13,39 @@ const archiveParagraph: ComputedRef<string[]> = computed(() => {
   return allParagraph
 })
 
-const styleConfirm = computed(() => {
-  let newStyleConfirm
+const labelBtn = computed(() => {
+  let labelButton
 
   switch (props.typeMod) {
     case 'yes':
-      newStyleConfirm = grabElementStyleButton('valid_yes', 'YES', '3.2rem', 'green')
+      labelButton = 'YES'
       break
     case 'send':
-      newStyleConfirm = grabElementStyleButton('send_request', 'send', '3.2rem', 'green')
+      labelButton = 'send'
       break
     case 'ok':
-      newStyleConfirm = grabElementStyleButton('send_request', 'OK', '3.2rem', 'green')
+      labelButton = 'OK'
       break
     default:
-      throw Error('styleConfirm Error validation in --ModalPromptButton--')
+      throw Error(' Error label validation in --ModalPromptButton--')
   }
 
-  return newStyleConfirm
+  return labelButton
 })
 </script>
 <template>
-  <div class="prompt_wrapper">
-    <div class="prompt_content">
-      <ul class="prompt_list">
+  <div class="prompt_wrapper w-full">
+    <div class="prompt_content w-full text_size_msg">
+      <ul class="prompt_list w-full flex flex-col items-center gap-1 text-center my-2">
         <li :key="i" v-for="(elt, i) in archiveParagraph">{{ elt }}</li>
       </ul>
-      <div class="btn_wrapper">
-        <ShortModalButtonA :style-infos="styleConfirm" :onClick="() => props.onDeeperClick(true)" />
+      <div class="btn_wrapper w-4/5 flex justify-center items-center mt-6 mx-auto">
+        <button
+          class="w-full btn_valid_req btn_gen_green_2 text_size_msg"
+          @click="() => props.onDeeperClick(true)"
+        >
+          {{ labelBtn }}
+        </button>
       </div>
     </div>
   </div>
@@ -50,5 +53,9 @@ const styleConfirm = computed(() => {
 <style scoped>
 ul {
   list-style: none;
+}
+
+.text_size_msg {
+  font-size: calc(12px + 0.25vw);
 }
 </style>

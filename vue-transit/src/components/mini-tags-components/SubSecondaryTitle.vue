@@ -85,7 +85,10 @@ const labText: ComputedRef<{ text: string; symbol: string }> = computed(() => {
         <span>{{ labText.text }}</span>
       </li>
       <li>
-        <div class="w-5 h-5 bg-gray-300 grid place-items-center" style="border-radius: 50%">
+        <div
+          class="bg-gray-300 grid place-items-center"
+          style="border-radius: 50%; width: 1.35em; height: 1.35em"
+        >
           <span>{{ labText.symbol }}</span>
         </div>
       </li>

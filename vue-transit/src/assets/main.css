@@ -83,6 +83,10 @@ body {
   background-color: #fff;
 }
 
+.text_secondary_title {
+  font-size: calc(12px + 0.15vw);
+}
+
 .btn_gen_green {
   padding: 6px 10px;
   background-color: green;
