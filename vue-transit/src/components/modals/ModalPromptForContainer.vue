@@ -56,6 +56,6 @@ ul {
 }
 
 .text_size_msg {
-  font-size: calc(12px + 0.25vw);
+  font-size: calc(12px + 0.28vw);
 }
 </style>

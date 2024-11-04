@@ -63,7 +63,7 @@ function handleEndModalContainer() {
       <div class="entrance_title w-full mb-4 flex justify-center">
         <span class="font-bold">Human Socializing</span>
       </div>
-      <div class="text_secondary_title w-full mt-4 mb-2 justify-center items-center">
+      <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
         <SubSecondaryTitle label="human" />
       </div>
       <div class="about_two_agent w-full my-3">
@@ -92,7 +92,7 @@ function handleEndModalContainer() {
               </select>
             </li>
           </ul>
-          <ul class="office_post_wrap w-full my-4">
+          <ul class="office_post_wrap w-full my-4 sm:my-10">
             <li id="your_post" class="ofice_sandbox">
               <span> Your actual post in your department</span>
               <input id="post_office_plaintiff" class="w-full bg-gray-300 px-1 rounded" />
@@ -118,7 +118,7 @@ function handleEndModalContainer() {
           </ul>
         </div>
       </div>
-      <div class="matter_cooked text_situation w-full my-8">
+      <div class="matter_cooked text_situation w-full my-8 sm:mt-16 sm:mb-8">
         <div class="specify_problem w-full mb-2">
           <span>Resume in 05 sentences max what is the matter between you and your peer</span>
           <textarea rows="3" columns="5" class="problem_on_fire"></textarea>
@@ -128,12 +128,12 @@ function handleEndModalContainer() {
             Describe us in details at least 02 to 03 of these situations, and some others agents you
             may remember where in place.
           </h3>
-          <div class="box_situation_wrap w-full mt-4 mb-2">
+          <div class="box_situation_wrap w-full mt-4 mb-2 sm:my-8">
             <span class="text_gen_title">Details</span>
             <div class="box_situation_ct w-full">
               <ul class="situations_list">
                 <li class="situation_item w-full">
-                  <div class="my-2">
+                  <div class="my-4">
                     <span class="font-semibold text-gray-500">situation 1</span>
                   </div>
                   <div class="situation_out">
@@ -141,7 +141,7 @@ function handleEndModalContainer() {
                   </div>
                 </li>
                 <li class="situation_item w-full">
-                  <div class="my-2">
+                  <div class="my-4">
                     <span class="font-semibold text-gray-500">situation 2</span>
                   </div>
                   <div class="situation_out">
@@ -149,7 +149,7 @@ function handleEndModalContainer() {
                   </div>
                 </li>
                 <li class="situation_item w-full">
-                  <div class="my-2">
+                  <div class="my-4">
                     <span class="font-semibold text-gray-500">situation 3</span>
                   </div>
                   <div class="situation_out">
@@ -159,12 +159,12 @@ function handleEndModalContainer() {
               </ul>
             </div>
           </div>
-          <div class="box_solution_wrap w-full my-8">
+          <div class="box_solution_wrap w-full my-8 sm:mt-16 sm:mb-10">
             <span>Your tentatives to solve the problem(s)</span>
             <div class="box_solution_ct w-full">
               <ul class="solutions_list w-full">
                 <li class="solution_item w-full">
-                  <div class="my-2">
+                  <div class="my-4">
                     <span class="font-semibold">move 1</span>
                   </div>
                   <div class="solution_out">
@@ -172,7 +172,7 @@ function handleEndModalContainer() {
                   </div>
                 </li>
                 <li class="solution_item w-full">
-                  <div class="my-2">
+                  <div class="my-4">
                     <span class="font-semibold">move 2</span>
                   </div>
                   <div class="solution_out">
@@ -182,7 +182,7 @@ function handleEndModalContainer() {
               </ul>
             </div>
           </div>
-          <div class="time_spinning_wrap my-4">
+          <div class="time_spinning_wrap my-4 sm:my-8">
             <h3>how many times last this uneasy situation ?</h3>
             <select class="time_spinning_choice select_style my-2">
               <option class="spinning_choice" value="monthly">less than 03 months</option>
@@ -203,7 +203,7 @@ function handleEndModalContainer() {
             </div>
           </div>
           <!--Here we are-->
-          <div class="submit_board_btn w-full h-12 flex justify-center items-center">
+          <div class="submit_board_btn w-full h-20 flex justify-center items-center">
             <button class="btn_submit" @click="handleSubmit">submit</button>
           </div>
           <div class="value_message_add my-4">
@@ -335,6 +335,77 @@ function handleEndModalContainer() {
 
   .value_message_add {
     @apply w-full flex justify-center;
+  }
+}
+
+@media (min-width: 380px) {
+  .text_gen_title {
+    font-size: calc(13px + 0.2vw);
+  }
+
+  .text_select {
+    font-size: calc(13px + 0.15vw);
+  }
+
+  .text_content {
+    font-size: calc(13px + 0.2vw);
+  }
+
+  .text_situation {
+    font-size: calc(13px + 0.25vw);
+  }
+}
+
+@media (min-width: 640px) {
+  .text_select {
+    font-size: calc(14px + 0.15vw);
+  }
+
+  .text_content {
+    font-size: calc(14px + 0.2vw);
+  }
+
+  .text_situation {
+    font-size: calc(15px + 0.15vw);
+  }
+
+  /** container **/
+  .req_integration_container {
+    width: 100vw;
+    max-width: 1100px;
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .inside_dpt {
+    height: 6rem;
+    display: flex;
+    flex-basis: 50%;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .inside_dpt .dpt_structure {
+    @apply w-full py-2 flex flex-col items-center gap-2;
+  }
+
+  /**office post **/
+  .ofice_sandbox {
+    @apply w-full h-20 gap-4;
+  }
+
+  /** matter cooked **/
+
+  .specify_problem .problem_on_fire {
+    @apply w-full my-6;
+  }
+
+  /** submit **/
+
+  .btn_submit {
+    width: 100%;
+    padding: 3px 5px;
+    font-size: calc(12px + 0.25vw);
   }
 }
 </style>

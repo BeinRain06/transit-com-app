@@ -37,7 +37,7 @@ function handleSelectionDay() {
       <li class="scale_day_box w-full" :key="modelDay.id" v-for="modelDay in modelDays">
         <div id="day_box_one" class="day_box">
           <div
-            class="wrap_day_choice w-full flex flex-col-reverse justify-center gap-2 md:flex-row md:justify-start"
+            class="wrap_day_choice w-full flex flex-col-reverse justify-center gap-2 sm:flex-row sm:justify-start sm:items-center"
           >
             <div class="choosed_one">
               {{ modelDay.dayLabel }} * : <span>{{ modelDay.dayCall }}</span>
@@ -91,7 +91,7 @@ function handleSelectionDay() {
         </div>
       </li>
     </ul>
-    <div class="req_confirm w-full flex justify-center gap-2">
+    <div class="req_confirm w-full flex justify-center gap-2 sm:my-5">
       <div class="time_wrap_button w-1/2">
         <button
           id="time_btn_confirm"
@@ -155,6 +155,14 @@ function handleSelectionDay() {
     border-radius: 5px;
     border: 1px solid transparent;
     transition: 'all 300ms ease-in-out';
+  }
+
+  @media (min-width: 640px) {
+    .time_btn {
+      width: 100%;
+      padding: 2px 5px;
+      font-size: calc(12px + 0.18vw);
+    }
   }
 }
 </style>
