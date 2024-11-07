@@ -218,18 +218,9 @@ function handleEndModalContainer() {
                   <input type="number" id="money_unpaid" class="money_unpaid" />
                 </div>
                 <div class="submit_claimed_wrapper">
-                  <ShortModalButtonA
-                    :style-infos="
-                      grabElementStyleButton(
-                        'continue_toggler',
-                        'continue',
-                        '7rem',
-                        'green',
-                        '#fff'
-                      )
-                    "
-                    :on-click="() => handleClaim()"
-                  />
+                  <button class="btn_continue btn_gen_green" @click.prevent="handleClaim">
+                    continue
+                  </button>
                   <div class="modal_wrap" v-if="isClaimConfirmed">
                     <ModalPromptForButton
                       typeMod="yes"
@@ -252,7 +243,7 @@ function handleEndModalContainer() {
       </div>
       <div class="gen_modal_container">
         <ModalPromptForContainer
-          typeMod="OK"
+          typeMod="ok"
           :list-paragraph="promptParagraphsTwo"
           :on-deeper-click="handleEndModalContainer"
         />

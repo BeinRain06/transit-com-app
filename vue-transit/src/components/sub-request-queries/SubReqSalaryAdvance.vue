@@ -33,7 +33,8 @@ const manage: {
 let isSubmitted: Ref<boolean> = ref(false)
 
 const listOneParagraghs: Ref<string[]> = ref([
-  ' You are about to send the request. Click Submit if all the information are accurate'
+  ' You are about to send the request.',
+  'Click Submit if all the information are accurate.'
 ])
 
 const listTwoParagraghs: Ref<string[]> = ref([
@@ -71,24 +72,25 @@ function handleEndModalContainer() {
 </script>
 <template>
   <div id="req_salary_advance" class="salary_advance_container">
-    <div class="salary_advance_content">
-      <SubSecondaryTitle label="salary" />
-      <div class="details_worker">
-        <div>
-          <span>Personal Info</span>
-        </div>
+    <div class="salary_advance_content p">
+      <div class="entrance_title w-full mb-4 flex justify-center">
+        <span class="font-bold">Salary suitcase</span>
+      </div>
+      <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
+        <SubSecondaryTitle label="salary" />
+      </div>
+      <div class="details_worker w-full">
         <form class="get_formal_information">
           <fieldset>
-            <legend class="Personal infos">
-              <span>Personal infos </span>
-              <div>&copy;</div>
+            <legend class="Personal infos h-10">
+              <span class="text_size_legend crete-round-regular-italic">Personal infos </span>
             </legend>
             <div class="formal_info_item">
-              <label for="department" class="info_label"> department </label>
+              <label for="department" class="info_label roboto-light"> department </label>
               <input type="text" id="dpt_input" class="info_input" v-model="modelForm.department" />
             </div>
             <div class="formal_info_item">
-              <label for="name" class="info_label"> Name </label>
+              <label for="name" class="info_label roboto-light"> Name </label>
               <input
                 type="text"
                 id="name_input"
@@ -97,7 +99,7 @@ function handleEndModalContainer() {
               />
             </div>
             <div class="formal_info_item">
-              <label for="post" class="info_label"> office post </label>
+              <label for="post" class="info_label roboto-light"> office post </label>
               <input
                 type="text"
                 id="post_input"
@@ -106,7 +108,9 @@ function handleEndModalContainer() {
               />
             </div>
             <div class="formal_info_item">
-              <label for="reason" class="info_label"> reason why you want an advancement </label>
+              <label for="reason" class="info_label roboto-light">
+                reason why you want an advancement
+              </label>
               <input
                 type="text"
                 id="reason_input"
@@ -114,50 +118,59 @@ function handleEndModalContainer() {
                 v-model="modelForm.reasonUnderHood"
               />
             </div>
-            <div class="field_btn_wrap">
-              <div class="btn_wrap_confirm">
-                <ShortModalButtonA
-                  :style-infos="
-                    grabElementStyleButton(
-                      'btn_confirm_detail',
-                      'confirm',
-                      '3.2rem',
-                      'green',
-                      '#fff'
-                    )
-                  "
-                  :on-click="() => handleConfirm()"
-                />
+            <div class="field_btn_wrap w-full my-2">
+              <div class="btn_wrap_confirm w-full">
+                <button
+                  class="btn_confirm_detail btn_gen_green_2 roboto-regular"
+                  @click="handleConfirm"
+                >
+                  confirm
+                </button>
               </div>
-              <div class="btn_wrap_cancel">
-                <ShortModalButtonA
-                  :style-infos="
-                    grabElementStyleButton('btn_cancel_detail', 'edit', '3.2rem', '#ddd', '#444')
-                  "
-                  :on-click="() => handleCancel()"
-                />
+              <div class="btn_wrap_cancel w-full">
+                <button
+                  class="btn_cancel_detail btn_gen_drop_2 roboto-regular"
+                  @click="handleCancel"
+                >
+                  edit
+                </button>
               </div>
             </div>
           </fieldset>
         </form>
       </div>
-      <div class="details_money_management">
-        <div class="amount_to_release">
-          <span>Specify the amount money you might want(in $ dollars)</span>
-          <input type="number" class="amount_money" v-model="manage.amountMoney" />
-          <div class="amount_money_display">
+      <div class="details_money_management w-full">
+        <div class="amount_to_release w-full my-2 flex flex-col justify-center items-center gap-4">
+          <span class="roboto-light">Specify the amount money you might want(in $ dollars)</span>
+          <input
+            type="number"
+            class="amount_money bg-gray-300"
+            placeholder="e.g : 13 dollars"
+            v-model="manage.amountMoney"
+          />
+          <div class="amount_money_display my-2">
             <div class="money_display_content"><span>1345</span> <span>$(dollars)</span></div>
           </div>
         </div>
+        <!--Here we are-->
         <div class="means_to_refund">
-          <div class="question_refund">
-            <span>How do you intend to refund this advancement</span>
-            <span>( this information is capital)</span>
+          <div class="question_refund w-full flex flex-col justify-center items-center gap-2">
+            <span class="roboto-light">How do you intend to refund this advancement</span>
+            <span class="roboto-light">( this information is capital)</span>
+
+            <div class="mt-4 mb-2 mx-auto" style="width: 70%; height: 6rem">
+              <textarea
+                class="w-full h-full border border-solid border-gray-300"
+                rows="3"
+                columns="5"
+                v-model="manage.textRefund"
+              ></textarea>
+            </div>
           </div>
-          <textarea rows="3" columns="5" v-model="manage.textRefund"></textarea>
+
           <div class="intention_refund_display">
-            <div class="intend_display_content">
-              <p>
+            <div class="intend_display_content my-2">
+              <p class="text-center text_size_intend roboto-regular">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quas iure, maxime
                 earum ipsa autem quo, saepe libero numquam mollitia, molestias modi similique
                 temporibus quia.
@@ -165,24 +178,27 @@ function handleEndModalContainer() {
             </div>
           </div>
         </div>
-        <div class="time_money_lend">
-          <div class="time_money_day">
-            <span class="money_lend_question"
-              >Give us a Date where you wish to have the money
+        <div class="time_money_lend mt-4 mb-2">
+          <div class="time_money_day py-3 text-center">
+            <span class="money_lend_question block roboto-light"
+              >Propose a deadline you wish to be lend money
             </span>
-            <span>(e.g : 12/03/2025)</span>
+            <span class="py-2">(e.g : 12/03/2025)</span>
           </div>
-          <input type="text" id="expected_date" class="lending_date" />
+          <div class="h-8 my-2 mx-auto" style="width: 80%">
+            <input
+              type="text"
+              id="expected_date"
+              class="lending_date border w-full h-full text-center border-solid border-gray-300"
+            />
+          </div>
         </div>
       </div>
       <div class="validate_req_box">
-        <ShortModalButtonA
-          :style-infos="
-            grabElementStyleButton('btn_salary_validate', 'edit', '4.8rem', 'green', '#fff')
-          "
-          :on-click="() => handleValidation()"
-        />
-        <div class="salary_modal_box">
+        <button class="btn_sal_valid w-full btn_gen_green_2" @click="handleValidation">
+          apply
+        </button>
+        <div class="salary_modal_box w-full my-8 text-center">
           <ModalPromptForButton
             typeMod="submit"
             :list-paragraph="listOneParagraghs"
@@ -190,9 +206,9 @@ function handleEndModalContainer() {
           />
         </div>
       </div>
-      <div class="end_closing_message">
+      <div class="end_closing_message mt-3 mb-6">
         <ModalPromptForContainer
-          typeMod="OK"
+          typeMod="ok"
           :list-paragraph="listTwoParagraghs"
           :on-deeper-click="handleEndModalContainer"
         />
@@ -204,7 +220,81 @@ function handleEndModalContainer() {
   </div>
 </template>
 <style scoped>
-ul {
-  list-style: none;
+@media (min-width: 180px) {
+  ul {
+    list-style: none;
+  }
+
+  .text_size_legend {
+    font-size: calc(12px + 0.25vw);
+  }
+
+  .text_size_intend {
+    font-size: calc(13px + 0.18vw);
+  }
+
+  /** container **/
+
+  .salary_advance_content {
+    width: 100w;
+    padding: 2rem 0.75rem 1rem;
+    margin: 0 auto;
+  }
+
+  /**formal information **/
+
+  .get_formal_information {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    @apply flex flex-col justify-center items-center border border-solid border-gray-400;
+  }
+
+  .formal_info_item {
+    width: 100%;
+    padding: 0.25rem 0.35rem 0.75rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-auto-rows: 100%;
+    gap: 0.5rem;
+    place-content: center;
+    @apply bg-gray-100;
+  }
+
+  .formal_info_item .info_input {
+    width: 96%;
+    height: 1.8rem;
+    margin: 0 auto;
+    padding: 10px;
+    @apply border border-solid border-gray-300 rounded-xl;
+  }
+
+  .field_btn_wrap {
+    @apply flex justify-center items-center gap-1;
+    height: 4rem;
+    flex-basis: 50%;
+  }
+
+  .amount_money::placeholder {
+    font-style: italic;
+    @apply w-full flex justify-center items-center;
+  }
+
+  .btn_confirm_detail,
+  .btn_cancel_detail {
+    width: 100%;
+  }
+
+  /** validate request box **/
+
+  .validate_req_box {
+    width: 60%;
+    margin: 1.5rem auto;
+  }
+}
+
+@media (min-width: 490px) {
 }
 </style>

@@ -27,7 +27,7 @@ const labelBtn = computed(() => {
       labelButton = 'OK'
       break
     default:
-      throw Error(' Error label validation in --ModalPromptButton--')
+      throw Error(' Error label validation in --ModalPromptContainer--')
   }
 
   return labelButton
