@@ -118,7 +118,7 @@ function handleEndModalContainer() {
                 v-model="modelForm.reasonUnderHood"
               />
             </div>
-            <div class="field_btn_wrap w-full my-2">
+            <div class="field_btn_wrap my-2">
               <div class="btn_wrap_confirm w-full">
                 <button
                   class="btn_confirm_detail btn_gen_green_2 roboto-regular"
@@ -139,12 +139,17 @@ function handleEndModalContainer() {
           </fieldset>
         </form>
       </div>
-      <div class="details_money_management w-full">
+      <div class="details_money_management w-full md:py-8">
         <div class="amount_to_release w-full my-2 flex flex-col justify-center items-center gap-4">
-          <span class="roboto-light">Specify the amount money you might want(in $ dollars)</span>
+          <span class="roboto-light md:hidden font-bold"
+            >Specify the amount money you might want(in $ dollars)</span
+          >
+          <span class="hidden md:block font-semibold text-lg py-2"
+            >Specify the amount money you might want(in $ dollars)</span
+          >
           <input
             type="number"
-            class="amount_money bg-gray-300"
+            class="amount_money bg-gray-300 md:h-6 md:w-3/5"
             placeholder="e.g : 13 dollars"
             v-model="manage.amountMoney"
           />
@@ -233,6 +238,10 @@ function handleEndModalContainer() {
     font-size: calc(13px + 0.18vw);
   }
 
+  fieldset {
+    width: min-content;
+  }
+
   /** container **/
 
   .salary_advance_content {
@@ -272,14 +281,18 @@ function handleEndModalContainer() {
   }
 
   .field_btn_wrap {
-    @apply flex justify-center items-center gap-1;
+    width: 100%;
     height: 4rem;
-    flex-basis: 50%;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: min-content;
+    gap: 0.25rem;
   }
 
   .amount_money::placeholder {
     font-style: italic;
-    @apply w-full flex justify-center items-center;
+    @apply w-full flex justify-center items-center text-center;
   }
 
   .btn_confirm_detail,
@@ -296,5 +309,55 @@ function handleEndModalContainer() {
 }
 
 @media (min-width: 490px) {
+  fieldset {
+    width: 86%;
+  }
+
+  .salary_advance_content {
+    width: 100w;
+    padding: 2rem 5% 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .text_size_intend {
+    font-size: calc(14px + 0.22vw);
+  }
+
+  fieldset {
+    width: 90%;
+    margin: 0.5rem 0;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: min-content;
+    gap: 1rem;
+  }
+
+  /** container **/
+
+  .salary_advance_content {
+    width: 100w;
+    max-width: 1060px;
+  }
+
+  /**formal information **/
+
+  .formal_info_item {
+    margin: 2rem 0 1rem;
+  }
+
+  .field_btn_wrap {
+    width: 200%;
+    margin: 0 auto;
+    gap: 1rem;
+  }
+
+  /**intend display **/
+
+  .intend_display_content {
+    width: 92%;
+    margin: 1.5rem auto;
+  }
 }
 </style>
