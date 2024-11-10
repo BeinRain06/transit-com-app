@@ -9,25 +9,39 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div class="layout_item">
-    <div class="box_info">
-      <div class="box_question">
-        <span>{{ props.question }}</span>
+  <div class="layout_item w-full my-4">
+    <div class="box_info md:py-4">
+      <div class="box_question mt-1 mb-2 text-center sm:text-left">
+        <span class="roboto-light">{{ props.question }}</span>
       </div>
-      <div class="box_check_wrap">
-        <ul class="box_check_city">
-          <li :key="item.id" v-for="item in props.checkInfo">
+      <div class="box_check_wrap w-full">
+        <ul class="box_check_city w-full flex justify-center items-center gap-1">
+          <li
+            :key="item.id"
+            v-for="item in props.checkInfo"
+            class="w-1/2 sm:w-20 grid place-items-center gap-1"
+          >
+            <div class="check_label_text">{{ item.label }}</div>
             <input
               type="checkbox"
               :id="item.id"
               :name="item.id"
-              class="box_check"
+              class="box_check border border-solid border-gray-300"
               :checked="item.status"
             />
-            <div class="check_label_text">{{ item.label }}</div>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
+<style scoped>
+@media (min-width: 520px) {
+  .box_info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: min-content;
+  }
+}
+</style>

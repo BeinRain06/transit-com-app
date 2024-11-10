@@ -8,8 +8,6 @@ import SubCheckBox from '../mini-tags-components/SubCheckBox .vue'
 import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
 import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
 import RadioWrapButton from '../buttons/RadioWrapButton.vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
 
 interface IModelCheckBoxItem {
   checkDetails: {
@@ -28,9 +26,9 @@ interface IRadioBonusItem {
   }[]
 }
 
-let isSubmitted: Ref<boolean> = ref(false)
+let isSubmitted: Ref<boolean> = ref(true)
 
-let isClaimConfirmed: Ref<boolean> = ref(false)
+let isClaimConfirmed: Ref<boolean> = ref(true)
 
 const promptParagraphsOne: Ref<string[]> = ref([
   'you are about to submit a claim for unpaid bonus',
@@ -92,17 +90,17 @@ const modelThree: IModelCheckBoxItem = reactive({
   checkDetails: [
     {
       id: 'time_unpaid_one',
-      label: '01 time',
+      label: 'once',
       status: false
     },
     {
       id: 'time_unpaid_two',
-      label: '02 times',
+      label: 'twice',
       status: false
     },
     {
       id: 'time_unpaid_three',
-      label: 'more than 02 times',
+      label: 'more +',
       status: false
     }
   ]
@@ -132,14 +130,15 @@ function handleRadioToggle(i: number) {
 
 function handleClaim() {
   const baseFtSize = 13
-  playOnClickBtn(baseFtSize)
+  /*  playOnClickBtn(baseFtSize) */
+
   // do something
   // --> open the modal confirm container(isClaimConfirmed set to **true**)
 }
 
 function handleSubmit() {
   const baseFtSize = 13
-  playOnClickBtn(baseFtSize)
+  /*  playOnClickBtn(baseFtSize) */
 
   // --> couple actions --SUBMITTION--
 }
@@ -151,24 +150,31 @@ function handleEndModalContainer() {
 <template>
   <div id="req_unpaid_bonus" class="unpaid_bonus_container">
     <div class="unpaid_bonus_content">
-      <SubSecondaryTitle label="bonus" />
+      <div class="entrance_title w-full mb-4 flex justify-center">
+        <span class="font-bold">Bonus stats</span>
+      </div>
+      <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
+        <SubSecondaryTitle label="bonus" />
+      </div>
 
-      <div class="department_details">
+      <div class="department_details my-4 md:my-6">
         <SubSingleInputTextBox
           question="Your Department"
           label="dpt_concern"
+          bgColor="#dae4be"
           :model="infoEmployee.dpt"
-          :isInput="false"
+          :isInput="true"
         />
 
         <SubSingleInputTextBox
           question="Your Post"
           label="post_concern"
+          bgColor="#eee"
           :model="infoEmployee.post"
-          :isInput="false"
+          :isInput="true"
         />
       </div>
-      <div class="track_bonus_details">
+      <div class="track_bonus_details md:py-2">
         <div class="track_box">
           <RadioWrapButton
             question="Which Bonus do you claimed ?"
@@ -177,7 +183,7 @@ function handleEndModalContainer() {
           />
 
           <div class="bonus_track_wrap">
-            <ul class="details_joining">
+            <ul class="details_joining my-1 md: py-4">
               <li>
                 <div class="joining_item">
                   <span>Phone 1</span>
@@ -197,7 +203,7 @@ function handleEndModalContainer() {
                 </div>
               </li>
             </ul>
-            <div class="actions_on_process">
+            <div class="actions_on_process my-4">
               <div class="action_process">
                 <SubCheckBox
                   question="have you an ongoing Credit ?"
@@ -210,18 +216,30 @@ function handleEndModalContainer() {
                 />
 
                 <SubCheckBox
-                  question="how many times have you already experienced that situation under the year ?"
+                  question="how many times you already experienced that situation under the year ?"
                   :check-info="modelThree.checkDetails"
                 />
-                <div class="amount_money_unreceived">
-                  <span>How much money you are intended to have</span>
-                  <input type="number" id="money_unpaid" class="money_unpaid" />
+                <div
+                  class="amount_money_unreceived w-full h-24 flex flex-col justify-center items-center md:w-4/5 md:mx-auto"
+                >
+                  <div class="my-2">
+                    <span>How much money you are intended to have</span>
+                  </div>
+                  <input
+                    type="number"
+                    id="money_unpaid"
+                    class="money_unpaid w-full h-8 border border-solid border-gray-300"
+                  />
                 </div>
-                <div class="submit_claimed_wrapper">
-                  <button class="btn_continue btn_gen_green" @click.prevent="handleClaim">
+                <div class="submit_claimed_wrapper w-full my-3 md:grid md:place-items-center">
+                  <button
+                    class="btn_continue btn_gen_green_2 md:w-2/5"
+                    @click.prevent="handleClaim"
+                  >
                     continue
                   </button>
-                  <div class="modal_wrap" v-if="isClaimConfirmed">
+
+                  <div class="modal_wrap py-2" v-if="isClaimConfirmed">
                     <ModalPromptForButton
                       typeMod="yes"
                       :list-paragraph="promptParagraphsOne"
@@ -241,7 +259,7 @@ function handleEndModalContainer() {
           </div>
         </div>
       </div>
-      <div class="gen_modal_container">
+      <div class="gen_modal_container" v-if="isSubmitted">
         <ModalPromptForContainer
           typeMod="ok"
           :list-paragraph="promptParagraphsTwo"
@@ -252,7 +270,58 @@ function handleEndModalContainer() {
   </div>
 </template>
 <style scoped>
-ul {
-  list-style: none;
+@media (min-width: 180px) {
+  ul {
+    list-style: none;
+  }
+
+  /** container **/
+
+  .unpaid_bonus_content {
+    width: 100vw;
+    padding: 2rem 1rem 1rem;
+    margin: 0 auto;
+  }
+
+  /** bonus track wrap **/
+  .joining_item {
+    @apply w-full my-4 flex justify-start items-center gap-2;
+  }
+
+  .joining_item span {
+    width: 25%;
+  }
+
+  .joining_input {
+    width: 75%;
+    @apply h-6 my-1 border border-solid border-gray-300;
+  }
+}
+
+@media (min-width: 520px) {
+  /** actons ongoing **/
+  .actions_on_process {
+    margin: 2.5rem 0 1rem;
+    height: max-content;
+  }
+}
+
+@media (min-width: 768px) {
+  /** container **/
+
+  .unpaid_bonus_content {
+    width: 100vw;
+    max-width: 1100px;
+    padding: 2rem 2rem 1rem;
+    margin: 0 auto;
+  }
+
+  .department_details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: min-content;
+    gap: 1rem;
+  }
 }
 </style>

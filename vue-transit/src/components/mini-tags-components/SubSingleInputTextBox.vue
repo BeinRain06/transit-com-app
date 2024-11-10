@@ -1,25 +1,34 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import type { ComputedRef } from 'vue'
 const props = defineProps<{
   question: string
   label: string
   model: string
   isInput: Boolean
+  bgColor?: string
   numberRows?: string
   numberColumns?: string
 }>()
+
+const bgInputColor: ComputedRef<string> = computed(() => {
+  let newBgColor = props.bgColor ? props.bgColor : 'transparent'
+  return newBgColor
+})
 </script>
 <template>
   <div class="layout_item">
-    <div class="box_info">
+    <div class="box_info w-full">
       <div class="box_question">
-        <span>{{ props.question }}</span>
+        <span class="roboto-light">{{ props.question }}</span>
       </div>
-      <div class="box_input_wrap" v-if="props.isInput">
+      <div class="box_input_wrap w-full h-6 mt-1 mb-2" v-if="props.isInput">
         <input
           type="text"
           :id="props.label"
           :name="props.label"
-          class="box_input"
+          class="box_input w-full h-full border border-solid border-gray-300 rounded"
+          :style="{ 'background-color': `${bgInputColor}` }"
           :v-model="props.model"
         />
       </div>

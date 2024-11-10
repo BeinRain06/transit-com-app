@@ -72,7 +72,7 @@ function handleEndModalContainer() {
 </script>
 <template>
   <div id="req_salary_advance" class="salary_advance_container">
-    <div class="salary_advance_content p">
+    <div class="salary_advance_content">
       <div class="entrance_title w-full mb-4 flex justify-center">
         <span class="font-bold">Salary suitcase</span>
       </div>

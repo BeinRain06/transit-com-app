@@ -111,8 +111,8 @@ const referenceGet: ComputedRef<string> = computed(() => {
     width: 100vw;
     max-width: 1045px;
   }
-
   /** employee details **/
+
   .employee_infos_wrap {
     display: flex;
     justify-content: center;

@@ -7,9 +7,9 @@ import SubEngineRepairComponents from './components/sub-request-queries/SubEngin
 import SubReqMaintenanceTools from './components/sub-request-queries/SubReqMaintenanceTools.vue'
 import SubReqHumanIntegration from './components/sub-request-queries/SubReqHumanIntegration.vue'
 import SubReqPurchaseOrder from './components/sub-request-queries/SubReqPurchaseOrder.vue'
-
 import SubReqSalaryAdvance from './components/sub-request-queries/SubReqSalaryAdvance.vue'
-/* import SubUnpaidBonus from './components/sub-request-queries/SubUnpaidBonus.vue' */
+
+import SubUnpaidBonus from './components/sub-request-queries/SubUnpaidBonus.vue'
 </script>
 
 <template>
@@ -24,7 +24,7 @@ import SubReqSalaryAdvance from './components/sub-request-queries/SubReqSalaryAd
 
   <!-- <RouterView /> -->
 
-  <SubReqSalaryAdvance />
+  <SubUnpaidBonus />
 </template>
 
 <style scoped></style>

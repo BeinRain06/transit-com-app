@@ -10,12 +10,12 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div class="radio_wrap">
-    <div class="question_tag">
-      <span>{{ props.question }}</span>
+  <div class="radio_wrap w-full">
+    <div class="question_tag text-center my-4">
+      <span class="roboto-light">{{ props.question }}</span>
     </div>
 
-    <ul class="time_assertion">
+    <ul class="list_radio_stuff my-4">
       <li
         class="radio_broadcast"
         :key="item.id"
@@ -32,4 +32,42 @@ const props = defineProps<{
     </ul>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+@media (min-width: 180px) {
+  /** radio stuff**/
+  .list_radio_stuff {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: min-content;
+    gap: 1rem;
+  }
+
+  .list_radio_stuff .radio_broadcast {
+    width: 100%;
+    display: grid;
+    grid-row: span 2;
+    grid-auto-rows: subgrid;
+    gap: 0.5rem;
+    place-items: center;
+    text-align: center;
+  }
+  /** radio inner box **/
+  .radio_inner_box {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid gray;
+  }
+
+  .radio_inner_box.active_inner_box {
+    width: 14px;
+    height: 14px;
+    background-color: #7e7e7e;
+    border-radius: 50%;
+    border: 1px solid gray;
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+  }
+}
+</style>
