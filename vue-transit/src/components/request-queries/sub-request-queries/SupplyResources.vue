@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
-import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
-import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
-import LoadingBtnContinue from '../loading/LoadingBtnContinue.vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
+
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import SubTemplateSupply from '@/components/templates_quotation/SubTemplateSupply.vue'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
+import LoadingBtnContinue from '@/components/loading/LoadingBtnContinue.vue'
+import { playOnClickBtn } from '@/components/snippets-function-ts/playClickButton'
 import { ButtonStore } from '@/stores/button-store'
-import { slapLoadingTime } from '../snippets-function-ts/reusable-mini-function'
+
+import { slapLoadingTime } from '@/components/snippets-function-ts/reusable-mini-function'
 
 let isSubmitted: Ref<boolean> = ref(false)
 
@@ -52,7 +53,7 @@ function handleContinue() {
 <template>
   <div id="sup_resources" class="sup_resources_container">
     <div class="sup_resources_content">
-      <SubSecondaryTitle label="Needed Resources" />
+      <SubSecondaryTitle label="needs" />
       <ul class="sup_rsc_presentation">
         <li class="sup_resc_activity">
           <div>
@@ -62,19 +63,7 @@ function handleContinue() {
             <input type="text" id="work_activity" class="work_activity" v-model="modelInput" />
           </div>
           <div class="continue_wrap">
-            <ShortModalButtonA
-              :style-infos="
-                grabElementStyleButton(
-                  'continue_toggler',
-                  'continue',
-                  true,
-                  '3.2rem',
-                  'green',
-                  '#fff'
-                )
-              "
-              :on-click="() => handleContinue()"
-            />
+            <button clas="btn_continue btn_gen_green" @click="handleContinue">continue</button>
           </div>
         </li>
       </ul>

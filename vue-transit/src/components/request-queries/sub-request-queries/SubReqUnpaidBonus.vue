@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
-import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
-import SubSingleInputTextBox from '../mini-tags-components/SubSingleInputTextBox.vue'
-import SubCheckBox from '../mini-tags-components/SubCheckBox .vue'
-import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
-import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
-import RadioWrapButton from '../buttons/RadioWrapButton.vue'
 
-interface IModelCheckBoxItem {
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import SubSingleInputTextBox from '@/components/mini-tags-components/SubSingleInputTextBox.vue'
+import SubCheckBox from '@/components/mini-tags-components/SubCheckBox .vue'
+import ModalPromptForButton from '@/components/modals/ModalPromptForButton.vue'
+import ModalPromptForContainer from '@/components/modals/ModalPromptForContainer.vue'
+import RadioWrapButton from '@/components/buttons/RadioWrapButton.vue'
+
+export interface IModelCheckBoxItem {
   checkDetails: {
     id: string
     label: string

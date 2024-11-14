@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import LoadingBtnContinue from './components/loading/LoadingBtnContinue.vue'
-import SubReqFuelOrOil from './components/sub-request-queries/SubReqFuelOrOil.vue'
-import SubEngineRepairComponents from './components/sub-request-queries/SubEngineRepairComponents.vue'
-import SubReqMaintenanceTools from './components/sub-request-queries/SubReqMaintenanceTools.vue'
-import SubReqHumanIntegration from './components/sub-request-queries/SubReqHumanIntegration.vue'
-import SubReqPurchaseOrder from './components/sub-request-queries/SubReqPurchaseOrder.vue'
-import SubReqSalaryAdvance from './components/sub-request-queries/SubReqSalaryAdvance.vue'
 
-import SubUnpaidBonus from './components/sub-request-queries/SubUnpaidBonus.vue'
+import SubReqUnpaidBonus from './components/request-queries/sub-request-queries/SubReqUnpaidBonus.vue'
+import DocUnpaidBonus from './components/request_answers/sub_request_answers/DocUnpaidBonus.vue'
 </script>
 
 <template>
@@ -24,7 +18,7 @@ import SubUnpaidBonus from './components/sub-request-queries/SubUnpaidBonus.vue'
 
   <!-- <RouterView /> -->
 
-  <SubUnpaidBonus />
+  <DocUnpaidBonus />
 </template>
 
 <style scoped></style>

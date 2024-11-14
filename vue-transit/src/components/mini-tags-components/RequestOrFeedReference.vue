@@ -10,10 +10,10 @@ const props = defineProps<{
   <div class="req_feed_container">
     <div class="req_feed_ct w-full my-2 flex justify-center md:justify-end">
       <ul class="req_feed_text krub-light-italic text-xs">
-        <li class="">
+        <li class="inline-block mx-2">
           <span>{{ props.element }}- {{ props.label }}</span>
         </li>
-        <li>
+        <li class="inline-block">
           <span>{{ props.idFetch }}</span>
         </li>
       </ul>

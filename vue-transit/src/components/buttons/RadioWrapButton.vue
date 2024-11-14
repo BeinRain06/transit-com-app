@@ -7,6 +7,8 @@ const props = defineProps<{
     classItem: string
     modelRadio: boolean
   }[]
+  isReqDisplay?: boolean
+  bonusClaimed?: string
 }>()
 </script>
 <template>
