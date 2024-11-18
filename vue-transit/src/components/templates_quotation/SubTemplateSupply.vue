@@ -23,7 +23,7 @@ interface ITemplate {
   }[][]
 }
 
-const props = defineProps<{ label: string }>()
+const props = defineProps<{ label: string; isDocPage?: boolean }>()
 
 const arrParagraphs: Ref<string[]> = ref([
   'Your Performance and Request will be thoroughly analyze before Reply.',
@@ -105,7 +105,7 @@ function handleApplyOrEdit(isBtnApply: boolean) {
         </div>
         <!--  HERE WE ARE -->
         <div class="rsc_template_mob block py-2 sm:hidden">
-          <ul class="rsc_mob_in">
+          <ul class="rsc_mob_in" v-if="!props.isDocPage">
             <li
               class="mob_template_frame"
               :key="item[i].id"

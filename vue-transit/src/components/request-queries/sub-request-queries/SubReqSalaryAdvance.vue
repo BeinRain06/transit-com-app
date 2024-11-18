@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import { grabElementStyleButton } from '../snippets-function-ts/playClickButton'
-import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
-import ShortModalButtonA from '../buttons/ShortModalButtonA.vue'
-import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
-import ModalPromptForContainer from '../modals/ModalPromptForContainer.vue'
-import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import ModalPromptForButton from '@/components/modals/ModalPromptForButton.vue'
+import ModalPromptForContainer from '@/components/modals/ModalPromptForContainer.vue'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
 interface IModelForm {
   department: string

@@ -2,10 +2,10 @@
 import { ref, reactive, computed } from 'vue'
 import type { Ref, Reactive, ComputedRef } from 'vue'
 
-import SubSecondaryTitle from '../mini-tags-components/SubSecondaryTitle.vue'
-import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
-import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
-import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import SubTemplateSupply from '@/components/templates_quotation/SubTemplateSupply.vue'
+import ModalPromptForButton from '@/components/modals/ModalPromptForButton.vue'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
 let infoPage: Reactive<{
   req_id: string

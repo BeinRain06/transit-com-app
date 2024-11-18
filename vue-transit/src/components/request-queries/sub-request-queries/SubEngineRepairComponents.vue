@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import SubTemplateSupply from '../templates_quotation/SubTemplateSupply.vue'
-import ModalPromptForButton from '../modals/ModalPromptForButton.vue'
-import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
-import RequestOrFeedReference from '../mini-tags-components/RequestOrFeedReference.vue'
+
+import SubTemplateSupply from '@/components/templates_quotation/SubTemplateSupply.vue'
+import ModalPromptForButton from '@/components/modals/ModalPromptForButton.vue'
+import { playOnClickBtn } from '@/components/snippets-function-ts/playClickButton'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
 let isSubmitted: Ref<boolean> = ref(true)
 
@@ -50,8 +51,8 @@ function handleSubmit() {
           </div>
           <input
             type="text"
-            id="license"
-            name="license"
+            id="line_transportation"
+            name="transportation"
             class="repair_init_input"
             placeholder="e.g: line garoua-ngaoundere"
           />

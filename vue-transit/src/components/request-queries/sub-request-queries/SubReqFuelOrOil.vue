@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
+
+import { playOnClickBtn } from '@/components/snippets-function-ts/playClickButton'
 
 const fuelAsInput: Ref<HTMLInputElement | undefined> = ref()
 const oilAsInput: Ref<HTMLInputElement | undefined> = ref()
@@ -43,7 +46,7 @@ const referenceGet: ComputedRef<string> = computed(() => {
 })
 
 function handleSubmit() {
-  playOnClickBtn(13)
+  /* playOnClickBtn(13) */
 }
 </script>
 <template>
@@ -52,7 +55,10 @@ function handleSubmit() {
       <div class="liquid_request my-4 flex justify-center md:justify-end">
         <h3 class="gen_liquid_title py-2 px-4 krub-regular-italic">Liquid Request</h3>
       </div>
-      <form class="details_liquid_demand w-full py-2 mt-8 mb-4">
+      <div>
+        <SubSecondaryTitle label="details" />
+      </div>
+      <form class="details_liquid_demand w-full py-2 mb-4">
         <div class="details_car">
           <div class="liquid_demand_item">
             <label for="driver" class="demand_label">
@@ -76,12 +82,19 @@ function handleSubmit() {
                 type="checkbox"
                 id="check_fuel"
                 class="check_liquid"
+                data-liquid="fuel"
                 :checked="substance.fuel"
               />
               <span>Fuel(Diesel/Gazoil)</span>
             </div>
             <div class="spec_liquid_elt">
-              <input type="checkbox" id="check_oil" class="check_liquid" :checked="substance.oil" />
+              <input
+                type="checkbox"
+                id="check_oil"
+                class="check_liquid"
+                data-liquid="oil"
+                :checked="substance.oil"
+              />
               <span>Motor Oil</span>
             </div>
           </div>

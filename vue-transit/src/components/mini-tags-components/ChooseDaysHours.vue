@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import type { IModelDays } from '../sub-request-queries/SubReqHumanIntegration.vue'
 
 const modelInfosDays = defineModel()
 

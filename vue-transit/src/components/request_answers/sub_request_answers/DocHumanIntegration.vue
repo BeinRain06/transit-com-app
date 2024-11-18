@@ -1,62 +1,72 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { Ref, ComputedRef } from 'vue'
-
+import { computed } from 'vue'
 import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
-import ModalPromptForContainer from '@/components/modals/ModalPromptForContainer.vue'
-import ChooseDaysHours from '@/components/mini-tags-components/ChooseDaysHours.vue'
-import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
-export interface IModelDays {
-  id: string
-  dayLabel: string
-  dayCall: string
-  modalStatus: boolean
-  rangeHours: string
-  hoursConfirmed: boolean
-}
-let isSubmitted: Ref<boolean> = ref(false)
-
-const listOneParagraghs = ref([
-  'Keep watching your notification page in the app. As soon as Our resource end study your request. You will be shortly Join.',
-  'Thanks you Trusting Human Integration Service!'
-])
-
-const arrInfosDays: Ref<IModelDays[]> = ref([
-  {
-    id: 'day_one',
-    dayLabel: 'Day One',
-    dayCall: '',
-    modalStatus: true,
-    rangeHours: '12:00AM - 02:00 P.M',
-    hoursConfirmed: false
-  },
-
-  {
-    id: 'day_two',
-    dayLabel: 'Day Two',
-    dayCall: '',
-    modalStatus: true,
-    rangeHours: '01:00PM - 02:00 P.M',
-    hoursConfirmed: false
+const dataGetIntegration = computed(() => {
+  let dataFetchInRequest = {
+    postComplainant: 'mechanic technician assistant',
+    dptComplainant: 'maintenance',
+    postEmployeeInCharge: 'manager',
+    dptEmployeeInCharge: 'technical',
+    toolsNessity: 'for troubleshooting motor misbehavior sounds of the engine bus **kalago CT**',
+    generalMatterIdea:
+      'always tend to length response feed that are neccessary for the quick advancements of my work',
+    situationOccurence: 'monthly',
+    arrRscInside: [
+      {
+        id: 'day_one',
+        dayLabel: 'Day One',
+        dayCall: 'tuesday',
+        rangeHours: '12:00AM - 02:00 P.M'
+      },
+      {
+        id: 'day_two',
+        dayLabel: 'Day Two',
+        dayCall: 'friday',
+        rangeHours: '01:00PM - 02:00 P.M'
+      }
+    ],
+    matterRecipe: {
+      once: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis deleniti cum beatae eveniet repudiandae blanditiis maxime, qui minima!',
+      twice:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis deleniti cum beatae eveniet repudiandae blanditiis maxime, qui minima!',
+      thrice:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis deleniti cum beatae eveniet repudiandae blanditiis maxime, qui minima!'
+    },
+    solution: {
+      trialOne:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore similique vero nesciunt molestias quae quibusdam! Voluptate consectetur perferendis sed. Aspernatur ab eius asperiores harum animi maxime fuga. A, architecto veritatis.',
+      trialTwo:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aliquid laboriosam laborum hic est eos!'
+    },
+    agentIdAnalyser: '045552900',
+    dptAnalyzer: 'technical assistance',
+    referenceGet: '0006542865426'
   }
-])
-
-const referenceGet: ComputedRef<string> = computed(() => {
-  let newRef: string = ''
-  if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
-  }
-  return newRef
+  return dataFetchInRequest
 })
 
-function handleSubmit() {
-  // actions --SUBMITTION--
-}
+const occurenceLabName = computed(() => {
+  let labelValue = dataGetIntegration.value.situationOccurence
 
-function handleEndModalContainer() {
-  // actions --CLOSE MODAL CONTAINER--
-}
+  let newLabelValue: string = ''
+
+  switch (labelValue) {
+    case 'monthly':
+      newLabelValue = 'less than 03 months'
+      break
+    case 'quaterly':
+      newLabelValue = 'more than 03 months'
+      break
+    case 'semestrially':
+      newLabelValue = 'more than 06 months'
+      break
+    case 'yearly':
+      newLabelValue = '01 year +'
+  }
+
+  return newLabelValue
+})
 </script>
 <template>
   <div id="request_human_integration" class="req_integration_container">
@@ -67,33 +77,24 @@ function handleEndModalContainer() {
       <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
         <SubSecondaryTitle label="human" />
       </div>
+      <!--About the two Agents-->
       <div class="about_two_agent w-full my-3">
         <div class="department_concerned_people w-full">
           <ul class="inside_dpt w-full">
             <li id="your_dpt " class="dpt_structure">
               <span class="text_gen_title">Your department</span>
-              <select class="select_dpt select_style text_select">
-                <option class="dpt_item" value="human">human Integration service</option>
-                <option class="dpt_item" value="transportation">transportation service</option>
-                <option class="dpt_item" value="accounting">accounting service</option>
-                <option class="dpt_item" value="maintenance">maintenance service</option>
-                <option class="dpt_item" value="technical">technical service</option>
-                <option class="dpt_item" value="supply">supply service</option>
-                <option class="dpt_item" value="law">law's regulation service</option>
-                <option class="dpt_item" value="supervising">supervising board</option>
+              <select class="select_dpt select_style text_select" disabled>
+                <option class="dpt_item" :value="dataGetIntegration.dptComplainant">
+                  {{ dataGetIntegration.dptComplainant }} service
+                </option>
               </select>
             </li>
             <li id="peer_dpt" class="dpt_structure">
               <span class="text_gen_title">peer host department</span>
               <select class="select_dpt select_style text_select">
-                <option class="dpt_item" value="human">human Integration service</option>
-                <option class="dpt_item" value="transportation">transportation service</option>
-                <option class="dpt_item" value="accounting">accounting service</option>
-                <option class="dpt_item" value="maintenance">maintenance service</option>
-                <option class="dpt_item" value="technical">technical service</option>
-                <option class="dpt_item" value="supply">supply service</option>
-                <option class="dpt_item" value="law">law's regulation service</option>
-                <option class="dpt_item" value="supervising">supervising board</option>
+                <option class="dpt_item" :value="dataGetIntegration.dptEmployeeInCharge">
+                  {{ dataGetIntegration.dptEmployeeInCharge }} service
+                </option>
               </select>
             </li>
           </ul>
@@ -101,19 +102,33 @@ function handleEndModalContainer() {
             <li id="your_post" class="ofice_sandbox">
               <span> Your actual post in your department</span>
               <input id="post_office_plaintiff" class="w-full bg-gray-300 px-1 rounded" />
-              <p class="display_post"></p>
+              <p class="display_post w-full bg-gray-300 px-1 rounded">
+                {{ dataGetIntegration.postComplainant }}
+              </p>
             </li>
             <li id="peer_position" class="ofice_sandbox">
               <span> the actual peer post rang</span>
               <div class="peer_group">
                 <div class="peer_elt_position">
-                  <input type="checkbox" id="post_employee" class="check_pos" />
+                  <input
+                    type="checkbox"
+                    id="post_employee"
+                    class="check_pos"
+                    :checked="dataGetIntegration.postEmployeeInCharge === 'manager' ? false : true"
+                    disabled
+                  />
                   <div>
                     <span>Regular Employee</span>
                   </div>
                 </div>
                 <div class="peer_elt_position">
-                  <input type="checkbox" id="post_manager" class="check_pos" />
+                  <input
+                    type="checkbox"
+                    id="post_manager"
+                    class="check_pos"
+                    :checked="dataGetIntegration.postEmployeeInCharge === 'manager' ? true : false"
+                    disabled
+                  />
                   <div>
                     <span>Manager</span>
                   </div>
@@ -123,10 +138,11 @@ function handleEndModalContainer() {
           </ul>
         </div>
       </div>
+      <!--Matter Cooked-->
       <div class="matter_cooked text_situation w-full my-8 sm:mt-16 sm:mb-8">
         <div class="specify_problem w-full mb-2">
           <span>Resume in 05 sentences max what is the matter between you and your peer</span>
-          <textarea rows="3" columns="5" class="problem_on_fire"></textarea>
+          <p class="problem_on_fire">{{ dataGetIntegration.generalMatterIdea }}</p>
         </div>
         <div class="description_details w-full mb-2">
           <h3>
@@ -142,7 +158,9 @@ function handleEndModalContainer() {
                     <span class="font-semibold text-gray-500">situation 1</span>
                   </div>
                   <div class="situation_out">
-                    <textarea class="situation_out_text" rows="4" columns="5"></textarea>
+                    <p class="solution_out_text">
+                      {{ dataGetIntegration.matterRecipe.once }}
+                    </p>
                   </div>
                 </li>
                 <li class="situation_item w-full">
@@ -150,7 +168,9 @@ function handleEndModalContainer() {
                     <span class="font-semibold text-gray-500">situation 2</span>
                   </div>
                   <div class="situation_out">
-                    <textarea class="situation_out_text" rows="4" columns="5"></textarea>
+                    <p class="solution_out_text">
+                      {{ dataGetIntegration.matterRecipe.twice }}
+                    </p>
                   </div>
                 </li>
                 <li class="situation_item w-full">
@@ -158,7 +178,9 @@ function handleEndModalContainer() {
                     <span class="font-semibold text-gray-500">situation 3</span>
                   </div>
                   <div class="situation_out">
-                    <textarea class="situation_out_text" rows="4" columns="5"></textarea>
+                    <p class="solution_out_text">
+                      {{ dataGetIntegration.matterRecipe.thrice }}
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -173,7 +195,9 @@ function handleEndModalContainer() {
                     <span class="font-semibold">move 1</span>
                   </div>
                   <div class="solution_out">
-                    <textarea class="solution_out_text" rows="4" columns="5"></textarea>
+                    <p class="solution_out_text">
+                      {{ dataGetIntegration.solution.trialTwo }}
+                    </p>
                   </div>
                 </li>
                 <li class="solution_item w-full">
@@ -181,7 +205,9 @@ function handleEndModalContainer() {
                     <span class="font-semibold">move 2</span>
                   </div>
                   <div class="solution_out">
-                    <textarea class="solution_out_text" rows="4" columns="5"></textarea>
+                    <p class="solution_out_text">
+                      {{ dataGetIntegration.solution.trialTwo }}
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -189,11 +215,10 @@ function handleEndModalContainer() {
           </div>
           <div class="time_spinning_wrap my-4 sm:my-8">
             <h3>how many times last this uneasy situation ?</h3>
-            <select class="time_spinning_choice select_style my-2">
-              <option class="spinning_choice" value="monthly">less than 03 months</option>
-              <option class="spinning_choice" value="quaterly">more than 03 months</option>
-              <option class="spinning_choice" value="semestrially">more than 06 months</option>
-              <option class="spinning_choice" value="yearly">01 year +</option>
+            <select class="time_spinning_choice select_style my-2" disabled>
+              <option class="spinning_choice" :value="dataGetIntegration.situationOccurence">
+                {{ occurenceLabName }}
+              </option>
             </select>
           </div>
           <div class="free_duty_time">
@@ -204,24 +229,46 @@ function handleEndModalContainer() {
                   >(in case Our resources will to plan a shadow discussion with you.)</span
                 >
               </p>
-              <ChooseDaysHours v-model="arrInfosDays" />
+              <!--scheduled Days and Hours-->
+              <div class="integration_timer w-full mt-4 mb-8">
+                <ul class="days_in_week w-full my-2">
+                  <li
+                    class="scale_day_box w-full"
+                    :key="modelDay.id"
+                    v-for="modelDay in dataGetIntegration.arrRscInside"
+                  >
+                    <div id="day_box_one" class="day_box">
+                      <div
+                        class="wrap_day_choice w-full flex flex-col-reverse justify-center gap-2 sm:flex-row sm:justify-start sm:items-center"
+                      >
+                        <div class="choosed_one">
+                          {{ modelDay.dayLabel }} * : <span>{{ modelDay.dayCall }}</span>
+                        </div>
+                      </div>
+
+                      <div class="hours_range_wrap w-fullmy-2">
+                        <div class="w-full flex-col justify-center items-center gap-2 my-4">
+                          <h3 class="py-1">hours range</h3>
+                          <div class="potential_schedule_hours">
+                            {{ modelDay.rangeHours }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <!--Here we are-->
-          <div class="submit_board_btn w-full h-20 flex justify-center items-center">
-            <button class="btn_submit" @click="handleSubmit">submit</button>
-          </div>
-          <div class="value_message_add my-4">
-            <ModalPromptForContainer
-              typeMod="ok"
-              :list-paragraph="listOneParagraghs"
-              :on-deeper-click="handleEndModalContainer"
-            />
           </div>
         </div>
       </div>
+      <!--Request id-->
       <div>
-        <RequestOrFeedReference element="request" label="integration" :id-fetch="referenceGet" />
+        <RequestOrFeedReference
+          element="request"
+          label="integration"
+          :id-fetch="dataGetIntegration.referenceGet"
+        />
       </div>
     </div>
   </div>
@@ -254,7 +301,7 @@ function handleEndModalContainer() {
     font-size: calc(12px + 0.15vw);
   }
 
-  /** container **/
+  /** integration container **/
   .req_integration_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
@@ -325,22 +372,6 @@ function handleEndModalContainer() {
   .time_spinning_choice {
     @apply bg-pink-200;
   }
-
-  /** submit **/
-
-  .btn_submit {
-    width: 100%;
-    padding: 2px 5px;
-    font-size: calc(12px + 0.15vw);
-    border-radius: 5px;
-    border: 1px solid transparent;
-    transition: 'all 300ms ease-in-out';
-    @apply bg-blue-300 text-white hover:bg-blue-400;
-  }
-
-  .value_message_add {
-    @apply w-full flex justify-center;
-  }
 }
 
 @media (min-width: 380px) {
@@ -374,7 +405,7 @@ function handleEndModalContainer() {
     font-size: calc(15px + 0.15vw);
   }
 
-  /** container **/
+  /** integration container **/
   .req_integration_container {
     width: 100vw;
     max-width: 1100px;
@@ -403,14 +434,6 @@ function handleEndModalContainer() {
 
   .specify_problem .problem_on_fire {
     @apply w-full my-6;
-  }
-
-  /** submit **/
-
-  .btn_submit {
-    width: 100%;
-    padding: 3px 5px;
-    font-size: calc(12px + 0.25vw);
   }
 }
 </style>
