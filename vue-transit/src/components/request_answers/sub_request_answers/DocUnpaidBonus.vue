@@ -34,7 +34,8 @@ const dataGet = computed(() => {
 
     moneyUnpaid: '245',
 
-    referenceGet: '08884576444321'
+    referenceGet: '08884576444321',
+    date: '12-03-24'
   }
 
   return dataFetchInRequest
@@ -236,12 +237,19 @@ const modelThree: IModelCheckBoxItem = reactive({
                     </p>
                   </div>
                 </div>
-                <div class="w-full py-2 my-4">
+                <!--Request Id-->
+                <div class="w-full py-2 my-2">
                   <RequestOrFeedReference
                     element="request"
                     label="unpaid-bonus"
                     :id-fetch="dataGet.referenceGet"
                   />
+                </div>
+                <!--Date-->
+                <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
+                  <p>
+                    <span>Date :</span> <span class="mx-2">{{ dataGet.date }}</span>
+                  </p>
                 </div>
               </div>
             </div>

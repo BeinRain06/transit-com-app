@@ -16,7 +16,8 @@ const dataGetComponents = computed(() => {
     ],
     timeDelay: '05 days',
     timeRepairment: '02 days',
-    referenceGet: '046780233945'
+    referenceGet: '046780233945',
+    date: '11-03-24'
   }
   return dataFetchInRequest
 })
@@ -66,16 +67,16 @@ const totalPrice = computed(() => {
         <div class="subtemplate_supply">
           <div class="resources_template_content">
             <div class="rsc_main_question">
-              <h2 class="text_query_label roboto-light">Purchase Order</h2>
+              <h2 class="text_query_label roboto-light sm:pt-4">Purchase Order</h2>
             </div>
             <div class="rsc_main_view w-full">
-              <div class="py-1 sm:py-4 sm:mt-8">
+              <div class="py-1 sm:py-4">
                 <span class="font-semibold">Template</span>
               </div>
               <!--HERE WE ARE MOB-->
               <div class="rsc_template_mob block py-2 sm:hidden">
                 <div class="table_result_wrap">
-                  <div class="result_gen_title py-2">
+                  <div class="result_gen_title pb-4">
                     <span>Service in Demands :</span>
                     <span class="mx-2">{{ dataGetComponents.dpt }}</span>
                   </div>
@@ -84,7 +85,7 @@ const totalPrice = computed(() => {
                       <ul class="mini_tab_infos">
                         <li
                           :key="item.id"
-                          class="resource_item"
+                          class="resource_item p-2 border border-solid border-purple-300"
                           v-for="item in dataGetComponents.arrRscInside"
                         >
                           <div class="mini_tab_box">
@@ -110,7 +111,7 @@ const totalPrice = computed(() => {
                         </li>
                       </ul>
                     </div>
-                    <div class="mini_tab_infos" data-case="total">
+                    <div class="mini_tab_infos w-full" data-case="total">
                       <ul class="mini_tab_box">
                         <li>
                           <div class="min_row_total"><span>Total Price</span></div>
@@ -129,7 +130,7 @@ const totalPrice = computed(() => {
               </div>
               <!--HERE WE ARE DESK-->
               <div class="rsc_template_desk w-full hidden sm:block">
-                <div class="table_result_wrap my-4">
+                <div class="table_result_wrap my-2">
                   <div class="result_gen_title py-2">
                     <span>Service Demands :</span>
                     <span class="mx-2">{{ dataGetComponents.dpt }}</span>
@@ -156,7 +157,7 @@ const totalPrice = computed(() => {
                     <div>
                       <ul class="table_element_infos" data-case="total">
                         <li>Total Price</li>
-                        <li></li>
+                        <li class="empty_present"></li>
                         <li>
                           <span>$</span> <span>{{ totalPrice }}</span>
                         </li>
@@ -196,6 +197,12 @@ const totalPrice = computed(() => {
             :id-fetch="dataGetComponents.referenceGet"
           />
         </div>
+        <!--Date-->
+        <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
+          <p>
+            <span>Date :</span> <span class="mx-2">{{ dataGetComponents.date }}</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -224,7 +231,7 @@ const totalPrice = computed(() => {
     padding: 10px 5px;
     margin: 0.25rem 0 1rem;
     border-radius: 5px;
-    @apply border border-solid border-gray-300;
+    @apply flex justify-center items-center border border-solid border-gray-300;
   }
 
   .repair_init_input::placeholder {
@@ -281,7 +288,7 @@ const totalPrice = computed(() => {
     width: 100%;
     height: 100%;
     padding: 0 0.5rem;
-    @apply text-white bg-gray-500;
+    @apply text-white text-center bg-blue-800;
   }
 
   .mini_tab_box .min_row_total {
@@ -296,7 +303,7 @@ const totalPrice = computed(() => {
   }
 
   .mini_tab_box .min_row_price {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     text-align: right;
   }
 }

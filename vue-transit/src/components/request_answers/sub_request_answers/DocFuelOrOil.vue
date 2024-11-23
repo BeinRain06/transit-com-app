@@ -12,7 +12,8 @@ const dataGetLiquid = computed(() => {
     quantity: '60l',
     startCity: 'melano-factory',
     endCity: 'east farm town',
-    referenceGet: '046780233945'
+    referenceGet: '046780233945',
+    date: '11-03-24'
   }
   return dataFetchInRequest
 })
@@ -23,25 +24,27 @@ const dataGetLiquid = computed(() => {
       <div class="liquid_request my-4 flex justify-center md:justify-end">
         <h3 class="gen_liquid_title py-2 px-4 krub-regular-italic">Liquid Request</h3>
       </div>
-      <div>
+      <div style="font-size: calc(12px + 0.27vw)">
         <SubSecondaryTitle label="details" />
       </div>
       <!--details liquid-->
       <div class="details_liquid_demand w-full py-2 mb-4">
         <div class="details_car">
-          <div class="liquid_demand_item">
+          <div class="liquid_demand_item my-2">
             <label for="driver" class="demand_label">
               <div class="flex flex-col">
                 <p>Driver id</p>
                 <span class="text-xs">(Do not share with anyone)</span>
               </div>
             </label>
-            <p>{{ dataGetLiquid.driverId }}</p>
+            <div class="demand_input flex items-center">
+              <p>{{ dataGetLiquid.driverId }}</p>
+            </div>
           </div>
         </div>
-        <div class="liquid_demand_item">
+        <div class="liquid_demand_item mt-4">
           <label for="engine" class="demand_label">Engine local Name</label>
-          <div class="demand_input">
+          <div class="demand_input flex items-center">
             <p>{{ dataGetLiquid.engineLocalName }}</p>
           </div>
         </div>
@@ -70,9 +73,10 @@ const dataGetLiquid = computed(() => {
         </div>
       </div>
       <div class="liquid_ref_wrap">
-        <div id="liquid_type" class="liquid_demand_item">
+        <div id="liquid_type" class="liquid_demand_item py-2 sm:py-0">
+          <label for="quantity" class="demand_label visible sm:invisible">Liquid</label>
           <div class="demand_input">
-            <p>
+            <p class="w-full text-center">
               {{
                 dataGetLiquid.liquidName.charAt(0).toUpperCase() + dataGetLiquid.liquidName.slice(1)
               }}
@@ -80,7 +84,7 @@ const dataGetLiquid = computed(() => {
           </div>
         </div>
 
-        <div id="liquid_qty" class="liquid_demand_item">
+        <div id="liquid_qty" class="liquid_demand_item py-3 sm:py-0">
           <label for="quantity" class="demand_label">Quantity(liters)</label>
           <div class="demand_input">
             <p>{{ dataGetLiquid.quantity }}</p>
@@ -88,14 +92,14 @@ const dataGetLiquid = computed(() => {
         </div>
       </div>
 
-      <div class="city_wrap mt-8 mb-6">
-        <div class="city_start">
+      <div class="city_wrap h-56 sm:h-60 my-4 grid content-center">
+        <div class="city_start my-1">
           <span>start city transportation</span>
           <div id="city_a" class="city_input">
             <p>{{ dataGetLiquid.startCity }}</p>
           </div>
         </div>
-        <div class="city_end">
+        <div class="city_end my-2">
           <span>end city transportation</span>
           <div id="city_b" class="city_input">
             <p>{{ dataGetLiquid.endCity }}</p>
@@ -103,12 +107,18 @@ const dataGetLiquid = computed(() => {
         </div>
       </div>
       <!--Request id-->
-      <div>
+      <div class="my-2">
         <RequestOrFeedReference
           element="request"
           label="fuel-oil"
           :id-fetch="dataGetLiquid.referenceGet"
         />
+      </div>
+      <!--Date-->
+      <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
+        <p>
+          <span>Date :</span> <span class="mx-2">{{ dataGetLiquid.date }}</span>
+        </p>
       </div>
     </div>
   </div>
@@ -138,25 +148,26 @@ const dataGetLiquid = computed(() => {
   }
 
   .liquid_demand_item {
-    @apply w-full flex flex-col gap-2 my-4;
+    @apply w-full flex flex-col gap-2;
   }
 
   .demand_input {
     width: 100%;
-    height: 2.6rem;
+    height: 2.2rem;
+    padding: 0.5rem;
     border-radius: 5px;
-    @apply border border-solid border-gray-300;
+    @apply flex flex-col justify-center items-start  border border-solid border-gray-300;
   }
 
   /** specs liquid **/
 
   .demand_spec_liquid {
-    height: 8rem;
-    @apply w-full flex flex-col justify-start gap-2 mt-8 mb-6;
+    height: 6.4rem;
+    @apply w-full flex flex-col justify-start gap-2 my-2;
   }
 
   .spec_liquid_elt {
-    @apply w-full flex justify-start gap-2 my-2;
+    @apply w-full flex justify-start gap-2;
   }
 
   /** city wrap **/
@@ -228,15 +239,17 @@ const dataGetLiquid = computed(() => {
 
   .liquid_ref_wrap {
     width: 100%;
-    grid-area: quantity;
+    /*  grid-area: quantity; */
     display: flex;
-    flex-direction: row-reverse;
+    grid-auto-columns: 50%;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 60px;
     gap: 0.75rem;
   }
 
   .city_wrap {
     width: 100%;
-    grid-area: city;
+    /*  grid-area: city; */
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
+import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
 const dataGetIntegration = computed(() => {
   let dataFetchInRequest = {
@@ -41,7 +42,8 @@ const dataGetIntegration = computed(() => {
     },
     agentIdAnalyser: '045552900',
     dptAnalyzer: 'technical assistance',
-    referenceGet: '0006542865426'
+    referenceGet: '0006542865426',
+    date: '11-03-24'
   }
   return dataFetchInRequest
 })
@@ -74,16 +76,16 @@ const occurenceLabName = computed(() => {
       <div class="entrance_title w-full mb-4 flex justify-center">
         <span class="font-bold">Human Socializing</span>
       </div>
-      <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
+      <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-16">
         <SubSecondaryTitle label="human" />
       </div>
       <!--About the two Agents-->
-      <div class="about_two_agent w-full my-3">
+      <div class="about_two_agent w-full my-3 lg:my-8">
         <div class="department_concerned_people w-full">
           <ul class="inside_dpt w-full">
             <li id="your_dpt " class="dpt_structure">
               <span class="text_gen_title">Your department</span>
-              <select class="select_dpt select_style text_select" disabled>
+              <select class="select_dpt select_style text_select">
                 <option class="dpt_item" :value="dataGetIntegration.dptComplainant">
                   {{ dataGetIntegration.dptComplainant }} service
                 </option>
@@ -98,16 +100,19 @@ const occurenceLabName = computed(() => {
               </select>
             </li>
           </ul>
-          <ul class="office_post_wrap w-full my-4 sm:my-10">
+          <ul class="office_post_wrap w-full h-52 grid place-items-center my-4 sm:my-10">
             <li id="your_post" class="ofice_sandbox">
-              <span> Your actual post in your department</span>
-              <input id="post_office_plaintiff" class="w-full bg-gray-300 px-1 rounded" />
-              <p class="display_post w-full bg-gray-300 px-1 rounded">
-                {{ dataGetIntegration.postComplainant }}
-              </p>
+              <span class="font-semibold text-gray-500"> Your actual post in your department</span>
+              <div
+                class="display_post w-full h-12 bg-gray-200 px-1 rounded grid place-items-center"
+              >
+                <p>
+                  {{ dataGetIntegration.postComplainant }}
+                </p>
+              </div>
             </li>
             <li id="peer_position" class="ofice_sandbox">
-              <span> the actual peer post rang</span>
+              <span class="text-gray-500 font-semibold"> the actual peer post rang</span>
               <div class="peer_group">
                 <div class="peer_elt_position">
                   <input
@@ -139,13 +144,20 @@ const occurenceLabName = computed(() => {
         </div>
       </div>
       <!--Matter Cooked-->
-      <div class="matter_cooked text_situation w-full my-8 sm:mt-16 sm:mb-8">
+      <div class="matter_cooked text_situation w-full mt-6 mb-4 sm:mt-16 sm:mb-4">
         <div class="specify_problem w-full mb-2">
-          <span>Resume in 05 sentences max what is the matter between you and your peer</span>
+          <span class="roboto-light text-blue-800"
+            >Resume in 05 sentences max what is the matter between you and your peer</span
+          >
           <p class="problem_on_fire">{{ dataGetIntegration.generalMatterIdea }}</p>
         </div>
-        <div class="description_details w-full mb-2">
-          <h3>
+        <!--Describe what is going on-->
+        <div class="w-10 py-2 mt-8 mb-2">
+          <span class="krub-regular-italic" style="color: rgb(192, 59, 174)">Describe</span>
+        </div>
+
+        <div class="description_details w-full px-2 py-4 mt-2 mb-4">
+          <h3 class="roboto-light text-blue-800">
             Describe us in details at least 02 to 03 of these situations, and some others agents you
             may remember where in place.
           </h3>
@@ -186,8 +198,13 @@ const occurenceLabName = computed(() => {
               </ul>
             </div>
           </div>
+          <!--Attempt to solve the problem-->
+          <div class="w-10 py-2 mt-8 mb-2">
+            <span class="krub-regular-italic" style="color: rgb(192, 59, 174)">Tentatives</span>
+          </div>
+
           <div class="box_solution_wrap w-full my-8 sm:mt-16 sm:mb-10">
-            <span>Your tentatives to solve the problem(s)</span>
+            <span class="roboto-light text-blue-800">Your tentatives to solve the problem(s)</span>
             <div class="box_solution_ct w-full">
               <ul class="solutions_list w-full">
                 <li class="solution_item w-full">
@@ -214,7 +231,7 @@ const occurenceLabName = computed(() => {
             </div>
           </div>
           <div class="time_spinning_wrap my-4 sm:my-8">
-            <h3>how many times last this uneasy situation ?</h3>
+            <h3 class="roboto-light text-blue-800">how many times last this uneasy situation ?</h3>
             <select class="time_spinning_choice select_style my-2" disabled>
               <option class="spinning_choice" :value="dataGetIntegration.situationOccurence">
                 {{ occurenceLabName }}
@@ -222,12 +239,12 @@ const occurenceLabName = computed(() => {
             </select>
           </div>
           <div class="free_duty_time">
-            <div>
-              <p>
-                Specify 02 days / week with the range of hours where you may not have a lot of
-                duty<span class="italic ml-1"
-                  >(in case Our resources will to plan a shadow discussion with you.)</span
-                >
+            <div class="mt-12">
+              <p class="block roboto-light text-blue-800">
+                Specify 02 days / week with the range of hours where you may not have a lot of duty
+              </p>
+              <p class="italic ml-1 mt-1">
+                (in case Our resources will to plan a shadow discussion with you.)
               </p>
               <!--scheduled Days and Hours-->
               <div class="integration_timer w-full mt-4 mb-8">
@@ -269,6 +286,12 @@ const occurenceLabName = computed(() => {
           label="integration"
           :id-fetch="dataGetIntegration.referenceGet"
         />
+      </div>
+      <!--Date-->
+      <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
+        <p>
+          <span>Date :</span> <span class="mx-2">{{ dataGetIntegration.date }}</span>
+        </p>
       </div>
     </div>
   </div>
@@ -316,6 +339,7 @@ const occurenceLabName = computed(() => {
 
   .select_dpt {
     width: 100%;
+    height: 4rem;
     padding: 0.15rem 0.25rem;
     @apply text-gray-400 text-center font-semibold;
   }
@@ -348,7 +372,7 @@ const occurenceLabName = computed(() => {
 
   .specify_problem .problem_on_fire {
     border-radius: 5px;
-    @apply w-full my-4 border border-solid border-gray-300;
+    @apply w-full my-4 p-2 border border-solid border-gray-300;
   }
 
   .situations_list,
@@ -363,7 +387,7 @@ const occurenceLabName = computed(() => {
   .situation_item .situation_out,
   .solution_item .solution_out {
     border-radius: 5px;
-    padding: 0;
+    padding: 0.5rem;
     margin: 0.25rem auto;
     @apply w-full border border-solid border-gray-300;
   }
@@ -408,7 +432,7 @@ const occurenceLabName = computed(() => {
   /** integration container **/
   .req_integration_container {
     width: 100vw;
-    max-width: 1100px;
+    max-width: 960px;
     padding: 2rem 1.5rem 1rem;
   }
 
@@ -427,7 +451,7 @@ const occurenceLabName = computed(() => {
 
   /**office post **/
   .ofice_sandbox {
-    @apply w-full h-20 gap-4;
+    @apply w-full h-28  gap-4;
   }
 
   /** matter cooked **/

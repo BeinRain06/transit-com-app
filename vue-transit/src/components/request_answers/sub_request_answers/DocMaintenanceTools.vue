@@ -15,7 +15,8 @@ const dataGetMaintTools = computed(() => {
     ],
     agentIdAnalyser: '045552900',
     dptAnalyzer: 'technical assistance',
-    referenceGet: '0006542865426'
+    referenceGet: '0006542865426',
+    date: '12-03-24'
   }
   return dataFetchInRequest
 })
@@ -47,10 +48,10 @@ const totalPrice = computed(() => {
       <SubSecondaryTitle label="request" />
     </div>
     <div class="tools_necessity my-2">
-      <div class="mb-1">
+      <div class="mb-2">
         <span class="roboto-light">Describe Tools Necessity</span>
       </div>
-      <p class="tools_text_need w-full border border-gray-300 rounded">
+      <p class="tools_text_need w-full px-2 py-3 border border-gray-300 rounded">
         {{ dataGetMaintTools.toolsNessity }}
       </p>
     </div>
@@ -71,12 +72,16 @@ const totalPrice = computed(() => {
                 <span>Service in Demands :</span>
                 <span class="mx-2">{{ dataGetMaintTools.dptInDemand }}</span>
               </div>
+              <div class="result_gen_title py-2">
+                <span>Necessity :</span>
+                <span class="mx-2">{{ dataGetMaintTools.toolsNessity }}</span>
+              </div>
               <div class="minitab_result_view w-full">
                 <div class="table_content w-full my-2">
                   <ul class="mini_tab_infos">
                     <li
                       :key="item.id"
-                      class="resource_item"
+                      class="resource_item w-full grid place-items-center px-4 pt-6 pb-8 my-2 border border-solid border-gray-300 rounded"
                       v-for="item in dataGetMaintTools.arrRscInside"
                     >
                       <div class="mini_tab_box">
@@ -125,6 +130,10 @@ const totalPrice = computed(() => {
               <div class="result_gen_title py-2">
                 <span>Service Demands :</span>
                 <span class="mx-2">{{ dataGetMaintTools.dptInDemand }}</span>
+              </div>
+              <div class="result_gen_title py-2">
+                <span>Necessity :</span>
+                <span class="mx-2">{{ dataGetMaintTools.toolsNessity }}</span>
               </div>
               <div class="table_result_view w-full">
                 <div class="table_head w-full">
@@ -181,6 +190,12 @@ const totalPrice = computed(() => {
         label="maintenance-tools"
         :id-fetch="dataGetMaintTools.referenceGet"
       />
+    </div>
+    <!--Date-->
+    <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
+      <p>
+        <span>Date :</span> <span class="mx-2">{{ dataGetMaintTools.date }}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -243,13 +258,17 @@ const totalPrice = computed(() => {
 
   .mini_tab_box .min_row_spec,
   .mini_tab_box .min_row_total {
-    width: 100%;
+    width: 40%;
+    min-width: 7rem;
     height: 100%;
     padding: 0 0.5rem;
-    @apply text-white bg-gray-500;
+    box-shadow: 2px 3px 5px #f3ad44;
+    @apply text-white bg-blue-800 rounded;
   }
 
   .mini_tab_box .min_row_total {
+    margin: 0 0.5rem;
+    box-shadow: 2px 3px 5px #4087f0;
     @apply text-white bg-orange-700;
   }
 
@@ -272,7 +291,7 @@ const totalPrice = computed(() => {
   }
 
   .employee_info .employee_input {
-    @apply w-full h-7 border border-gray-400;
+    @apply w-full h-7 p-2 flex justify-start items-center border border-gray-400;
     border-radius: 5px;
   }
 }
@@ -283,6 +302,12 @@ const totalPrice = computed(() => {
     width: 100vw;
     padding: 2.2rem 2rem 1rem;
     margin: 0 auto;
+  }
+
+  .mini_tab_box .min_row_elt,
+  .mini_tab_box .min_row_price {
+    padding-left: 15%;
+    text-align: center;
   }
 }
 

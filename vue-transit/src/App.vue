@@ -2,13 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-import SubReqSalaryAdvance from './components/request-queries/sub-request-queries/SubReqSalaryAdvance.vue'
-import SubReqPurchaseOrder from './components/request-queries/sub-request-queries/SubReqPurchaseOrder.vue'
-
-import SubEngineRepairComponents from './components/request-queries/sub-request-queries/SubEngineRepairComponents.vue'
-
-import DocFuelOrOil from './components/request_answers/sub_request_answers/DocFuelOrOil.vue'
-import DocEngineRepairComponents from './components/request_answers/sub_request_answers/DocEngineRepairComponents.vue'
+import DocPurchaseOrder from './components/request_answers/sub_request_answers/DocPurchaseOrder.vue'
+import DocSalaryAdvance from './components/request_answers/sub_request_answers/DocSalaryAdvance.vue'
+import DocUnpaidBonus from './components/request_answers/sub_request_answers/DocUnpaidBonus.vue'
 </script>
 
 <template>
@@ -23,7 +19,7 @@ import DocEngineRepairComponents from './components/request_answers/sub_request_
 
   <!-- <RouterView /> -->
 
-  <DocEngineRepairComponents />
+  <DocUnpaidBonus />
 </template>
 
 <style scoped></style>

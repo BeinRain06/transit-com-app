@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
 import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
 const dataGetPurchaseOrder = computed(() => {
   let dataFetchInRequest = {
     dpt: 'maintenance',
+    purpose: 'repair katango CT',
     arrRscInside: [
       { id: 'material_1', label: 'resource_A', quantity: '3', approxUnitPrice: '25' },
       { id: 'material_2', label: 'resource_B', quantity: '5', approxUnitPrice: '14' },
       { id: 'material_3', label: 'resource_C', quantity: '7', approxUnitPrice: '18' },
       { id: 'material_4', label: 'resource_D', quantity: '2', approxUnitPrice: '49' }
     ],
-    referenGet: '0956479496003'
+    referenGet: '0956479496003',
+    date: '12-03-24'
   }
   return dataFetchInRequest
 })
@@ -38,7 +41,12 @@ const totalPrice = computed(() => {
   <div class="subtemplate_supply">
     <div class="resources_template_content">
       <div class="rsc_main_question">
-        <h2 class="text_query_label roboto-light">Purchase Order</h2>
+        <div class="main_title_ct w-full text-center my-2 font-bold">
+          <h2 class="text_query_label font-bold">Purchase Order</h2>
+        </div>
+      </div>
+      <div class="my-4 md:my-8 roboto-light">
+        <SubSecondaryTitle label="purchase" />
       </div>
       <div class="rsc_main_view w-full">
         <div class="py-1 sm:py-4 sm:mt-8">
@@ -51,12 +59,16 @@ const totalPrice = computed(() => {
               <span>Service in Demands :</span>
               <span class="mx-2">{{ dataGetPurchaseOrder.dpt }}</span>
             </div>
+            <div class="result_gen_title py-2">
+              <span>Necessity :</span>
+              <span class="mx-2">{{ dataGetPurchaseOrder.purpose }}</span>
+            </div>
             <div class="minitab_result_view w-full">
               <div class="table_content w-full my-2">
                 <ul class="mini_tab_infos">
                   <li
                     :key="item.id"
-                    class="resource_item"
+                    class="resource_item w-full grid place-items-center px-4 pt-6 pb-8 my-2 border border-solid border-gray-300 rounded"
                     v-for="item in dataGetPurchaseOrder.arrRscInside"
                   >
                     <div class="mini_tab_box">
@@ -106,6 +118,10 @@ const totalPrice = computed(() => {
               <span>Service Demands :</span>
               <span class="mx-2">{{ dataGetPurchaseOrder.dpt }}</span>
             </div>
+            <div class="result_gen_title py-2">
+              <span>Necessity :</span>
+              <span class="mx-2">{{ dataGetPurchaseOrder.purpose }}</span>
+            </div>
             <div class="table_result_view w-full">
               <div class="table_head w-full">
                 <ul class="table_head_title">
@@ -138,12 +154,18 @@ const totalPrice = computed(() => {
           </div>
         </div>
         <!--request id-->
-        <div class="mt-10 mb-2 md:mb-6">
+        <div class="mt-10 mb-2">
           <RequestOrFeedReference
             element="request"
             label="purchase_order"
             :id-fetch="dataGetPurchaseOrder.referenGet"
           />
+        </div>
+        <!--Date-->
+        <div class="krub-light-italic my-2 md:mt-4 md:mb-2" style="font-size: calc(12px + 0.15vw)">
+          <p>
+            <span>Date :</span> <span class="mx-2">{{ dataGetPurchaseOrder.date }}</span>
+          </p>
         </div>
       </div>
     </div>
@@ -157,11 +179,13 @@ const totalPrice = computed(() => {
 
   .resources_template_content {
     width: 100%;
+    max-width: 1240px;
+    padding: 2rem 1rem 2.5rem;
     margin: 0 auto;
   }
 
   .text_query_label {
-    font-size: calc(14px + 0.15vw);
+    font-size: calc(16px + 0.22vw);
   }
 
   /** template **/
@@ -197,13 +221,17 @@ const totalPrice = computed(() => {
 
   .mini_tab_box .min_row_spec,
   .mini_tab_box .min_row_total {
-    width: 100%;
+    width: 40%;
+    min-width: 7rem;
     height: 100%;
     padding: 0 0.5rem;
-    @apply text-white bg-gray-500;
+    box-shadow: 2px 3px 5px #f3ad44;
+    @apply text-white bg-blue-800 rounded;
   }
 
   .mini_tab_box .min_row_total {
+    margin: 0 0.5rem;
+    box-shadow: 2px 3px 5px #4087f0;
     @apply text-white bg-orange-700;
   }
 
@@ -211,6 +239,19 @@ const totalPrice = computed(() => {
   .mini_tab_box .min_row_price {
     width: 100%;
     height: 100%;
+    text-align: center;
+  }
+
+  .mini_tab_box .min_row_price {
+    padding: 0.5rem 1rem;
+    text-align: right;
+  }
+}
+
+@media (min-width: 420px) {
+  .mini_tab_box .min_row_elt,
+  .mini_tab_box .min_row_price {
+    padding-left: 15%;
     text-align: center;
   }
 

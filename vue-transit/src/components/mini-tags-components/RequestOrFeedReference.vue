@@ -8,10 +8,10 @@ const props = defineProps<{
 
 <template>
   <div class="req_feed_container">
-    <div class="req_feed_ct w-full my-2 flex justify-center md:justify-end">
-      <ul class="req_feed_text krub-light-italic text-xs">
+    <div class="req_feed_ct w-full my-2">
+      <ul class="req_feed_text krub-light-italic">
         <li class="inline-block mx-2">
-          <span>{{ props.element }}- {{ props.label }}</span>
+          <span>{{ props.element }} - {{ props.label }}</span>
         </li>
         <li class="inline-block">
           <span>{{ props.idFetch }}</span>
@@ -23,5 +23,9 @@ const props = defineProps<{
 <style scoped>
 ul {
   list-style: none;
+}
+
+.req_feed_text {
+  @apply text-xs flex justify-center md:justify-end;
 }
 </style>
