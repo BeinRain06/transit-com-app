@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import DocPurchaseOrder from './components/request_answers/sub_request_answers/DocPurchaseOrder.vue'
 import DocSalaryAdvance from './components/request_answers/sub_request_answers/DocSalaryAdvance.vue'
 import DocUnpaidBonus from './components/request_answers/sub_request_answers/DocUnpaidBonus.vue'
+import IndividualStats from './components/stats/IndividualStats.vue'
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import DocUnpaidBonus from './components/request_answers/sub_request_answers/Doc
 
   <!-- <RouterView /> -->
 
-  <DocUnpaidBonus />
+  <IndividualStats />
 </template>
 
 <style scoped></style>
