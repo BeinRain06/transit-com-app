@@ -6,6 +6,7 @@ import DocPurchaseOrder from './components/request_answers/sub_request_answers/D
 import DocSalaryAdvance from './components/request_answers/sub_request_answers/DocSalaryAdvance.vue'
 import DocUnpaidBonus from './components/request_answers/sub_request_answers/DocUnpaidBonus.vue'
 import IndividualStats from './components/stats/IndividualStats.vue'
+import GeneralStats from './components/stats/GeneralStats.vue'
 </script>
 
 <template>
