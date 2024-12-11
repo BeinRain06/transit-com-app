@@ -79,9 +79,21 @@
 
 /** <-- code font-family style --> **/
 
+:root {
+  --bg-primary: #f3f3f3;
+  --bg-secondary: #092c40;
+  --bg-button-1: #3a82a2;
+  --bg-button-2: #a75da0;
+  --gen-title: #092c40fe;
+  --color-subtext-title: #cccaca;
+  --color-text-question: #092c40bb;
+  --grayish-text-color-1: #6d6e70;
+  --grayish-text-color-2: #5e636e;
+  --color-subtitle-footer: #24775b;
+}
+
 body {
-  background-color: #fff;
-  /* color: #92026e; */
+  background-color: var(--bg-primary);
 }
 
 .text_secondary_title {

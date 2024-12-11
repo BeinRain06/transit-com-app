@@ -7,6 +7,7 @@ import DocSalaryAdvance from './components/request_answers/sub_request_answers/D
 import DocUnpaidBonus from './components/request_answers/sub_request_answers/DocUnpaidBonus.vue'
 import IndividualStats from './components/stats/IndividualStats.vue'
 import GeneralStats from './components/stats/GeneralStats.vue'
+import HomeView from './views/HomeView.vue'
 </script>
 
 <template>
@@ -21,7 +22,7 @@ import GeneralStats from './components/stats/GeneralStats.vue'
 
   <!-- <RouterView /> -->
 
-  <IndividualStats />
+  <HomeView />
 </template>
 
 <style scoped></style>
