@@ -7,7 +7,7 @@ function handleResearch() {
 function handleCloseSearch() {
   // do something ...
 }
-function handleLogin() {
+function handleLogSignRedirect() {
   // do something ...
 }
 
@@ -21,6 +21,16 @@ function handleDropDown(label: string) {
 
 function handleSubDropDown() {
   // do something ...
+}
+
+function handleLinkModal(e: MouseEvent, label: string) {
+  // do something ...
+
+  if (label === 'open') {
+    // do from open
+  } else if (label === 'close') {
+    // do from close
+  }
 }
 </script>
 <template>
@@ -148,12 +158,12 @@ function handleSubDropDown() {
                       <div class="logo_letter">N</div>
                       <div class="account_email">joe_delmach@gmail.com</div>
                     </div>
-                    <div id="submenu_login" class="column_submenu">
+                    <div id="submenu_login" class="column_submenu" @click="handleLogSignRedirect">
                       <h5>login</h5>
                     </div>
                   </div>
                   <div class="submenu_item">
-                    <div id="submenu_sign_up" class="column_submenu">
+                    <div id="submenu_sign_up" class="column_submenu" @click="handleLogSignRedirect">
                       <h5>Sign Up</h5>
                     </div>
                   </div>
@@ -163,9 +173,9 @@ function handleSubDropDown() {
           </div>
         </div>
         <div class="logo_expression">
-          <h1 class="logo_app">
+          <h1 class="logo_app text-white">
             <span>transi</span>
-            <span>\</span>
+            <span class="text-green-300">\</span>
             <span>.app</span>
           </h1>
         </div>
@@ -190,7 +200,7 @@ function handleSubDropDown() {
         <li class="login_area">
           <div class="login_session">
             <div class="login_wrap">
-              <button class="btn_login" @click.prevent="handleLogin">login</button>
+              <button class="btn_login" @click.prevent="handleLogSignRedirect">login</button>
             </div>
           </div>
         </li>
@@ -207,14 +217,97 @@ function handleSubDropDown() {
       </div>
     </div>
   </nav>
-  <nav id="nav_desk_container">
-    <!-- Next style nav Desktop -->
+  <nav id="nav_desk_container flex_between ">
+    <div class="nav_left_side">
+      <div class="logo_expression">
+        <h1 class="logo_app text-white">
+          <span>transi</span>
+          <span class="text-green-300">\</span>
+          <span>.app</span>
+        </h1>
+      </div>
+    </div>
+    <!-- NEXT *nav middle inside** -->
+    <div class="nav_middle_side flex_center">
+      <ul class="link_desk_wrap">
+        <li id="desk_link_home">
+          <div>Home</div>
+        </li>
+        <li id="desk_link_home">
+          <div
+            @mouseover="(e) => handleLinkModal(e, 'open')"
+            @mouseleave="(e) => handleLinkModal(e, 'close')"
+          >
+            Requests
+          </div>
+          <div class="modal_desk_link" @mouseleave.prevent="(e) => handleLinkModal(e, 'close')">
+            <div class="sublink_desk py-4">fuel or oil</div>
+            <div class="sublink_desk py-4">human integration</div>
+            <div class="sublink_desk py-4">purchase order</div>
+            <div class="sublink_desk py-4">engine components repair</div>
+            <div class="sublink_desk py-4">maintenance tools</div>
+            <div class="sublink_desk py-4">supply resources</div>
+            <div class="sublink_desk py-4">salary advance</div>
+            <div class="sublink_desk py-4">unpaid bonus</div>
+          </div>
+        </li>
+        <li id="desk_link_home">
+          <div
+            @mouseover="(e) => handleLinkModal(e, 'open')"
+            @mouseleave="(e) => handleLinkModal(e, 'close')"
+          >
+            Feedbacks
+          </div>
+          <div class="modal_desk_link" @mouseleave.prevent="(e) => handleLinkModal(e, 'close')">
+            <div class="sublink_desk py-4">ask feedbacks</div>
+            <div class="sublink_desk py-4">reply feedbacks</div>
+          </div>
+        </li>
+        <li id="desk_link_home">
+          <div
+            @mouseover="(e) => handleLinkModal(e, 'open')"
+            @mouseleave="(e) => handleLinkModal(e, 'close')"
+          >
+            Company
+          </div>
+          <div class="modal_desk_link">
+            <div class="sublink_desk py-4" @mouseleave="(e) => handleLinkModal(e, 'close')">
+              career
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="search_desk_button"></div>
+    </div>
+    <div class="nav_right_side flex_center gap-2">
+      <div class="user_define">
+        <div class="logo_user_define">name</div>
+        <div class="user_angle_container">
+          <div class="user_angle_down">&#xfe40;</div>
+          <div class="modal_user_desk">
+            <div class="modal_user_ct">
+              <div id="id_user_stats">Individual Stats</div>
+              <div id="gen_user_stats">General Stats</div>
+              <div id="sign_up_desk" @click="handleLogSignRedirect">
+                <h5>Sign up</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="login_desk" class="login_desk" @click="handleLogSignRedirect">login</div>
+    </div>
   </nav>
 </template>
 <style scoped>
 @media (min-width: 180px) {
   ul {
     list-style: none;
+  }
+
+  .logo_app {
+    font-size: calc(12px + 0.35vw);
+    font-weight: 600;
   }
 
   .btn_close_search {
@@ -230,7 +323,12 @@ function handleSubDropDown() {
   .flex_center {
     @apply flex justify-center items-center;
   }
-  /* nav -- mobile */
+
+  .flex_between {
+    @apply flex justify-between items-center;
+  }
+
+  /* ** nav -- mobile** */
   .nav_mob_container {
     width: 100vw;
     margin: 0 auto;
@@ -316,7 +414,6 @@ function handleSubDropDown() {
     left: 10px;
   }
 
-  /* Next ---> menu_ design  !!! */
   .menu_wrap {
     position: relative;
     width: 4rem;
@@ -438,6 +535,165 @@ function handleSubDropDown() {
     padding: 5px 10px;
     z-index: 3;
     traansition: all 1s ease;
+  }
+
+  /* ** nav -- desktop** */
+  .nav_desk_container {
+    width: 100vw;
+    height: 50px;
+    padding: 10px 15px;
+    color: var(--color-subtext-title);
+    background-color: var(--bg-secondary);
+    transition: all 1s ease;
+  }
+
+  .nav_desk_container .nav_left_side {
+    width: 10%;
+    flex-shrink: 0;
+  }
+
+  .nav_desk_container .nav_middle_side {
+    width: 75%;
+    padding: 0 2%;
+  }
+
+  .nav_middle_side ul.link_desk_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul.link_desk_wrap li {
+    position: relative;
+    top: 0;
+    height: 100%;
+    padding-right: 1rem;
+  }
+
+  li .modal_desk_link {
+    position: absolute;
+    top: 2rem;
+    width: 200px;
+    padding: 10px 20px 25px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #a75da0;
+    visibility: hidden;
+    @apply flex flex-col justify-start gap-4;
+  }
+
+  li.active_hover .modal_desk_link {
+    position: absolute;
+    top: 2rem;
+    width: 200px;
+    padding: 10px 20px 25px 5px;
+    color: var(--grayish-text-color-2);
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #a75da0;
+    visibility: visible;
+    @apply flex flex-col justify-start;
+  }
+
+  .modal_desk_link *:hover {
+    color: var(--color-subtitle-footer);
+  }
+
+  ul.link_desk_wrap li > div {
+    transition: all 1.4s ease;
+  }
+
+  ul.link_desk_wrap li:hover > div {
+    color: var(--color-subtitle-footer);
+  }
+
+  .nav_desk_container .nav_right_side {
+    width: 15%;
+  }
+
+  .nav_right_side .user_define {
+    width: 100%;
+    @apply flex justify-end items-center;
+  }
+
+  .user_define .logo_user_define {
+    width: auto;
+    display: flex;
+    text-decoration: underline;
+  }
+
+  .user_define.active_login .logo_user_define {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: var(--color-subtext-title);
+    background-color: #092c40d5;
+    display: grid;
+    place-items: center;
+    border: 1px solid black;
+    outline: 4px solid #fff;
+    outline-offset: -2px;
+  }
+
+  .user_define .user_angle_container {
+    position: relative;
+    width: 1rem;
+  }
+
+  .user_define .modal_user_desk {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    width: 200px;
+    height: 200px;
+    @apply hidden flex-col justify-start;
+  }
+
+  .user_define.active_select .modal_user_desk {
+    display: block;
+  }
+
+  .user_define.active_select .modal_user_ct {
+    position: relative;
+    top: 0;
+    padding: 15px 20px 25px;
+    color: var(--grayish-text-color-1);
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: -2px -1px 5px #a75da0;
+    visibility: hidden;
+    opacity: 0.9;
+    transition: all 1s ease;
+    @apply w-full h-full flex flex-col justify-start;
+  }
+
+  .user_define.active_select .modal_user_ct {
+    top: 1rem;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal_user_desk div {
+    width: 100%;
+    height: 1rem;
+  }
+
+  .modal_user_desk div:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .nav_right_side .login_desk {
+    cursor: pointer;
+    width: min-content;
+    padding-bottom: 3px;
+    border: 1px solid transparent;
+    transition: all 1s ease;
+  }
+
+  .nav_right_side .login_desk:hover {
+    color: #24775b;
+    border: 1px solid #24775b;
   }
 }
 @media (min-width: 520px) {
