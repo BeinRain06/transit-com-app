@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import MonthsFeedback from './MonthsFeedback.vue'
-import { useAskFeedStore } from '@/stores/ask-feed-store'
 import { computed } from 'vue'
 import type { ComputedRef } from 'vue'
+
+import MonthFeedReq from './MonthFeedReq.vue'
+import { useAskFeedStore } from '@/stores/ask-feed-store'
 
 const monthsFeedback = computed(() => {
   const useAskFeed = useAskFeedStore()
@@ -36,7 +37,7 @@ const monthsFeedback = computed(() => {
           </li>
           <li class="w-full"><hr class="nav_horizontal_line" /></li>
         </ul>
-        <MonthsFeedback v-model="monthsFeedback" />
+        <MonthFeedReq v-model="monthsFeedback" />
       </div>
     </div>
   </main>

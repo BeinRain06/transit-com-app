@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import SupplyResources from './sub-request/SupplyResources.vue'
-import SubRequestRepairment from './sub-request/SubRequestRepairment.vue'
-import SubReqMaintenanceTools from './sub-request/SubReqMaintenanceTools.vue'
+import SupplyResources from '../request-queries/sub-request-queries/SupplyResources.vue'
+import SubEngineRepairComponents from '../request-queries/sub-request-queries/SubEngineRepairComponents.vue'
+import SubReqMaintenanceTools from '../request-queries/sub-request-queries/SubReqMaintenanceTools.vue'
 
 const isConfirmed = ref<boolean>(false)
 
@@ -108,7 +108,7 @@ const myCategory = computed(() => {
               </div>
             </div>
             <!--Here we are  -> next template-->
-            <SubRequestRepairment label="devices/appliances" />
+            <SubEngineRepairComponents label="devices/appliances" />
 
             <!-- this represent the real if-else game for matching sub request-->>
 
