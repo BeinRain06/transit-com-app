@@ -1,11 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useTemplateRef, computed } from 'vue'
+
+const navLinkOneRef = useTemplateRef<HTMLLIElement | null>('linkTagOne')
+const navLinkTwoRef = useTemplateRef<HTMLLIElement | null>('linkTagTwo')
+const navLinkThreeRef = useTemplateRef<HTMLLIElement | null>('linkTagThree')
+
+const searchDeskRef = useTemplateRef<HTMLDivElement | null>('searchDesk')
+
+const dropUserDeskRef = useTemplateRef<HTMLDivElement | null>('dropUser')
 
 function handleResearch() {
   // do something ...
 }
-function handleCloseSearch() {
-  // do something ...
+function handleActSearch(value: string) {
+  if (value === 'open') {
+    // do something ...
+    searchDeskRef.value?.classList.add('active_bar_research')
+  } else if (value === 'close') {
+    // do something ...
+    searchDeskRef.value?.classList.remove('active_bar_research')
+  }
 }
 function handleLogSignRedirect() {
   // do something ...
@@ -23,18 +37,65 @@ function handleSubDropDown() {
   // do something ...
 }
 
-function handleLinkModal(e: MouseEvent, label: string) {
+function handleLinkModal(aliasRef: string, label: string) {
   // do something ...
 
   if (label === 'open') {
     // do from open
+    switch (aliasRef) {
+      case 'linkOne':
+        navLinkOneRef.value?.classList.add('active_hover')
+        break
+      case 'linkTwo':
+        navLinkTwoRef.value?.classList.add('active_hover')
+        break
+      case 'linkThree':
+        navLinkThreeRef.value?.classList.add('active_hover')
+        break
+      default:
+        throw Error('there is something wrong in handleLinkModal Function')
+    }
   } else if (label === 'close') {
     // do from close
+    switch (aliasRef) {
+      case 'linkOne':
+        navLinkOneRef.value?.classList.remove('active_hover')
+        break
+      case 'linkTwo':
+        navLinkTwoRef.value?.classList.remove('active_hover')
+        break
+      case 'linkThree':
+        navLinkThreeRef.value?.classList.remove('active_hover')
+        break
+      default:
+        throw Error('there is something wrong in handleLinkModal Function')
+    }
+  }
+}
+
+function handleDeskUserDropDown() {
+  if (!dropUserDeskRef.value?.classList.contains('active_select')) {
+    dropUserDeskRef.value?.classList.add('active_select')
+    setTimeout(() => {
+      dropUserDeskRef.value?.classList.remove('active_select')
+    }, 10000)
+  } else {
+    dropUserDeskRef.value?.classList.remove('active_select')
+  }
+}
+
+function stayInUserDropDown(value: string) {
+  if (value === 'open') {
+    dropUserDeskRef.value?.classList.add('active_select')
+  } else if (value === 'close') {
+    setTimeout(() => {
+      dropUserDeskRef.value?.classList.remove('active_select')
+    }, 3000)
   }
 }
 </script>
 <template>
-  <nav id="nav_mob_container">
+  <nav id="nav_mob_container" class="nav_mob_container">
     <div id="nav_first_flow" class="nav_first_flow">
       <div class="nav_block_start flex_center gap-2">
         <!--Next menu_ design  !!!  -->
@@ -182,7 +243,7 @@ function handleLinkModal(e: MouseEvent, label: string) {
       </div>
       <ul class="nav_block_end flex_center gap-4">
         <li class="search_area">
-          <div class="search_mob_button" @click.prevent="handleResearch">&#128269;</div>
+          <div class="search_mob_button" @click="handleActSearch('open')">&#128269;</div>
           <!-- search area mob>=520px  -->
           <div class="nav_long_search">
             <input
@@ -193,7 +254,9 @@ function handleLinkModal(e: MouseEvent, label: string) {
             />
             <div class="close_nav_search">
               <!-- box div parent position absolute -->
-              <button class="btn_close_search" @click.prevent="handleCloseSearch">&#x2715;</button>
+              <button class="btn_close_search" @click.prevent="handleActSearch('close')">
+                &#x2715;
+              </button>
             </div>
           </div>
         </li>
@@ -212,12 +275,14 @@ function handleLinkModal(e: MouseEvent, label: string) {
         <input type="text" id="search_in_two" name="search" placeholder="requests or feedbacks" />
         <div class="close_nav_search">
           <!-- box div parent position absolute -->
-          <button class="btn_close_search" @click.prevent="handleCloseSearch">&#x2715;</button>
+          <button class="btn_close_search" @click.prevent="handleActSearch('close')">
+            &#x2715;
+          </button>
         </div>
       </div>
     </div>
   </nav>
-  <nav id="nav_desk_container flex_between ">
+  <nav id="nav_desk_container " class="nav_desk_container">
     <div class="nav_left_side">
       <div class="logo_expression">
         <h1 class="logo_app text-white">
@@ -228,63 +293,92 @@ function handleLinkModal(e: MouseEvent, label: string) {
       </div>
     </div>
     <!-- NEXT *nav middle inside** -->
-    <div class="nav_middle_side flex_center">
+    <div class="nav_middle_side flex_row_center">
       <ul class="link_desk_wrap">
-        <li id="desk_link_home">
+        <li id="desk_link_home" class="hover:text-green-400">
           <div>Home</div>
         </li>
-        <li id="desk_link_home">
+        <li id="desk_link_request" class="hover:text-green-400" ref="linkTagOne">
           <div
-            @mouseover="(e) => handleLinkModal(e, 'open')"
-            @mouseleave="(e) => handleLinkModal(e, 'close')"
+            @mouseover="() => handleLinkModal('linkOne', 'open')"
+            @mouseleave="() => handleLinkModal('linkOne', 'close')"
           >
             Requests
           </div>
-          <div class="modal_desk_link" @mouseleave.prevent="(e) => handleLinkModal(e, 'close')">
-            <div class="sublink_desk py-4">fuel or oil</div>
-            <div class="sublink_desk py-4">human integration</div>
-            <div class="sublink_desk py-4">purchase order</div>
-            <div class="sublink_desk py-4">engine components repair</div>
-            <div class="sublink_desk py-4">maintenance tools</div>
-            <div class="sublink_desk py-4">supply resources</div>
-            <div class="sublink_desk py-4">salary advance</div>
-            <div class="sublink_desk py-4">unpaid bonus</div>
+          <div
+            class="modal_desk_link"
+            @mouseover="() => handleLinkModal('linkOne', 'open')"
+            @mouseleave="() => handleLinkModal('linkOne', 'close')"
+          >
+            <div class="sublink_desk">fuel or oil</div>
+            <div class="sublink_desk">human integration</div>
+            <div class="sublink_desk">purchase order</div>
+            <div class="sublink_desk">engine components repair</div>
+            <div class="sublink_desk">maintenance tools</div>
+            <div class="sublink_desk">supply resources</div>
+            <div class="sublink_desk">salary advance</div>
+            <div class="sublink_desk">unpaid bonus</div>
           </div>
         </li>
-        <li id="desk_link_home">
+        <li id="desk_link_feedback" class="hover:text-green-400" ref="linkTagTwo">
           <div
-            @mouseover="(e) => handleLinkModal(e, 'open')"
-            @mouseleave="(e) => handleLinkModal(e, 'close')"
+            @mouseover="() => handleLinkModal('linkTwo', 'open')"
+            @mouseleave="() => handleLinkModal('linkTwo', 'close')"
           >
             Feedbacks
           </div>
-          <div class="modal_desk_link" @mouseleave.prevent="(e) => handleLinkModal(e, 'close')">
-            <div class="sublink_desk py-4">ask feedbacks</div>
-            <div class="sublink_desk py-4">reply feedbacks</div>
+          <div
+            class="modal_desk_link"
+            @mouseover="() => handleLinkModal('linkTwo', 'open')"
+            @mouseleave="() => handleLinkModal('linkTwo', 'close')"
+          >
+            <div class="sublink_desk">ask feedbacks</div>
+            <div class="sublink_desk">reply feedbacks</div>
           </div>
         </li>
-        <li id="desk_link_home">
+        <li id="desk_link_company" class="hover:text-green-400" ref="linkTagThree">
           <div
-            @mouseover="(e) => handleLinkModal(e, 'open')"
-            @mouseleave="(e) => handleLinkModal(e, 'close')"
+            @mouseover="() => handleLinkModal('linkThree', 'open')"
+            @mouseleave="() => handleLinkModal('linkThree', 'close')"
           >
             Company
           </div>
-          <div class="modal_desk_link">
-            <div class="sublink_desk py-4" @mouseleave="(e) => handleLinkModal(e, 'close')">
-              career
-            </div>
+          <div
+            class="modal_desk_link"
+            @mouseover="() => handleLinkModal('linkThree', 'open')"
+            @mouseleave="() => handleLinkModal('linkThree', 'close')"
+          >
+            <div class="sublink_desk">career</div>
           </div>
         </li>
       </ul>
-      <div class="search_desk_button"></div>
+      <div class="search_desk_wrapper" ref="searchDesk">
+        <div class="search_desk_button ml-3 px-5 cursor-pointer" @click="handleActSearch('open')">
+          &#128269;
+        </div>
+        <div class="input_desk_wrapper">
+          <div class="input_desk_content">
+            <input id="search" name="search" type="text" placeholder="requests or feedbacks ..." />
+            <div class="icon_input_desk">
+              <div class="icon_search_input cursor-pointer" @click="handleResearch">&#128269;</div>
+              <div class="icon_close_input cursor-pointer" @click="handleActSearch('close')">
+                &#x2715;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="nav_right_side flex_center gap-2">
+    <div class="nav_right_side flex_center gap-4">
       <div class="user_define">
         <div class="logo_user_define">name</div>
-        <div class="user_angle_container">
-          <div class="user_angle_down">&#xfe40;</div>
-          <div class="modal_user_desk">
+        <div class="user_angle_container" ref="dropUser">
+          <div class="user_angle_down cursor-pointer" @click="handleDeskUserDropDown">&#xfe40;</div>
+          <div
+            class="modal_user_desk"
+            @mouseover="() => stayInUserDropDown('open')"
+            @mouseleave="() => stayInUserDropDown('close')"
+          >
             <div class="modal_user_ct">
               <div id="id_user_stats">Individual Stats</div>
               <div id="gen_user_stats">General Stats</div>
@@ -324,8 +418,34 @@ function handleLinkModal(e: MouseEvent, label: string) {
     @apply flex justify-center items-center;
   }
 
+  .flex_row_center {
+    @apply flex flex-row justify-center items-center;
+  }
+
   .flex_between {
     @apply flex justify-between items-center;
+  }
+
+  .nav_desk_container {
+    @apply hidden;
+  }
+
+  input[name='search']:focus {
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 24px;
+    border: 2px solid #092c40bb;
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+  }
+
+  input[name='search']::placeholder {
+    font-style: italic;
+    font-size: calc(12px + 0.15vw);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* ** nav -- mobile** */
@@ -334,6 +454,7 @@ function handleLinkModal(e: MouseEvent, label: string) {
     margin: 0 auto;
     background-color: var(--bg-secondary);
     transition: all 1s ease;
+    display: block;
   }
 
   .nav_mob_container .nav_first_flow {
@@ -386,7 +507,7 @@ function handleLinkModal(e: MouseEvent, label: string) {
     z-index: 3;
   }
 
-  .nav_mini_search input[name='search']:focus,
+  /*  .nav_mini_search input[name='search']:focus,
   .nav_long_search input[name='search']:focus {
     width: 100%;
     padding: 5px 10px;
@@ -400,7 +521,7 @@ function handleLinkModal(e: MouseEvent, label: string) {
   .nav_long_search input[name='search']::placeholder {
     font-style: italic;
     font-size: calc(12px + 0.15vw);
-  }
+  } */
 
   .nav_mini_search .close_nav_search {
     position: absolute;
@@ -536,15 +657,43 @@ function handleLinkModal(e: MouseEvent, label: string) {
     z-index: 3;
     traansition: all 1s ease;
   }
+}
+@media (min-width: 520px) {
+  /* nav-- block-start -- */
+  .nav_mob_container #nav_add_search {
+    @apply hidden;
+  }
+
+  /* nav-- block-end -- */
+  .nav_block_end li.search_area {
+    width: 80%;
+    display: block;
+  }
+
+  li.search_area .nav_long_search {
+    width: 100%;
+    height: 24px;
+  }
+
+  .nav_block_end li.login_area {
+    width: 20%;
+    display: flex;
+  }
+}
+@media (min-width: 860px) {
+  .nav_mob_container {
+    display: none;
+  }
 
   /* ** nav -- desktop** */
   .nav_desk_container {
     width: 100vw;
     height: 50px;
-    padding: 10px 15px;
+    padding: 10px 45px 10px 20px;
     color: var(--color-subtext-title);
     background-color: var(--bg-secondary);
     transition: all 1s ease;
+    @apply flex justify-between items-center;
   }
 
   .nav_desk_container .nav_left_side {
@@ -553,22 +702,26 @@ function handleLinkModal(e: MouseEvent, label: string) {
   }
 
   .nav_desk_container .nav_middle_side {
+    position: relative;
     width: 75%;
-    padding: 0 2%;
+    height: 100%;
+    padding: 10px 2%;
   }
 
   .nav_middle_side ul.link_desk_wrap {
-    width: 100%;
+    padding-left: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    z-index: 3;
   }
 
   ul.link_desk_wrap li {
     position: relative;
     top: 0;
+    width: 6rem;
     height: 100%;
-    padding-right: 1rem;
   }
 
   li .modal_desk_link {
@@ -578,33 +731,134 @@ function handleLinkModal(e: MouseEvent, label: string) {
     padding: 10px 20px 25px 5px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #a75da0;
+    opacity: 0.1;
     visibility: hidden;
-    @apply flex flex-col justify-start gap-4;
+    @apply flex flex-col justify-start gap-1;
+    z-index: 10;
+  }
+
+  ul.link_desk_wrap li > div {
+    cursor: pointer;
+    transition: all 1.4s ease;
   }
 
   li.active_hover .modal_desk_link {
     position: absolute;
-    top: 2rem;
+    top: 2.1rem;
     width: 200px;
-    padding: 10px 20px 25px 5px;
+    padding: 10px 20px 25px 10px;
     color: var(--grayish-text-color-2);
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: 0px 0px 5px #a75da0;
+    opacity: 1;
     visibility: visible;
+    transition: all 1s ease;
     @apply flex flex-col justify-start;
   }
 
-  .modal_desk_link *:hover {
-    color: var(--color-subtitle-footer);
+  .modal_desk_link div:hover {
+    color: var(--grayish-text-color-2);
   }
 
-  ul.link_desk_wrap li > div {
-    transition: all 1.4s ease;
+  .modal_desk_link .sublink_desk {
+    padding: 0.35rem 0;
+    color: var(--color-subtext-title);
+    letter-spacing: 0px;
+    transition: all 350ms ease;
   }
 
-  ul.link_desk_wrap li:hover > div {
+  .modal_desk_link .sublink_desk:hover {
+    padding: 0.5rem 0;
+    font-weight: bold;
     color: var(--color-subtitle-footer);
+    letter-spacing: 1px;
+  }
+
+  .search_desk_wrapper {
+    position: relative;
+    width: min-content;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    transition: all 450ms ease;
+  }
+
+  .search_desk_wrapper.active_bar_research {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 42px;
+  }
+
+  .search_desk_wrapper .search_desk_button {
+    display: inline-block;
+  }
+
+  .search_desk_wrapper.active_bar_research .search_desk_button {
+    display: none;
+  }
+
+  .search_desk_wrapper .input_desk_wrapper {
+    width: 10%;
+    top: -0.38rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s ease;
+    @apply relative inline-block;
+  }
+
+  .search_desk_wrapper.active_bar_research .input_desk_wrapper {
+    width: 80%;
+    height: 30px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 1s ease 100ms;
+    @apply relative inline-block;
+  }
+
+  .input_desk_wrapper .input_desk_content {
+    @apply w-full h-full absolute flex justify-center items-center;
+    background-color: #000000a2;
+    background-color: var(--color-text-question);
+    border-radius: 24px;
+    z-index: 30;
+  }
+
+  .input_desk_content input[name='search'] {
+    color: var(--color-subtext-title);
+    background-color: var(--color-text-question);
+    padding: 0 20px;
+    border: 1px solid #cccaca;
+    border-radius: 24px;
+    outline: none;
+    z-index: 40;
+    @apply w-full h-full flex justify-center items-center;
+  }
+
+  .input_desk_content .icon_input_desk {
+    width: 3rem;
+    position: absolute;
+    right: 0.75rem;
+    font-size: calc(12px + 0.15vw);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 75;
+  }
+
+  .search_desk_wrapper .icon_input_desk {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease;
+  }
+
+  .search_desk_wrapper.active_bar_research .icon_input_desk {
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav_desk_container .nav_right_side {
@@ -635,45 +889,66 @@ function handleLinkModal(e: MouseEvent, label: string) {
     outline-offset: -2px;
   }
 
-  .user_define .user_angle_container {
+  .user_angle_container {
     position: relative;
-    width: 1rem;
+    width: 0.5rem;
+    padding-top: 14px;
+    margin: 0 8px;
   }
 
-  .user_define .modal_user_desk {
-    display: none;
-    position: absolute;
-    top: 2rem;
-    width: 200px;
-    height: 200px;
-    @apply hidden flex-col justify-start;
-  }
-
-  .user_define.active_select .modal_user_desk {
+  .user_angle_container .modal_user_desk {
     display: block;
+    position: absolute;
+    top: 1.2rem;
+    right: 0.25rem;
+    width: 190px;
+    height: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease;
   }
 
-  .user_define.active_select .modal_user_ct {
+  .user_angle_container.active_select .modal_user_desk {
+    top: 1.6rem;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .user_angle_container .modal_user_ct {
     position: relative;
     top: 0;
     padding: 15px 20px 25px;
-    color: var(--grayish-text-color-1);
-    background-color: #fff;
+    color: var(--color-subtext-title);
+    /* background-color: #fff; */
+    background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: -2px -1px 5px #a75da0;
     visibility: hidden;
     opacity: 0.9;
     transition: all 1s ease;
-    @apply w-full h-full flex flex-col justify-start;
+    @apply w-full h-full flex flex-col justify-start gap-2;
   }
 
-  .user_define.active_select .modal_user_ct {
+  .user_angle_container.active_select .modal_user_ct {
     top: 1rem;
     visibility: visible;
     opacity: 1;
   }
 
-  .modal_user_desk div {
+  .modal_user_ct div {
+    width: max-content;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 350ms ease;
+  }
+
+  .modal_user_ct div:hover {
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #a75da0;
+    color: var(--bg-button-2);
+  }
+
+  /*  .modal_user_desk div {
     width: 100%;
     height: 1rem;
   }
@@ -681,43 +956,20 @@ function handleLinkModal(e: MouseEvent, label: string) {
   .modal_user_desk div:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+  } */
 
   .nav_right_side .login_desk {
     cursor: pointer;
     width: min-content;
-    padding-bottom: 3px;
+    padding-top: 1px;
     border: 1px solid transparent;
     transition: all 1s ease;
   }
 
   .nav_right_side .login_desk:hover {
     color: #24775b;
+    padding: 0 8px;
     border: 1px solid #24775b;
   }
-}
-@media (min-width: 520px) {
-  /* nav-- block-start -- */
-  .nav_mob_container #nav_add_search {
-    @apply hidden;
-  }
-
-  /* nav-- block-end -- */
-  .nav_block_end li.search_area {
-    width: 80%;
-    display: block;
-  }
-
-  li.search_area .nav_long_search {
-    width: 100%;
-    height: 24px;
-  }
-
-  .nav_block_end li.login_area {
-    width: 20%;
-    display: flex;
-  }
-}
-@media (min-width: 860px) {
 }
 </style>
