@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { useTemplateRef, computed } from 'vue'
 
+// menu wrap
+const menuLinkRef = useTemplateRef<HTMLDivElement | null>('menuLink')
+
+// Link Mobile
+const requestsLinkRef = useTemplateRef<HTMLDivElement | null>('linkZero')
+const feedbacksLinkRef = useTemplateRef<HTMLDivElement | null>('linkOne')
+const companyLinkRef = useTemplateRef<HTMLDivElement | null>('linkTwo')
+const userLinkRef = useTemplateRef<HTMLDivElement | null>('linkThree')
+const statsLinkRef = useTemplateRef<HTMLDivElement | null>('myStats')
+
+// link DeskTop
 const navLinkOneRef = useTemplateRef<HTMLLIElement | null>('linkTagOne')
 const navLinkTwoRef = useTemplateRef<HTMLLIElement | null>('linkTagTwo')
 const navLinkThreeRef = useTemplateRef<HTMLLIElement | null>('linkTagThree')
@@ -25,16 +36,72 @@ function handleLogSignRedirect() {
   // do something ...
 }
 
-function handleMenu(label: string) {
+function handleMenu(outsideMenu?: boolean) {
   // do something ...
+  if (outsideMenu && menuLinkRef.value?.classList.add('active_menu')) {
+    menuLinkRef.value?.classList.remove('active_menu')
+    return
+  }
+
+  if (!menuLinkRef.value?.classList.contains('active_menu')) {
+    menuLinkRef.value?.classList.add('active_menu')
+  } else {
+    menuLinkRef.value?.classList.remove('active_menu')
+  }
 }
 
-function handleDropDown(label: string) {
+function handleDropDown(labelCase: string) {
   // do something ...
+  const catchItAll = [requestsLinkRef, feedbacksLinkRef, companyLinkRef, userLinkRef]
+
+  catchItAll.forEach((linkRef, i) => {
+    if (linkRef.value?.classList.contains('active_drop_case') && i !== +labelCase) {
+      linkRef.value?.classList.remove('active_drop_case')
+    }
+  })
+
+  switch (labelCase) {
+    case '0':
+      if (requestsLinkRef.value?.classList.contains('active_drop_case')) {
+        requestsLinkRef.value?.classList.remove('active_drop_case')
+      } else {
+        requestsLinkRef.value?.classList.add('active_drop_case')
+      }
+      break
+    case '1':
+      if (feedbacksLinkRef.value?.classList.contains('active_drop_case')) {
+        feedbacksLinkRef.value?.classList.remove('active_drop_case')
+      } else {
+        feedbacksLinkRef.value?.classList.add('active_drop_case')
+      }
+      break
+    case '2':
+      if (companyLinkRef.value?.classList.contains('active_drop_case')) {
+        companyLinkRef.value?.classList.remove('active_drop_case')
+      } else {
+        companyLinkRef.value?.classList.add('active_drop_case')
+      }
+      break
+    case '3':
+      if (userLinkRef.value?.classList.contains('active_drop_case')) {
+        userLinkRef.value?.classList.remove('active_drop_case')
+      } else {
+        userLinkRef.value?.classList.add('active_drop_case')
+      }
+      break
+    default:
+      throw Error('Something wrong in handleDropDown Fn')
+  }
 }
 
 function handleSubDropDown() {
   // do something ...
+
+  if (!statsLinkRef.value?.classList.contains('active_stats')) {
+    statsLinkRef.value?.classList.add('active_stats')
+  } else {
+    statsLinkRef.value?.classList.remove('active_stats')
+  }
 }
 
 function handleLinkModal(aliasRef: string, label: string) {
@@ -97,143 +164,157 @@ function stayInUserDropDown(value: string) {
 <template>
   <nav id="nav_mob_container" class="nav_mob_container">
     <div id="nav_first_flow" class="nav_first_flow">
-      <div class="nav_block_start flex_center gap-2">
+      <div class="nav_block_start flex_start gap-2">
         <!--Next menu_ design  !!!  -->
-        <div class="menu_wrap">
-          <div class="menu_bar" @click="() => handleMenu('open')"></div>
-          <div class="modal_menu">
-            <div class="modal_close">
-              <div class="icon_menu_close" @click="() => handleMenu('close')">&#x2715;</div>
-            </div>
-            <ul class="menu_content">
-              <li class="menu_elt">
-                <div class="menu_label">
-                  <span>Home</span>
-                </div>
-              </li>
-              <li class="menu_elt">
-                <div class="menu_label">
-                  <span>Requests</span>
-                  <div class="angle_menu" @click="() => handleDropDown('0')">&#xfe40;</div>
-                </div>
-                <div class="submenu_elt" data-drop="0">
-                  <div class="submenu_item">
-                    <div id="req_fuel_oil" class="column_submenu">
-                      <h5>fuel or oil</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_human_integration" class="column_submenu">
-                      <h5>human integration</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_purchase_order" class="column_submenu">
-                      <h5>purchase order</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_engine_components" class="column_submenu">
-                      <h5>engine components repair</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_maintenance_tools" class="column_submenu">
-                      <h5>maintenance tools</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_supply_resources" class="column_submenu">
-                      <h5>supply resources</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_salary_advance" class="column_submenu">
-                      <h5>salary advance</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="req_unpaid_bonus" class="column_submenu">
-                      <h5>unpaid bonus</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="menu_elt">
-                <div class="menu_label">
-                  <span>FeedBacks</span>
-                  <div class="angle_menu" @click="() => handleDropDown('1')">&#xfe40;</div>
-                </div>
-                <div class="submenu_elt" data-drop="1">
-                  <div class="submenu_item">
-                    <div id="ask_feedback" class="column_submenu">
-                      <h5>Ask Feedback</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="reply_feedback" class="column_submenu">
-                      <h5>Reply Feedback</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="menu_elt">
-                <div class="menu_label">
-                  <span>Company</span>
-                  <div class="angle_menu" @click="() => handleDropDown('2')">&#xfe40;</div>
-                </div>
-                <div class="submenu_elt" data-drop="2">
-                  <div class="submenu_item">
-                    <div id="company_business" class="column_submenu">
-                      <h5>Career</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="menu_elt">
-                <div class="menu_label">
-                  <h4>
-                    <span>user</span>
-                    <div class="angle_menu" @click="() => handleDropDown('3')">&#xfe40;</div>
-                  </h4>
-                </div>
-                <div class="submenu_elt" data-drop="3">
-                  <div class="submenu_item">
-                    <div class="submenu_label">
-                      <h5>
-                        <span>stats</span>
-                        <div class="angle_submenu" @click="() => handleSubDropDown()">&#xfe40;</div>
-                      </h5>
-                    </div>
-                    <div class="column_submenu">
-                      <div id="id_stats">
-                        <h5>Individuals Stats</h5>
-                      </div>
-                      <div id="gen_stats">
-                        <h5>GeneralStats</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="user_profile" class="user_profile">
-                      <div class="logo_letter">N</div>
-                      <div class="account_email">joe_delmach@gmail.com</div>
-                    </div>
-                    <div id="submenu_login" class="column_submenu" @click="handleLogSignRedirect">
-                      <h5>login</h5>
-                    </div>
-                  </div>
-                  <div class="submenu_item">
-                    <div id="submenu_sign_up" class="column_submenu" @click="handleLogSignRedirect">
-                      <h5>Sign Up</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+        <div class="menu_wrap" ref="menuLink">
+          <div class="hamburger" @click="() => handleMenu()">
+            <div class="menu_bar"></div>
           </div>
         </div>
-        <div class="logo_expression">
+        <div class="modal_menu">
+          <div class="modal_close">
+            <div class="icon_menu_close cursor-pointer" @click="() => handleMenu()">&#x2715;</div>
+          </div>
+          <ul class="menu_content">
+            <li class="menu_elt">
+              <div class="menu_label">
+                <span>Home</span>
+                <div class="angle_menu invisible">&#xfe40;</div>
+              </div>
+            </li>
+            <li class="menu_elt" data-drop="0" ref="linkZero">
+              <div class="menu_label" @click="() => handleDropDown('0')">
+                <span>Requests</span>
+                <div class="angle_menu cursor-pointer">&#xfe40;</div>
+              </div>
+              <div class="submenu_elt">
+                <div class="submenu_item">
+                  <div id="req_fuel_oil" class="column_submenu sub_first_link">
+                    <h5>fuel or oil</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_human_integration" class="column_submenu sub_first_link">
+                    <h5>human integration</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_purchase_order" class="column_submenu sub_first_link">
+                    <h5>purchase order</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_engine_components" class="column_submenu sub_first_link">
+                    <h5>engine components repair</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_maintenance_tools" class="column_submenu sub_first_link">
+                    <h5>maintenance tools</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_supply_resources" class="column_submenu sub_first_link">
+                    <h5>supply resources</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_salary_advance" class="column_submenu sub_first_link">
+                    <h5>salary advance</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="req_unpaid_bonus" class="column_submenu sub_first_link">
+                    <h5>unpaid bonus</h5>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="menu_elt" data-drop="1" ref="linkOne">
+              <div class="menu_label" @click="() => handleDropDown('1')">
+                <span>FeedBacks</span>
+                <div class="angle_menu cursor-pointer">&#xfe40;</div>
+              </div>
+              <div class="submenu_elt">
+                <div class="submenu_item">
+                  <div id="ask_feedback" class="column_submenu sub_first_link">
+                    <h5>Ask Feedback</h5>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="reply_feedback" class="column_submenu sub_first_link">
+                    <h5>Reply Feedback</h5>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="menu_elt" data-drop="2" ref="linkTwo">
+              <div class="menu_label" @click="() => handleDropDown('2')">
+                <span>Company</span>
+                <div class="angle_menu cursor-pointer">&#xfe40;</div>
+              </div>
+              <div class="submenu_elt">
+                <div class="submenu_item">
+                  <div id="company_business" class="column_submenu sub_first_link">
+                    <h5>Career</h5>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="menu_elt" data-drop="3" ref="linkThree">
+              <div class="menu_label" @click="() => handleDropDown('3')">
+                <span>User</span>
+                <div class="angle_menu">&#xfe40;</div>
+              </div>
+              <div class="submenu_elt">
+                <div class="submenu_item">
+                  <div id="stats_box" ref="myStats">
+                    <div class="submenu_label flex justify-start gap-1 hover:text-blue-400">
+                      <span>stats</span>
+                      <div class="angle_submenu" @click="() => handleSubDropDown()">&#xfe40;</div>
+                    </div>
+                    <div id="stats_mob_content" class="column_submenu drop_content my-2">
+                      <div class="stats_mob_area">
+                        <div id="id_stats" class="pt-1 pl-3">
+                          <h5 class="cursor-pointer hover:text-blue-400">Individuals Stats</h5>
+                        </div>
+                        <div id="gen_stats" class="py-2 pl-3">
+                          <h5 class="cursor-pointer hover:text-blue-400">GeneralStats</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="submenu_item">
+                  <div id="user_profile" class="user_profile">
+                    <div class="logo_letter">N</div>
+                    <div
+                      class="account_email hover:text-green-400"
+                      style="transition: all 890ms ease"
+                    >
+                      joe_delmach@gmail.com
+                    </div>
+                  </div>
+                  <div
+                    id="submenu_login"
+                    class="column_sub_end cursor-pointer"
+                    @click="handleLogSignRedirect"
+                  >
+                    <h5>Login</h5>
+                  </div>
+                  <div
+                    id="submenu_sign_up"
+                    class="column_sub_end cursor-pointer my-2"
+                    @click="handleLogSignRedirect"
+                  >
+                    <h5>Sign Up</h5>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="logo_expression mx-2">
           <h1 class="logo_app text-white">
             <span>transi</span>
             <span class="text-green-300">\</span>
@@ -243,7 +324,9 @@ function stayInUserDropDown(value: string) {
       </div>
       <ul class="nav_block_end flex_center gap-4">
         <li class="search_area">
-          <div class="search_mob_button" @click="handleActSearch('open')">&#128269;</div>
+          <div class="search_mob_button text-xs cursor-pointer" @click="handleActSearch('open')">
+            &#128269;
+          </div>
           <!-- search area mob>=520px  -->
           <div class="nav_long_search">
             <input
@@ -262,9 +345,7 @@ function stayInUserDropDown(value: string) {
         </li>
         <li class="login_area">
           <div class="login_session">
-            <div class="login_wrap">
-              <button class="btn_login" @click.prevent="handleLogSignRedirect">login</button>
-            </div>
+            <div id="login_mob" class="btn_login" @click.prevent="handleLogSignRedirect">login</div>
           </div>
         </li>
       </ul>
@@ -293,7 +374,7 @@ function stayInUserDropDown(value: string) {
       </div>
     </div>
     <!-- NEXT *nav middle inside** -->
-    <div class="nav_middle_side flex_row_center">
+    <div class="nav_middle_side flex_center">
       <ul class="link_desk_wrap">
         <li id="desk_link_home" class="hover:text-green-400">
           <div>Home</div>
@@ -389,7 +470,7 @@ function stayInUserDropDown(value: string) {
           </div>
         </div>
       </div>
-      <div id="login_desk" class="login_desk" @click="handleLogSignRedirect">login</div>
+      <div id="login_desk" class="btn_login" @click="handleLogSignRedirect">login</div>
     </div>
   </nav>
 </template>
@@ -414,12 +495,27 @@ function stayInUserDropDown(value: string) {
     z-index: 5;
   }
 
-  .flex_center {
-    @apply flex justify-center items-center;
+  .btn_login {
+    cursor: pointer;
+    width: min-content;
+    padding-top: 1px;
+    color: var(--color-subtext-title);
+    border: 1px solid transparent;
+    transition: all 1s ease;
   }
 
-  .flex_row_center {
-    @apply flex flex-row justify-center items-center;
+  .btn_login:hover {
+    color: #24775b;
+    padding: 0 8px;
+    border: 1px solid #24775b;
+  }
+
+  .flex_start {
+    @apply flex justify-start items-center;
+  }
+
+  .flex_center {
+    @apply flex justify-center items-center;
   }
 
   .flex_between {
@@ -448,6 +544,42 @@ function stayInUserDropDown(value: string) {
     align-items: center;
   }
 
+  /* mobile angles animation */
+  .angle_menu,
+  .angle_submenu {
+    cursor: pointer;
+    padding-top: 2px;
+    margin: 0 10px;
+    font-size: calc(14px + 0.12vw);
+    transform: rotate(-90deg);
+    transition: all 480ms ease-in-out;
+  }
+
+  li.menu_elt.active_drop_case .angle_menu,
+  #stats_box.active_stats .angle_submenu {
+    transform: rotate(0deg);
+  }
+
+  #stats_box .drop_content {
+    display: none;
+  }
+
+  #stats_box.active_stats .drop_content {
+    display: block;
+  }
+
+  #stats_box .stats_mob_area {
+    position: relative;
+    display: grid;
+    width: max-content;
+    animation: stats-box-anim 780ms ease forwards;
+  }
+
+  #stats_box.active_stats .stats_mob_area {
+    padding: 0.5rem;
+    animation: stats-box-anim 780ms ease forwards;
+  }
+
   /* ** nav -- mobile** */
   .nav_mob_container {
     width: 100vw;
@@ -458,9 +590,10 @@ function stayInUserDropDown(value: string) {
   }
 
   .nav_mob_container .nav_first_flow {
+    position: relative;
     width: 100%;
     height: 50px;
-    padding: 5px 10px;
+    padding: 5px 28px 5px 20px;
     @apply flex justify-between items-center;
   }
 
@@ -507,22 +640,6 @@ function stayInUserDropDown(value: string) {
     z-index: 3;
   }
 
-  /*  .nav_mini_search input[name='search']:focus,
-  .nav_long_search input[name='search']:focus {
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 24px;
-    border: 2px solid #092c40bb;
-    outline: 2px solid #fff;
-    outline-offset: -3px;
-  }
-
-  .nav_mini_search input[name='search']::placeholder,
-  .nav_long_search input[name='search']::placeholder {
-    font-style: italic;
-    font-size: calc(12px + 0.15vw);
-  } */
-
   .nav_mini_search .close_nav_search {
     position: absolute;
     top: 10px;
@@ -537,117 +654,246 @@ function stayInUserDropDown(value: string) {
 
   .menu_wrap {
     position: relative;
-    width: 4rem;
-    height: 4rem;
-    padding: 10px;
+    width: 2.15rem;
+    height: 2.15rem;
     border-radius: 5px;
     border: 1px solid #fff;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    transform: scale(0.86);
   }
 
-  .menu_bar {
-    position: relative;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    border-radius: 12px;
-  }
-
-  .menu_bar::before,
-  .menu_bar::after {
-    content: '';
+  .menu_wrap .hamburger {
     position: absolute;
-    top: -10px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    cursor: pointer;
+    @apply flex justify-center items-center;
+  }
+
+  .menu_wrap .hamburger > div.menu_bar {
+    position: relative;
+    top: 0;
+    width: 86%;
+    height: 2px;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 12px;
+    transition: all 1s ease;
+    flex-shrink: 0;
+    @apply flex justify-center items-center;
   }
 
-  .menu_bar::after {
-    top: 10px;
-  }
-
-  .menu_elt .angle_menu {
-    transform: rotate(45deg);
-  }
-
-  .menu_elt.active_elt_menu .angle_menu {
-    transform: rotate(0deg);
-  }
-
-  .menu_bar .modal_menu {
-    display: none;
+  .menu_wrap .hamburger > div.menu_bar::before,
+  .menu_wrap .hamburger > div.menu_bar::after {
+    content: '';
     position: absolute;
-    top: 2rem;
-    left: 1rem;
-    width: 10rem;
-    padding: 1rem 0.5rem;
+    top: -9px;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
     background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #5e636e;
-    box-shadow: 0px 0px 5px #cccaca;
+    border-radius: 12px;
+    transform: rotate(0deg);
+    transition: all 1s ease;
   }
 
-  .menu_bar.active_menu .modal_menu {
+  .menu_wrap .hamburger > div.menu_bar::after {
+    top: 9px;
+  }
+
+  .menu_wrap.active_menu .hamburger > div.menu_bar {
+    transform: rotate(135deg);
+  }
+
+  .menu_wrap.active_menu .hamburger > div.menu_bar::before,
+  .menu_wrap.active_menu .hamburger > div.menu_bar::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+
+  .menu_wrap + .modal_menu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 3.1rem;
+    left: -30%;
+    width: 100%;
+    padding: 0.5rem;
+    color: var(--bg-primary);
+    background-color: var(--color-text-question);
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    backdrop-filter: grayscale;
+    z-index: 15;
+    transition: all 720ms ease;
+  }
+
+  .menu_wrap.active_menu + .modal_menu {
+    left: 0;
+    visibility: visible;
+    opacity: 1;
   }
 
   .modal_menu .modal_close {
     width: 100%;
-    padding: 10px 15px;
-    font-size: 1rem;
-    color: var(--grayish-text-color-2);
-    @apply flex flex-col justify-end;
+    padding: 5px 8px 5px 15px;
+    font-size: 1.3rem;
+    color: var(--grayish-text-color-1);
+    @apply flex flex justify-end;
   }
 
   ul.menu_content {
     width: 100%;
-    @apply flex flex-col justify-start gap-4;
+    @apply flex flex-col justify-start  gap-10;
   }
 
   li.menu_elt {
     width: 100%;
-    padding: 10px 5px;
+    padding: 5px;
+    @apply flex  flex-col justify-center gap-1;
   }
 
   li.menu_elt .menu_label {
-    @apply flex justify-start gap-1;
+    width: 70%;
+    /*  padding-left: 1.65rem; */
+    padding-left: -0.25rem;
+    margin: 0 auto;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 350ms ease;
+    @apply flex justify-center gap-1;
+  }
+
+  li.menu_elt .menu_label:hover {
+    transform: scale(1.07);
+    @apply text-green-400;
   }
 
   li.menu_elt .submenu_elt {
-    @apply flex flex-col justify-start gap-2;
+    animation: sub-elt-anim 3s ease forwards;
+    @apply py-1  hidden flex-col justify-center items-center;
+  }
+
+  li.menu_elt.active_drop_case .submenu_elt {
+    animation: sub-elt-anim 3s ease forwards;
+    @apply py-1  flex flex-col justify-start items-center;
   }
 
   .submenu_item {
-    @apply flex flex-col justify-start gap-2;
+    @apply py-2 ml-2 flex flex-col justify-start;
+  }
+
+  .submenu_item .sub_first_link {
+    opacity: 0.9;
+    transition: all 850ms ease;
+  }
+
+  .submenu_item .sub_first_link:hover {
+    opacity: 1;
+    @apply text-blue-600;
   }
 
   .submenu_item .user_profile {
-    @apply flex flex-col justify-center gap-2;
+    @apply w-full flex justify-start  gap-3;
   }
 
   .user_profile div.logo_letter {
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     color: var(--color-subtext-title);
     background-color: #092c40d5;
+    font-size: calc(11px + 0.25vw);
     display: grid;
     place-items: center;
     border-radius: 50%;
-    border: 1px solid black;
-    outline: 4px solid #fff;
-    outline-offset: -2px;
+    border: 2px solid black;
+    outline: 2px solid #cccaca;
+    outline-offset: -1px;
   }
 
   .submenu_item .column_submenu {
-    @apply flex  justify-start gap-1;
+    @apply flex flex-col justify-start gap-3;
   }
+
+  #submenu_login {
+    width: 4.2rem;
+    height: 2rem;
+    padding: 2px;
+    margin: 1.1rem 0 0;
+    position: relative;
+    display: grid;
+    place-items: start;
+    border-radius: 5px;
+    transition:
+      place-items 850ms ease 3.4s,
+      color 650ms ease;
+  }
+
+  #submenu_login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0%;
+    border-bottom: 1px solid #fff;
+    transition:
+      height 450ms ease-in,
+      width 375ms ease,
+      border 500ms;
+  }
+
+  #submenu_login:hover {
+    place-items: center;
+    @apply text-green-400;
+  }
+
+  #submenu_login:hover::before {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #24775b;
+  }
+
+  #submenu_sign_up {
+    position: relative;
+    width: max-content;
+    height: 1.8rem;
+    z-index: 10;
+    transition: all 1.5s ease;
+  }
+
+  #submenu_sign_up:hover {
+    color: var(--bg-button-2);
+  }
+
+  #submenu_sign_up::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    z-index: 1;
+    transition: all 480ms ease;
+  }
+
+  #submenu_sign_up:hover::before {
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-button-2);
+  }
+
   /* nav-- block-end -- */
 
-  .nav_block_end {
+  /*  .nav_block_end {
     width: 80%;
-  }
+  } */
 
   li.search_area .nav_long_search {
     display: none;
@@ -664,6 +910,24 @@ function stayInUserDropDown(value: string) {
     @apply hidden;
   }
 
+  /*  li.menu_elt {
+    @apply flex flex-col justify-start gap-1;
+  } */
+
+  li.menu_elt .menu_label {
+    width: min-content;
+    margin: 0;
+    padding-left: 0.75rem;
+    @apply flex justify-start gap-1;
+  }
+
+  li.menu_elt .submenu_elt {
+    @apply py-1 pl-3 hidden flex-col justify-center items-start;
+  }
+
+  li.menu_elt.active_drop_case .submenu_elt {
+    @apply py-1 pl-3 flex flex-col justify-start items-start;
+  }
   /* nav-- block-end -- */
   .nav_block_end li.search_area {
     width: 80%;
@@ -675,12 +939,12 @@ function stayInUserDropDown(value: string) {
     height: 24px;
   }
 
-  .nav_block_end li.login_area {
+  /* .nav_block_end li.login_area {
     width: 20%;
     display: flex;
-  }
+  } */
 }
-@media (min-width: 860px) {
+@media (min-width: 800px) {
   .nav_mob_container {
     display: none;
   }
@@ -948,17 +1212,7 @@ function stayInUserDropDown(value: string) {
     color: var(--bg-button-2);
   }
 
-  /*  .modal_user_desk div {
-    width: 100%;
-    height: 1rem;
-  }
-
-  .modal_user_desk div:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  } */
-
-  .nav_right_side .login_desk {
+  /* .nav_right_side .login_desk {
     cursor: pointer;
     width: min-content;
     padding-top: 1px;
@@ -970,6 +1224,51 @@ function stayInUserDropDown(value: string) {
     color: #24775b;
     padding: 0 8px;
     border: 1px solid #24775b;
+  } */
+}
+
+@keyframes anim-login-menu {
+  0% {
+    border-top: 1px solid #24775b;
+  }
+  35% {
+    border-left: 1px solid #24775b;
+  }
+
+  70% {
+    border-right: 1px solid #24775b;
+  }
+
+  100% {
+    border-bottom: 1px solid #24775b;
+  }
+}
+
+@keyframes sub-elt-anim {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes stats-box-anim {
+  0% {
+    top: -1rem;
+    opacity: 0;
+    height: 1rem;
+    visibility: hidden;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+    height: 3.72rem;
+    visibility: visible;
   }
 }
 </style>
