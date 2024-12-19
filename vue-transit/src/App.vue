@@ -9,9 +9,7 @@ import HomeView from './views/HomeView.vue'
   <header>
     <Navbar />
   </header>
-  <main class="main_container">
-    <RouterView />
-  </main>
+  <main class="main_container"></main>
 
   <!-- <RouterView /> -->
 </template>
