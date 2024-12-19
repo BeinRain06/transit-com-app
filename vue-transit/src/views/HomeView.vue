@@ -300,6 +300,8 @@
     width: 10rem;
     margin: 0 auto;
     border-radius: 5px;
+    box-shadow: 0px 0px 5px #092c40bb;
+    transition: all 450ms ease-in 150ms;
   }
 
   .btn_connect {
@@ -310,7 +312,26 @@
     border-radius: 5px;
     color: #fff;
     background-color: #3a82a2;
+    opacity: 0.9;
+    transition: all 450ms ease-in;
   }
+
+  .btn_connect_wrap:hover {
+    border-radius: 10px;
+    box-shadow: 0px -2px 5px #24775b;
+  }
+
+  .btn_connect_wrap:hover .btn_connect {
+    border-radius: 10px;
+    background-color: #092c40bb;
+    opacity: 1;
+  }
+
+  /*   .btn_connect:hover {
+    background-color: #092c40bb;
+    opacity: 1;
+    box-shadow: 0px -1px 5px #092c40bb;
+  } */
 
   /* hero ct_stick */
 
@@ -641,7 +662,7 @@
 
   /* hero section */
   .hero_ct_connect {
-    height: 90vh;
+    height: 75vh;
   }
   .promise_connect_wrap {
     position: relative;
