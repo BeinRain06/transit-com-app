@@ -1,5 +1,15 @@
 <script setup lang="ts">
-import { useTemplateRef, computed } from 'vue'
+import { useTemplateRef, watch } from 'vue'
+
+const stateMenuIn = defineModel()
+
+watch(stateMenuIn, async () => {
+  await stateMenuIn
+  if (!stateMenuIn.value) {
+    menuLinkRef.value?.classList.remove('active_menu')
+  }
+  return null
+})
 
 // menu wrap
 const menuLinkRef = useTemplateRef<HTMLDivElement | null>('menuLink')
@@ -36,18 +46,21 @@ function handleLogSignRedirect() {
   // do something ...
 }
 
-function handleMenu(outsideMenu?: boolean) {
+async function handleMenu() {
   // do something ...
-  if (outsideMenu && menuLinkRef.value?.classList.add('active_menu')) {
-    menuLinkRef.value?.classList.remove('active_menu')
-    return
-  }
+  console.log('stateMenuIn :', stateMenuIn.value)
 
   if (!menuLinkRef.value?.classList.contains('active_menu')) {
     menuLinkRef.value?.classList.add('active_menu')
+    stateMenuIn.value = true
+    await stateMenuIn
   } else {
     menuLinkRef.value?.classList.remove('active_menu')
+    stateMenuIn.value = false
+    await stateMenuIn
   }
+
+  console.log('stateMenuIn end:', stateMenuIn.value)
 }
 
 function handleDropDown(labelCase: string) {
@@ -167,13 +180,15 @@ function stayInUserDropDown(value: string) {
       <div class="nav_block_start flex_start gap-2">
         <!--Next menu_ design  !!!  -->
         <div class="menu_wrap" ref="menuLink">
-          <div class="hamburger" @click="() => handleMenu()">
+          <div class="hamburger" @click="async () => handleMenu()">
             <div class="menu_bar"></div>
           </div>
         </div>
         <div class="modal_menu">
           <div class="modal_close">
-            <div class="icon_menu_close cursor-pointer" @click="() => handleMenu()">&#x2715;</div>
+            <div class="icon_menu_close cursor-pointer" @click="async () => handleMenu()">
+              &#x2715;
+            </div>
           </div>
           <ul class="menu_content">
             <li class="menu_elt">
