@@ -52,20 +52,14 @@ export const useAskFeedStore = defineStore('askfeed', {
         }
       ]
     },
-    selectedDomain: 'tech',
+    selectedDomain: 'law',
     monthsConsultFeed: null
   }),
-  getters: {},
+  getters: {
+    choiceDomain: (state) => state.selectedDomain,
+    getReasons: (state) => state.reasons.spec
+  },
   actions: {
-    reasonFetched() {
-      const reasonObj = this.reasons.spec.map((item) => {
-        if (item.domain === this.selectedDomain) {
-          return item
-        }
-      })
-      return reasonObj
-    },
-
     selectMonthsArrFeed(label: string) {
       switch (label) {
         case 'current-month':

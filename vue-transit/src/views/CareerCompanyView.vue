@@ -2,7 +2,7 @@
 <template>
   <div class="career_company_wrapper">
     <div class="career_content">
-      <h3 class="font-bold">Not yet available .</h3>
+      <h3 class="font-semibold">Not yet available .</h3>
     </div>
   </div>
 </template>
@@ -11,6 +11,6 @@
   width: 100vw;
   height: 80vh;
   margin: 0 auto;
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center text-xl;
 }
 </style>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useTemplateRef, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user-store'
 
 const stateMenuIn = defineModel()
+
+const router = useRouter()
 
 watch(stateMenuIn, async () => {
   await stateMenuIn
@@ -107,6 +111,16 @@ function handleDropDown(labelCase: string) {
   }
 }
 
+function resetDropDownMenu() {
+  const catchItAll = [requestsLinkRef, feedbacksLinkRef, companyLinkRef, userLinkRef]
+
+  catchItAll.forEach((linkRef, i) => {
+    if (linkRef.value?.classList.contains('active_drop_case')) {
+      linkRef.value?.classList.remove('active_drop_case')
+    }
+  })
+}
+
 function handleSubDropDown() {
   // do something ...
 
@@ -115,6 +129,66 @@ function handleSubDropDown() {
   } else {
     statsLinkRef.value?.classList.remove('active_stats')
   }
+}
+
+async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
+  if (linkLabel === 'home') {
+    console.log('Yield Here !')
+    await router.push({ path: '/' })
+  } else if (linkLabel === 'requests') {
+    switch (sublinkLabel) {
+      case 'fuel-oil':
+        await router.push({ path: '/requests/form/fuel_oil' })
+        break
+      case 'integration':
+        await router.push({ path: '/requests/form/fuel_oil' })
+        break
+      case 'purchase-order':
+        await router.push({ path: '/requests/form/purchase_order' })
+        break
+      case 'components-repair':
+        await router.push({ path: '/requests/form/engine_repair' })
+        break
+      case 'maintenance-tools':
+        await router.push({ path: '/requests/form/maintenance_tools' })
+        break
+      case 'supply':
+        await router.push({ path: '/requests/form/supply_resources' })
+        break
+      case 'salary-advance':
+        await router.push({ path: '/requests/form/salary_advance' })
+        break
+      case 'unpaid-bonus':
+        await router.push({ path: '/requests/form/unpaid_bonus' })
+        break
+      default:
+        throw new Error('something wrong in career sublinkLabel')
+    }
+  } else if (linkLabel === 'feedbacks') {
+    switch (sublinkLabel) {
+      case 'ask-feed':
+        await router.push({ path: '/feedbacks/queries/form' })
+        break
+      case 'reply-feed':
+        await router.push({ path: '/feedbacks/answers/form' })
+        break
+      default:
+        throw new Error('something wrong in career sublinkLabel')
+    }
+  } else if (linkLabel === 'company') {
+    switch (sublinkLabel) {
+      case 'career':
+        await router.push({ path: '/career' })
+        break
+      default:
+        throw new Error('something wrong in career sublinkLabel')
+    }
+  }
+
+  menuLinkRef.value?.classList.remove('active_menu')
+  stateMenuIn.value = false
+
+  resetDropDownMenu()
 }
 
 function handleLinkModal(aliasRef: string, label: string) {
@@ -173,6 +247,8 @@ function stayInUserDropDown(value: string) {
     }, 3000)
   }
 }
+
+async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
 </script>
 <template>
   <nav id="nav_mob_container" class="nav_mob_container">
@@ -193,7 +269,9 @@ function stayInUserDropDown(value: string) {
           <ul class="menu_content">
             <li class="menu_elt">
               <div class="menu_label">
-                <span>Home</span>
+                <span class="cursor-pointer" @click="async () => handleLinkTarget('home')"
+                  >Home</span
+                >
                 <div class="angle_menu invisible">&#xfe40;</div>
               </div>
             </li>
@@ -204,43 +282,75 @@ function stayInUserDropDown(value: string) {
               </div>
               <div class="submenu_elt">
                 <div class="submenu_item">
-                  <div id="req_fuel_oil" class="column_submenu sub_first_link">
-                    <h5>fuel or oil</h5>
+                  <div
+                    id="req_fuel_oil"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'fuel-oil')"
+                  >
+                    <h5 class="cursor-pointer">fuel or oil</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_human_integration" class="column_submenu sub_first_link">
-                    <h5>human integration</h5>
+                  <div
+                    id="req_human_integration"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'human')"
+                  >
+                    <h5 class="cursor-pointer">human integration</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_purchase_order" class="column_submenu sub_first_link">
-                    <h5>purchase order</h5>
+                  <div
+                    id="req_purchase_order"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'purchase-order')"
+                  >
+                    <h5 class="cursor-pointer">purchase order</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_engine_components" class="column_submenu sub_first_link">
-                    <h5>engine components repair</h5>
+                  <div
+                    id="req_engine_components"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'components-repair')"
+                  >
+                    <h5 class="cursor-pointer">engine components repair</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_maintenance_tools" class="column_submenu sub_first_link">
-                    <h5>maintenance tools</h5>
+                  <div
+                    id="req_maintenance_tools"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'maintenance-tools')"
+                  >
+                    <h5 class="cursor-pointer">maintenance tools</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_supply_resources" class="column_submenu sub_first_link">
-                    <h5>supply resources</h5>
+                  <div
+                    id="req_supply_resources"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'supply')"
+                  >
+                    <h5 class="cursor-pointer">supply resources</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_salary_advance" class="column_submenu sub_first_link">
-                    <h5>salary advance</h5>
+                  <div
+                    id="req_salary_advance"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'salary-advance')"
+                  >
+                    <h5 class="cursor-pointer">salary advance</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="req_unpaid_bonus" class="column_submenu sub_first_link">
-                    <h5>unpaid bonus</h5>
+                  <div
+                    id="req_unpaid_bonus"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('requests', 'unpaid-bonus')"
+                  >
+                    <h5 class="cursor-pointer">unpaid bonus</h5>
                   </div>
                 </div>
               </div>
@@ -252,13 +362,21 @@ function stayInUserDropDown(value: string) {
               </div>
               <div class="submenu_elt">
                 <div class="submenu_item">
-                  <div id="ask_feedback" class="column_submenu sub_first_link">
-                    <h5>Ask Feedback</h5>
+                  <div
+                    id="ask_feedback"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('feedbacks', 'ask-feed')"
+                  >
+                    <h5 class="cursor-pointer">Ask Feedback</h5>
                   </div>
                 </div>
                 <div class="submenu_item">
-                  <div id="reply_feedback" class="column_submenu sub_first_link">
-                    <h5>Reply Feedback</h5>
+                  <div
+                    id="reply_feedback"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('feedbacks', 'reply-feed')"
+                  >
+                    <h5 class="cursor-pointer">Reply Feedback</h5>
                   </div>
                 </div>
               </div>
@@ -270,8 +388,12 @@ function stayInUserDropDown(value: string) {
               </div>
               <div class="submenu_elt">
                 <div class="submenu_item">
-                  <div id="company_business" class="column_submenu sub_first_link">
-                    <h5>Career</h5>
+                  <div
+                    id="company_business"
+                    class="column_submenu sub_first_link"
+                    @click="async () => handleLinkTarget('company', 'career')"
+                  >
+                    <h5 class="cursor-pointer">Career</h5>
                   </div>
                 </div>
               </div>
@@ -304,8 +426,8 @@ function stayInUserDropDown(value: string) {
                   <div id="user_profile" class="user_profile">
                     <div class="logo_letter">N</div>
                     <div
-                      class="account_email hover:text-green-400"
-                      style="transition: all 890ms ease"
+                      class="account_email tracking-normal skew-x-0 hover:text-green-400 hover:tracking-wider hover:skew-x-12"
+                      style="transition: all 450ms ease"
                     >
                       joe_delmach@gmail.com
                     </div>
@@ -392,7 +514,7 @@ function stayInUserDropDown(value: string) {
     <div class="nav_middle_side flex_center">
       <ul class="link_desk_wrap">
         <li id="desk_link_home" class="hover:text-green-400">
-          <div>Home</div>
+          <div @click="async () => handleLinkTarget('home')">Home</div>
         </li>
         <li id="desk_link_request" class="hover:text-green-400" ref="linkTagOne">
           <div
@@ -406,14 +528,45 @@ function stayInUserDropDown(value: string) {
             @mouseover="() => handleLinkModal('linkOne', 'open')"
             @mouseleave="() => handleLinkModal('linkOne', 'close')"
           >
-            <div class="sublink_desk">fuel or oil</div>
-            <div class="sublink_desk">human integration</div>
-            <div class="sublink_desk">purchase order</div>
-            <div class="sublink_desk">engine components repair</div>
-            <div class="sublink_desk">maintenance tools</div>
-            <div class="sublink_desk">supply resources</div>
-            <div class="sublink_desk">salary advance</div>
-            <div class="sublink_desk">unpaid bonus</div>
+            <div class="sublink_desk" @click="async () => handleLinkTarget('requests', 'fuel-oil')">
+              fuel or oil
+            </div>
+            <div class="sublink_desk" @click="async () => handleLinkTarget('requests', 'human')">
+              human integration
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'purchase-order')"
+            >
+              purchase order
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'components-repair')"
+            >
+              engine components repair
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'maintenance-tools')"
+            >
+              maintenance tools
+            </div>
+            <div class="sublink_desk" @click="async () => handleLinkTarget('requests', 'supply')">
+              supply resources
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'salary-advance')"
+            >
+              salary advance
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'unpaid-bonus')"
+            >
+              unpaid bonus
+            </div>
           </div>
         </li>
         <li id="desk_link_feedback" class="hover:text-green-400" ref="linkTagTwo">
@@ -428,8 +581,18 @@ function stayInUserDropDown(value: string) {
             @mouseover="() => handleLinkModal('linkTwo', 'open')"
             @mouseleave="() => handleLinkModal('linkTwo', 'close')"
           >
-            <div class="sublink_desk">ask feedbacks</div>
-            <div class="sublink_desk">reply feedbacks</div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('feedbacks', 'ask-feed')"
+            >
+              ask feedbacks
+            </div>
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('feedbacks', 'reply-feed')"
+            >
+              reply feedbacks
+            </div>
           </div>
         </li>
         <li id="desk_link_company" class="hover:text-green-400" ref="linkTagThree">
@@ -444,7 +607,9 @@ function stayInUserDropDown(value: string) {
             @mouseover="() => handleLinkModal('linkThree', 'open')"
             @mouseleave="() => handleLinkModal('linkThree', 'close')"
           >
-            <div class="sublink_desk">career</div>
+            <div class="sublink_desk" @click="async () => handleLinkTarget('company', 'career')">
+              career
+            </div>
           </div>
         </li>
       </ul>

@@ -30,12 +30,14 @@ const router = createRouter({
       component: () => import('../views/SigningView.vue')
     },
 
+    // feedbacks
     {
       path: '/feedbacks/queries/form',
       name: 'ask_form_feed',
       component: () => import('../components/feedback_queries/AskFormFeedback.vue')
     },
     {
+      // not Yet USED (designed to be access in Research / print PREVIEW)
       path: '/feedbacks/queries/template',
       name: 'ask_template_feed',
       component: () => import('../components/feedback_queries/AskSheetFeedback.vue')
@@ -46,6 +48,7 @@ const router = createRouter({
       component: () => import('../components/feedback_answers/ReplyFormFeedBack.vue')
     },
     {
+      // not Yet USED (designed to be access in Research / print PREVIEW)
       path: '/feedbacks/answers/template',
       name: 'reply_template_feed',
       component: () => import('../components/feedback_answers/ReplySheetFeedback.vue')
@@ -62,6 +65,7 @@ const router = createRouter({
       component: () => import('../components/requests-feedbacks-lists/MonthFeedReq.vue')
     },
 
+    // requests
     {
       path: '/requests/list/last_and_current_month',
       name: 'month_list_requests',
@@ -74,60 +78,62 @@ const router = createRouter({
     },
 
     {
-      path: '/requests/queries/form/engine_repair',
+      path: '/requests/form/engine_repair',
       name: 'engine_repair_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubEngineRepairComponents.vue')
     },
     {
-      path: '/requests/queries/form/fuel_oil',
+      path: '/requests/form/fuel_oil',
       name: 'fuel_oil_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqFuelOrOil.vue')
     },
     {
-      path: '/requests/queries/form/human_integration',
+      path: '/requests/form/human_integration',
       name: 'human_integration_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqHumanIntegration.vue')
     },
     {
-      path: '/requests/queries/form/maintenance_tools',
+      path: '/requests/form/maintenance_tools',
       name: 'maintenance_tools_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqMaintenanceTools.vue')
     },
     {
-      path: '/requests/queries/form/purchase_order',
+      path: '/requests/form/purchase_order',
       name: 'purchase_order_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqPurchaseOrder.vue')
     },
     {
-      path: '/requests/queries/form/salary_advance',
+      path: '/requests/form/salary_advance',
       name: 'salary_advance_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqSalaryAdvance.vue')
     },
     {
-      path: '/requests/queries/form/unpaid_bonus',
+      path: '/requests/form/unpaid_bonus',
       name: 'unpaid_bonus_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SubReqUnpaidBonus.vue')
     },
     {
-      path: '/requests/queries/form/supply_resources',
+      path: '/requests/form/supply_resources',
       name: 'supply_resources_form',
       component: () =>
         import('../components/request-queries/sub-request-queries/SupplyResources.vue')
     },
+
+    // user stats
     {
-      path: '/user/department/individual_stats',
+      path: '/user/:department/:userId/individual_stats',
       name: 'individual_stats',
       component: () => import('../components/stats/IndividualStats.vue')
     },
     {
-      path: '/user/department/general_stats',
+      path: '/user/:department/general_stats',
       name: 'general_stats',
       component: () => import('../components/stats/GeneralStats.vue')
     }

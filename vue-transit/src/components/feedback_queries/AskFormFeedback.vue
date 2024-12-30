@@ -1,18 +1,105 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { ComputedRef } from 'vue'
+import { ref, useTemplateRef, reactive, computed } from 'vue'
+import type { Ref } from 'vue'
 import { useAskFeedStore } from '@/stores/ask-feed-store'
 
-const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefined)[]> = computed(
-  () => {
-    const useAskFeed = useAskFeedStore()
-    const newUseAskFeed = useAskFeed.reasonFetched()
-    return newUseAskFeed
+/* NEXT TO DO ----> LINK IND.STATS , GEN.STATS
+   &&
+   STYLE REASON-TABLE-CONTENT MEDIA QUERIES
+*/
+
+let platformFeed = reactive<{ base: string[] }>({
+  base: []
+})
+
+const checkboxSubjectRef: Ref<HTMLInputElement[]> = ref([])
+
+const reasonRef = useTemplateRef('reason-echo')
+
+const reasonTableRef = useTemplateRef('subject-feed')
+
+const showcaseSubjectRef = useTemplateRef('reason-yield')
+
+const idCatChoices = reactive<{ domains: string[] }>({ domains: [] })
+
+const reasonPop = reactive<{
+  text: string
+  lastIndex: number | null
+  selectTextOption: string | undefined
+}>({
+  text: '',
+  lastIndex: null,
+  selectTextOption: ''
+})
+
+async function handleReasonChoice() {
+  const reasonVal: string | undefined = reasonRef.value?.value
+
+  const k: number | null = reasonPop.lastIndex
+
+  if (k !== null && reasonVal !== reasonPop.selectTextOption) {
+    checkboxSubjectRef.value[k].setAttribute('toggle', 'false')
   }
-)
+
+  if (reasonVal !== 'empty') {
+    await reasonFetched(reasonVal)
+
+    reasonRef.value?.parentElement?.parentElement?.classList.add('spot_active')
+
+    reasonTableRef.value?.classList.add('show_subject_panel')
+  } else {
+    reasonRef.value?.parentElement?.parentElement?.classList.remove('spot_active')
+  }
+}
+
+function reasonFetched(refElt: string | undefined) {
+  idCatChoices.domains = []
+
+  reasonPop.selectTextOption = refElt
+
+  const useAskFeed = useAskFeedStore()
+
+  const fetchReasons = useAskFeed.getReasons
+
+  useAskFeed.$patch({ selectedDomain: refElt })
+
+  platformFeed.base = []
+
+  fetchReasons.map((item, i) => {
+    if (item.domain === refElt) {
+      //new elt arr content
+      const newArr = item.archive
+
+      //replace arr with new Elt
+      platformFeed.base = [...newArr]
+    }
+    idCatChoices.domains.push(item.domain)
+  })
+}
+
+async function handleSubjectMatter(e: Event, i: number, item: string) {
+  const k: number | null = reasonPop.lastIndex
+
+  if (checkboxSubjectRef.value === null) return
+
+  if (k === null) {
+    checkboxSubjectRef.value[i].setAttribute('toggle', 'true')
+  } else {
+    checkboxSubjectRef.value[k].setAttribute('toggle', 'false')
+    checkboxSubjectRef.value[i].setAttribute('toggle', 'true')
+  }
+
+  reasonPop.text = item
+  reasonPop.lastIndex = i
+
+  setTimeout(() => {
+    reasonTableRef.value?.classList.remove('show_subject_panel')
+    showcaseSubjectRef.value?.setAttribute('data-show', 'true')
+  }, 460)
+}
 </script>
 <template>
-  <main id="ask_feed">
+  <div id="ask_feed">
     <div class="ask_feed_container">
       <div class="ask_feed_content w-full">
         <div
@@ -35,16 +122,49 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
               <div class="toggle_selection_reason">&#62;</div>
             </li>
             <li class="reason_spotted_wrap">
-              <div class="reason_spotted">shortage resources</div>
+              <div class="reason_spotted">
+                <select
+                  class="w-full cursor-pointer pl-1"
+                  ref="reason-echo"
+                  @click="async () => handleReasonChoice()"
+                >
+                  <option name="empty" value="empty">choose one of the reason</option>
+                  <option name="tech" class="reason_edge" value="tech">tech</option>
+                  <option name="account" class="reason_edge" value="accounting">accounting</option>
+                  <option name="management" class="reason_edge" value="management">
+                    management
+                  </option>
+                  <option name="human" class="reason_edge" value="human">human</option>
+                  <option name="law" class="reason_edge" value="law">law</option>
+                </select>
+              </div>
             </li>
           </ul>
           <div class="reason_table_wrap">
-            <div class="reason_table_content">
-              <div class="reason_item_wrap" :key="item?.domain" v-for="item in platformFeed">
-                <ul class="flex_col_center w-full h-full">
-                  <li class="reason_number w-full text-red-300"></li>
-                  <li class="reason_fire w-full">
-                    <p class="reason_item flex_row_center w-full p-2 leading-relaxed"></p>
+            <div class="reason_showcase" ref="reason-yield">
+              {{ reasonPop.text }}
+            </div>
+            <div class="reason_table_content" ref="subject-feed">
+              <div class="reason_item_wrap">
+                <ul class="flex_col_center w-full pt-2 pb-4">
+                  <li
+                    class="category_choice"
+                    :key="idCatChoices.domains[i]"
+                    v-for="(item, i) in platformFeed.base"
+                    @click="async (e: Event) => handleSubjectMatter(e, i, item)"
+                  >
+                    <div class="reason_number w-full p-2 pb-4 font-bold text-red-300">
+                      {{ i + 1 }}
+                    </div>
+                    <div class="reason_fire w-full py-2 px-1 flex_row_center">
+                      <p class="reason_item leading-relaxed flex flex-wrap max-w-lg">
+                        {{ item }}
+                      </p>
+                      <!-- style Next -->
+                      <div class="input_checkbox_subject" toggle="false" ref="checkboxSubjectRef">
+                        <div class="subject_checkbox">&#9745;</div>
+                      </div>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -164,7 +284,7 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 <style scoped>
 @media (min-width: 180px) {
@@ -199,7 +319,7 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
   }
 
   .toggle_selection_reason {
-    @apply relative w-4 h-4 mx-2 bg-gray-200 grid place-content-center;
+    @apply relative w-4 h-4 mx-2 bg-gray-400 grid place-content-center;
   }
 
   .reason_spotted_wrap {
@@ -210,7 +330,12 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     margin-left: calc(10%);
     font-size: calc(12px + 0.15vw);
     border-radius: 8px;
-    @apply border border-solid border-gray-400;
+    transition: all 650ms ease;
+    @apply border border-solid border-gray-400 hover:border-2 hover:border-blue-300;
+  }
+
+  .reason_spotted_wrap.spot_active {
+    @apply border border-solid border-purple-300;
   }
 
   .reason_spotted_wrap .reason_spotted {
@@ -226,28 +351,53 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     @apply border-2 border-solid border-gray-200 text-gray-400 flex_row_center;
   }
 
+  .reason_spotted_wrap.spot_active .reason_spotted {
+    font-weight: medium;
+    transition: all 650ms ease 300ms;
+    @apply border-2 border-solid border-purple-300 text-blue-400;
+  }
+
   .reason_table_wrap {
     position: relative;
     width: 100%;
-    height: 9rem;
     margin: 2.25rem 0 1rem;
+  }
+
+  .reason_table_wrap .reason_showcase {
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+    margin: 0 auto;
+    transition: all 1s ease;
+    @apply flex justify-center flex-wrap text-center py-2  px-4 font-medium;
+  }
+
+  .reason_table_wrap .reason_showcase[data-show='true'] {
+    visibility: visible;
+    opacity: 1;
   }
 
   .reason_table_wrap .reason_table_content {
     width: 90%;
-    height: 100%;
+    height: 9rem;
     margin: 0 auto;
-    display: grid;
+    display: none;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     grid-auto-columns: 70px;
+    animation: anim-reason-appearance 2s ease forwards;
+  }
+
+  .reason_table_wrap .reason_table_content.show_subject_panel {
+    display: grid;
   }
 
   .reason_item_wrap {
     position: relative;
     width: 100%;
-    height: 100%;
+    max-height: 12rem;
     margin: 0 auto;
     border-radius: 5px;
+    overflow-y: scroll;
     @apply border border-solid border-red-200;
   }
 
@@ -263,6 +413,63 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
     border-radius: 5px;
     @apply border-2 border-solid border-gray-300;
   }
+
+  .category_choice {
+    position: relative;
+    top: 0;
+    transition: all 580ms ease-in-out;
+    @apply w-full py-1 cursor-pointer hover:text-blue-600 hover:bg-blue-100;
+  }
+
+  .input_checkbox_subject[toggle='false'] {
+    display: none;
+    position: relative;
+    left: 1.5rem;
+  }
+  .input_checkbox_subject[toggle='true'] {
+    display: block;
+    position: relative;
+    left: 1.5rem;
+  }
+
+  .input_checkbox_subject[toggle='false'] .subject_checkbox {
+    /*   --webkit-appearance: none; */
+    position: relative;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 650ms ease;
+  }
+
+  /* .input_checkbox_subject[data-toggle='false'] .subject_checkbox::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    font-size: calc(13px + 0, 12vw);
+    outline: none;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    border: 1px solid #6d6e70;
+    transition: all 1s ease;
+  } */
+
+  .input_checkbox_subject[toggle='true'] .subject_checkbox {
+    border: 1px solid #a75da0;
+  }
+
+  /*  .input_checkbox_subject .subject_checkbox[data-toggle='true']::before {
+    color: var(--bg-button-2);
+    visibility: visible;
+    opacity: 1;
+  } */
 
   .details_feed .text_paragraph {
     outline: none;
@@ -344,6 +551,17 @@ const platformFeed: ComputedRef<({ domain: string; archive: string[] } | undefin
 @media (min-width: 1045px) {
   .reason_spotted_wrap {
     width: 50%;
+  }
+}
+
+@keyframes anim-reason-appearance {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
   }
 }
 </style>
