@@ -5,11 +5,10 @@ export const slapLoadingTime = () => {
 
   const loadingOn = useButtonStore.loading
 
+  loadingOn.isProcessing = true
+
   setTimeout(() => {
-    loadingOn.isProcessing = true
+    loadingOn.isProcessing = false
+    loadingOn.isEnd = true
   }, 5000)
-
-  loadingOn.isEnd = true
-
-  loadingOn.isProcessing = false
 }

@@ -128,12 +128,12 @@ const router = createRouter({
 
     // user stats
     {
-      path: '/user/:department/:userId/individual_stats',
+      path: '/user/stats/:department/:userId',
       name: 'individual_stats',
       component: () => import('../components/stats/IndividualStats.vue')
     },
     {
-      path: '/user/:department/general_stats',
+      path: '/user/stats/:department',
       name: 'general_stats',
       component: () => import('../components/stats/GeneralStats.vue')
     }

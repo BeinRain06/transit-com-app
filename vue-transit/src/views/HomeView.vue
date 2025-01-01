@@ -229,7 +229,6 @@
   .hero_ct_connect {
     width: 100%;
     padding: 0 5%;
-
     background-image: linear-gradient(to top, #092c40, #123b52, #1c5b7d, #2e6b89, #3a82a2);
     display: grid;
     grid-template-areas:
@@ -326,12 +325,6 @@
     background-color: #092c40bb;
     opacity: 1;
   }
-
-  /*   .btn_connect:hover {
-    background-color: #092c40bb;
-    opacity: 1;
-    box-shadow: 0px -1px 5px #092c40bb;
-  } */
 
   /* hero ct_stick */
 

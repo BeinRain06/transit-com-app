@@ -47,7 +47,7 @@ async function handleStateMenu() {
   width: 100vw;
   height: auto;
   margin: 0 auto;
-  z-index: 3;
+  z-index: 0;
   transition: all 1s ease;
 }
 

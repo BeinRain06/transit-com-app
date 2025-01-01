@@ -2,6 +2,7 @@
 <template>
   <main id="reply_feed">
     <div class="reply_feed_container">
+      <!-- Feedback Recap SecTion -->
       <div class="reply_feed_content w-full h-full">
         <div class="feedback_raised_reason p-2 mt-2 lg:mt-6 mb-4">
           <div
@@ -77,7 +78,10 @@
             </ul>
           </div>
         </div>
+        <!-- horizontal line -->
+        <hr class="my-2 border-2 border-dashed border-gray-300" style="padding: 3px" />
 
+        <!-- Respond Feedback Fill SecTion -->
         <div id="answer_section" class="py-2 mt-6 mb-4">
           <div class="answer_section_container">
             <div
@@ -366,6 +370,7 @@
   }
 
   .text_res_wrap .res_content_text {
+    width: 80%;
     padding: 5px 10px;
     border-radius: 5px;
     border: 2px solid transparent;

@@ -401,19 +401,6 @@ async function handleSubjectMatter(e: Event, i: number, item: string) {
     @apply border border-solid border-red-200;
   }
 
-  .reason_item_wrap::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    @apply border-2 border-solid border-gray-300;
-  }
-
   .category_choice {
     position: relative;
     top: 0;
@@ -551,6 +538,13 @@ async function handleSubjectMatter(e: Event, i: number, item: string) {
 @media (min-width: 1045px) {
   .reason_spotted_wrap {
     width: 50%;
+  }
+
+  .reason_table_wrap .reason_table_content {
+    width: 56%;
+    height: 14rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-auto-columns: 200px;
   }
 }
 

@@ -164,6 +164,9 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
       default:
         throw new Error('something wrong in career sublinkLabel')
     }
+    if (navLinkOneRef.value !== null) {
+      navLinkOneRef.value?.classList.remove('active_hover')
+    }
   } else if (linkLabel === 'feedbacks') {
     switch (sublinkLabel) {
       case 'ask-feed':
@@ -175,10 +178,29 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
       default:
         throw new Error('something wrong in career sublinkLabel')
     }
+    if (navLinkTwoRef.value !== null) {
+      navLinkTwoRef.value?.classList.remove('active_hover')
+    }
   } else if (linkLabel === 'company') {
     switch (sublinkLabel) {
       case 'career':
         await router.push({ path: '/career' })
+        break
+      default:
+        throw new Error('something wrong in career sublinkLabel')
+    }
+    if (navLinkThreeRef.value !== null) {
+      navLinkThreeRef.value?.classList.remove('active_hover')
+    }
+  } else if (linkLabel === 'user') {
+    switch (sublinkLabel) {
+      case 'individual':
+        await router.push({ path: '/user/stats/accounting/0045678333081' }) // will really be **router.resolve(...)**
+        statsLinkRef.value?.classList.remove('active_stats')
+        break
+      case 'general':
+        await router.push({ path: '/user/stats/accounting' }) // will really be **router.resolve(...)**
+        statsLinkRef.value?.classList.remove('active_stats')
         break
       default:
         throw new Error('something wrong in career sublinkLabel')
@@ -193,7 +215,6 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
 
 function handleLinkModal(aliasRef: string, label: string) {
   // do something ...
-
   if (label === 'open') {
     // do from open
     switch (aliasRef) {
@@ -247,8 +268,6 @@ function stayInUserDropDown(value: string) {
     }, 3000)
   }
 }
-
-async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
 </script>
 <template>
   <nav id="nav_mob_container" class="nav_mob_container">
@@ -412,10 +431,18 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
                     </div>
                     <div id="stats_mob_content" class="column_submenu drop_content my-2">
                       <div class="stats_mob_area">
-                        <div id="id_stats" class="pt-1 pl-3">
+                        <div
+                          id="id_stats"
+                          class="pt-1 pl-3"
+                          @click="async () => handleLinkTarget('user', 'individual')"
+                        >
                           <h5 class="cursor-pointer hover:text-blue-400">Individuals Stats</h5>
                         </div>
-                        <div id="gen_stats" class="py-2 pl-3">
+                        <div
+                          id="gen_stats"
+                          class="py-2 pl-3"
+                          @click="async () => handleLinkTarget('user', 'general')"
+                        >
                           <h5 class="cursor-pointer hover:text-blue-400">GeneralStats</h5>
                         </div>
                       </div>
@@ -531,7 +558,10 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
             <div class="sublink_desk" @click="async () => handleLinkTarget('requests', 'fuel-oil')">
               fuel or oil
             </div>
-            <div class="sublink_desk" @click="async () => handleLinkTarget('requests', 'human')">
+            <div
+              class="sublink_desk"
+              @click="async () => handleLinkTarget('requests', 'integration')"
+            >
               human integration
             </div>
             <div
@@ -641,8 +671,20 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
             @mouseleave="() => stayInUserDropDown('close')"
           >
             <div class="modal_user_ct">
-              <div id="id_user_stats">Individual Stats</div>
-              <div id="gen_user_stats">General Stats</div>
+              <div
+                id="id_user_stats"
+                class="cursor-pointer"
+                @click="async () => handleLinkTarget('user', 'individual')"
+              >
+                Individual Stats
+              </div>
+              <div
+                id="gen_user_stats"
+                class="cursor-pointer"
+                @click="async () => handleLinkTarget('user', 'general')"
+              >
+                General Stats
+              </div>
               <div id="sign_up_desk" @click="handleLogSignRedirect">
                 <h5>Sign up</h5>
               </div>
@@ -1138,6 +1180,7 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
     background-color: var(--bg-secondary);
     transition: all 1s ease;
     @apply flex justify-between items-center;
+    z-index: 10;
   }
 
   .nav_desk_container .nav_left_side {
@@ -1178,7 +1221,6 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
     opacity: 0.1;
     visibility: hidden;
     @apply flex flex-col justify-start gap-1;
-    z-index: 10;
   }
 
   ul.link_desk_wrap li > div {
@@ -1371,6 +1413,7 @@ async function handleUserStats(linkStats: string, sublinkLabel?: string) {}
     opacity: 0.9;
     transition: all 1s ease;
     @apply w-full h-full flex flex-col justify-start gap-2;
+    z-index: 25;
   }
 
   .user_angle_container.active_select .modal_user_ct {
