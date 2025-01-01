@@ -141,7 +141,7 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
         await router.push({ path: '/requests/form/fuel_oil' })
         break
       case 'integration':
-        await router.push({ path: '/requests/form/fuel_oil' })
+        await router.push({ path: '/requests/form/human_integration' })
         break
       case 'purchase-order':
         await router.push({ path: '/requests/form/purchase_order' })
