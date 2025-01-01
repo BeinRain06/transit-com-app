@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, ref, watch } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 
 import Navbar from './components/navbar/NavbarView.vue'
 
@@ -37,8 +37,6 @@ async function handleStateMenu() {
   <main class="main_container" ref="mainRef" @click="async () => handleStateMenu()">
     <RouterView />
   </main>
-
-  <!-- <RouterView /> -->
 </template>
 
 <style scoped>

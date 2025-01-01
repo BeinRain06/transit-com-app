@@ -984,7 +984,6 @@ function stayInUserDropDown(value: string) {
 
   li.menu_elt .menu_label {
     width: 70%;
-    /*  padding-left: 1.65rem; */
     padding-left: -0.25rem;
     margin: 0 auto;
     cursor: pointer;
@@ -1113,10 +1112,6 @@ function stayInUserDropDown(value: string) {
 
   /* nav-- block-end -- */
 
-  /*  .nav_block_end {
-    width: 80%;
-  } */
-
   li.search_area .nav_long_search {
     display: none;
     position: relative;
@@ -1126,15 +1121,12 @@ function stayInUserDropDown(value: string) {
     traansition: all 1s ease;
   }
 }
+
 @media (min-width: 520px) {
   /* nav-- block-start -- */
   .nav_mob_container #nav_add_search {
     @apply hidden;
   }
-
-  /*  li.menu_elt {
-    @apply flex flex-col justify-start gap-1;
-  } */
 
   li.menu_elt .menu_label {
     width: min-content;
@@ -1160,12 +1152,8 @@ function stayInUserDropDown(value: string) {
     width: 100%;
     height: 24px;
   }
-
-  /* .nav_block_end li.login_area {
-    width: 20%;
-    display: flex;
-  } */
 }
+
 @media (min-width: 800px) {
   .nav_mob_container {
     display: none;
@@ -1234,7 +1222,6 @@ function stayInUserDropDown(value: string) {
     width: 200px;
     padding: 10px 20px 25px 10px;
     color: var(--grayish-text-color-2);
-    /* background-color: #fff; */
     background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: 0px 0px 5px #a75da0;
@@ -1308,7 +1295,6 @@ function stayInUserDropDown(value: string) {
 
   .input_desk_wrapper .input_desk_content {
     @apply w-full h-full absolute flex justify-center items-center;
-    background-color: #000000a2;
     background-color: var(--color-text-question);
     border-radius: 24px;
     z-index: 30;
@@ -1405,7 +1391,6 @@ function stayInUserDropDown(value: string) {
     top: 0;
     padding: 15px 20px 25px;
     color: var(--color-subtext-title);
-    /* background-color: #fff; */
     background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: -2px -1px 5px #a75da0;
@@ -1434,20 +1419,6 @@ function stayInUserDropDown(value: string) {
     border-bottom: 1px solid #a75da0;
     color: var(--bg-button-2);
   }
-
-  /* .nav_right_side .login_desk {
-    cursor: pointer;
-    width: min-content;
-    padding-top: 1px;
-    border: 1px solid transparent;
-    transition: all 1s ease;
-  }
-
-  .nav_right_side .login_desk:hover {
-    color: #24775b;
-    padding: 0 8px;
-    border: 1px solid #24775b;
-  } */
 }
 
 @keyframes anim-login-menu {
