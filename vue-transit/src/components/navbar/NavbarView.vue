@@ -40,7 +40,9 @@ function handleActSearch(value: string) {
     searchDeskRef.value?.classList.remove('active_bar_research')
   }
 }
-function handleLogSignRedirect() {}
+async function handleLogSignRedirect() {
+  await router.push({ path: '/sign/login' })
+}
 
 async function handleMenu() {
   console.log('stateMenuIn :', stateMenuIn.value)
@@ -446,14 +448,14 @@ function stayInUserDropDown(value: string) {
                   <div
                     id="submenu_login"
                     class="column_sub_end cursor-pointer"
-                    @click="handleLogSignRedirect"
+                    @click="async () => handleLogSignRedirect()"
                   >
                     <h5>Login</h5>
                   </div>
                   <div
                     id="submenu_sign_up"
                     class="column_sub_end cursor-pointer my-2"
-                    @click="handleLogSignRedirect"
+                    @click="async () => handleLogSignRedirect()"
                   >
                     <h5>Sign Up</h5>
                   </div>
@@ -492,7 +494,13 @@ function stayInUserDropDown(value: string) {
         </li>
         <li class="login_area">
           <div class="login_session">
-            <div id="login_mob" class="btn_login" @click.prevent="handleLogSignRedirect">login</div>
+            <div
+              id="login_mob"
+              class="btn_login"
+              @click.prevent="async () => handleLogSignRedirect()"
+            >
+              login
+            </div>
           </div>
         </li>
       </ul>
@@ -666,14 +674,16 @@ function stayInUserDropDown(value: string) {
               >
                 General Stats
               </div>
-              <div id="sign_up_desk" @click="handleLogSignRedirect">
+              <div id="sign_up_desk" @click="async () => handleLogSignRedirect()">
                 <h5>Sign up</h5>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="login_desk" class="btn_login" @click="handleLogSignRedirect">login</div>
+      <div id="login_desk" class="btn_login" @click="async () => handleLogSignRedirect()">
+        login
+      </div>
     </div>
   </nav>
 </template>
