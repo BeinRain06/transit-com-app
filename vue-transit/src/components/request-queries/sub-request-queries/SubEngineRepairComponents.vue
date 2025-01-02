@@ -17,16 +17,16 @@ const arrParagraphs: Ref<string[]> = ref([
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
 
 function handleEndModal() {
   if (isSubmitted.value) {
-    //do something --OK--
+    console.log()
   } else {
-    //do something --NO--
+    console.log()
   }
 }
 
@@ -34,7 +34,6 @@ function handleSubmit() {
   playOnClickBtn(13)
 
   isSubmitted.value = true
-  // do some **ACTIONS** submit request
 }
 </script>
 <template>
@@ -120,7 +119,6 @@ function handleSubmit() {
 </template>
 <style scoped>
 @media (min-width: 180px) {
-  /**repair - content **/
   .engine_repair_content {
     --text-size-one: calc(13px + 0.3vw);
     width: 100vw;

@@ -237,7 +237,7 @@ const modelThree: IModelCheckBoxItem = reactive({
                     </p>
                   </div>
                 </div>
-                <!--Request Id-->
+
                 <div class="w-full py-2 my-2">
                   <RequestOrFeedReference
                     element="request"
@@ -245,7 +245,7 @@ const modelThree: IModelCheckBoxItem = reactive({
                     :id-fetch="dataGet.referenceGet"
                   />
                 </div>
-                <!--Date-->
+
                 <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
                   <p>
                     <span>Date :</span> <span class="mx-2">{{ dataGet.date }}</span>
@@ -265,15 +265,12 @@ const modelThree: IModelCheckBoxItem = reactive({
     list-style: none;
   }
 
-  /** container **/
-
   .unpaid_bonus_content {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
 
-  /** bonus track wrap **/
   .joining_item {
     @apply w-full my-2 flex flex-col justify-start  gap-2;
   }
@@ -287,7 +284,6 @@ const modelThree: IModelCheckBoxItem = reactive({
     @apply h-6 my-1 border border-solid border-gray-300;
   }
 
-  /** radio stuff**/
   .list_radio_stuff {
     width: 100%;
     display: grid;
@@ -305,7 +301,7 @@ const modelThree: IModelCheckBoxItem = reactive({
     place-items: center;
     text-align: center;
   }
-  /** radio inner box **/
+
   .radio_inner_box {
     width: 14px;
     height: 14px;
@@ -330,7 +326,6 @@ const modelThree: IModelCheckBoxItem = reactive({
     font-size: calc(16px + 0.2vw);
   }
 
-  /** actons ongoing **/
   .actions_on_process {
     margin: 2.5rem 0 1rem;
     height: max-content;
@@ -338,7 +333,6 @@ const modelThree: IModelCheckBoxItem = reactive({
 }
 
 @media (min-width: 768px) {
-  /** container **/
   .unpaid_bonus_content {
     width: 100vw;
     padding: 2rem 5%;

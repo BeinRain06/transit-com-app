@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user-store'
 
 const stateMenuIn = defineModel()
 
@@ -15,17 +14,14 @@ watch(stateMenuIn, async () => {
   return null
 })
 
-// menu wrap
 const menuLinkRef = useTemplateRef<HTMLDivElement | null>('menuLink')
 
-// Link Mobile
 const requestsLinkRef = useTemplateRef<HTMLDivElement | null>('linkZero')
 const feedbacksLinkRef = useTemplateRef<HTMLDivElement | null>('linkOne')
 const companyLinkRef = useTemplateRef<HTMLDivElement | null>('linkTwo')
 const userLinkRef = useTemplateRef<HTMLDivElement | null>('linkThree')
 const statsLinkRef = useTemplateRef<HTMLDivElement | null>('myStats')
 
-// link DeskTop
 const navLinkOneRef = useTemplateRef<HTMLLIElement | null>('linkTagOne')
 const navLinkTwoRef = useTemplateRef<HTMLLIElement | null>('linkTagTwo')
 const navLinkThreeRef = useTemplateRef<HTMLLIElement | null>('linkTagThree')
@@ -35,23 +31,18 @@ const searchDeskRef = useTemplateRef<HTMLDivElement | null>('searchDesk')
 const dropUserDeskRef = useTemplateRef<HTMLDivElement | null>('dropUser')
 
 function handleResearch() {
-  // do something ...
+  console.log('')
 }
 function handleActSearch(value: string) {
   if (value === 'open') {
-    // do something ...
     searchDeskRef.value?.classList.add('active_bar_research')
   } else if (value === 'close') {
-    // do something ...
     searchDeskRef.value?.classList.remove('active_bar_research')
   }
 }
-function handleLogSignRedirect() {
-  // do something ...
-}
+function handleLogSignRedirect() {}
 
 async function handleMenu() {
-  // do something ...
   console.log('stateMenuIn :', stateMenuIn.value)
 
   if (!menuLinkRef.value?.classList.contains('active_menu')) {
@@ -68,7 +59,6 @@ async function handleMenu() {
 }
 
 function handleDropDown(labelCase: string) {
-  // do something ...
   const catchItAll = [requestsLinkRef, feedbacksLinkRef, companyLinkRef, userLinkRef]
 
   catchItAll.forEach((linkRef, i) => {
@@ -122,8 +112,6 @@ function resetDropDownMenu() {
 }
 
 function handleSubDropDown() {
-  // do something ...
-
   if (!statsLinkRef.value?.classList.contains('active_stats')) {
     statsLinkRef.value?.classList.add('active_stats')
   } else {
@@ -195,11 +183,11 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
   } else if (linkLabel === 'user') {
     switch (sublinkLabel) {
       case 'individual':
-        await router.push({ path: '/user/stats/accounting/0045678333081' }) // will really be **router.resolve(...)**
+        await router.push({ path: '/user/stats/accounting/0045678333081' })
         statsLinkRef.value?.classList.remove('active_stats')
         break
       case 'general':
-        await router.push({ path: '/user/stats/accounting' }) // will really be **router.resolve(...)**
+        await router.push({ path: '/user/stats/accounting' })
         statsLinkRef.value?.classList.remove('active_stats')
         break
       default:
@@ -214,9 +202,7 @@ async function handleLinkTarget(linkLabel: string, sublinkLabel?: string) {
 }
 
 function handleLinkModal(aliasRef: string, label: string) {
-  // do something ...
   if (label === 'open') {
-    // do from open
     switch (aliasRef) {
       case 'linkOne':
         navLinkOneRef.value?.classList.add('active_hover')
@@ -231,7 +217,6 @@ function handleLinkModal(aliasRef: string, label: string) {
         throw Error('there is something wrong in handleLinkModal Function')
     }
   } else if (label === 'close') {
-    // do from close
     switch (aliasRef) {
       case 'linkOne':
         navLinkOneRef.value?.classList.remove('active_hover')
@@ -273,7 +258,6 @@ function stayInUserDropDown(value: string) {
   <nav id="nav_mob_container" class="nav_mob_container">
     <div id="nav_first_flow" class="nav_first_flow">
       <div class="nav_block_start flex_start gap-2">
-        <!--Next menu_ design  !!!  -->
         <div class="menu_wrap" ref="menuLink">
           <div class="hamburger" @click="async () => handleMenu()">
             <div class="menu_bar"></div>
@@ -491,7 +475,7 @@ function stayInUserDropDown(value: string) {
           <div class="search_mob_button text-xs cursor-pointer" @click="handleActSearch('open')">
             &#128269;
           </div>
-          <!-- search area mob>=520px  -->
+
           <div class="nav_long_search">
             <input
               type="text"
@@ -500,7 +484,6 @@ function stayInUserDropDown(value: string) {
               placeholder="requests or feedbacks"
             />
             <div class="close_nav_search">
-              <!-- box div parent position absolute -->
               <button class="btn_close_search" @click.prevent="handleActSearch('close')">
                 &#x2715;
               </button>
@@ -515,11 +498,9 @@ function stayInUserDropDown(value: string) {
       </ul>
     </div>
     <div id="nav_add_search" class="nav_add_search">
-      <!-- search area 180px>= mob <520px  -->
       <div class="nav_mini_search">
         <input type="text" id="search_in_two" name="search" placeholder="requests or feedbacks" />
         <div class="close_nav_search">
-          <!-- box div parent position absolute -->
           <button class="btn_close_search" @click.prevent="handleActSearch('close')">
             &#x2715;
           </button>
@@ -537,7 +518,7 @@ function stayInUserDropDown(value: string) {
         </h1>
       </div>
     </div>
-    <!-- NEXT *nav middle inside** -->
+
     <div class="nav_middle_side flex_center">
       <ul class="link_desk_wrap">
         <li id="desk_link_home" class="hover:text-green-400">
@@ -766,7 +747,6 @@ function stayInUserDropDown(value: string) {
     align-items: center;
   }
 
-  /* mobile angles animation */
   .angle_menu,
   .angle_submenu {
     cursor: pointer;
@@ -802,7 +782,6 @@ function stayInUserDropDown(value: string) {
     animation: stats-box-anim 780ms ease forwards;
   }
 
-  /* ** nav -- mobile** */
   .nav_mob_container {
     width: 100vw;
     margin: 0 auto;
@@ -818,8 +797,6 @@ function stayInUserDropDown(value: string) {
     padding: 5px 28px 5px 20px;
     @apply flex justify-between items-center;
   }
-
-  /* nav-- block-start -- */
 
   .nav_block_start {
     width: 20%;
@@ -984,7 +961,6 @@ function stayInUserDropDown(value: string) {
 
   li.menu_elt .menu_label {
     width: 70%;
-    /*  padding-left: 1.65rem; */
     padding-left: -0.25rem;
     margin: 0 auto;
     cursor: pointer;
@@ -1111,12 +1087,6 @@ function stayInUserDropDown(value: string) {
     background-color: var(--bg-button-2);
   }
 
-  /* nav-- block-end -- */
-
-  /*  .nav_block_end {
-    width: 80%;
-  } */
-
   li.search_area .nav_long_search {
     display: none;
     position: relative;
@@ -1127,14 +1097,9 @@ function stayInUserDropDown(value: string) {
   }
 }
 @media (min-width: 520px) {
-  /* nav-- block-start -- */
   .nav_mob_container #nav_add_search {
     @apply hidden;
   }
-
-  /*  li.menu_elt {
-    @apply flex flex-col justify-start gap-1;
-  } */
 
   li.menu_elt .menu_label {
     width: min-content;
@@ -1150,7 +1115,7 @@ function stayInUserDropDown(value: string) {
   li.menu_elt.active_drop_case .submenu_elt {
     @apply py-1 pl-3 flex flex-col justify-start items-start;
   }
-  /* nav-- block-end -- */
+
   .nav_block_end li.search_area {
     width: 80%;
     display: block;
@@ -1160,18 +1125,12 @@ function stayInUserDropDown(value: string) {
     width: 100%;
     height: 24px;
   }
-
-  /* .nav_block_end li.login_area {
-    width: 20%;
-    display: flex;
-  } */
 }
 @media (min-width: 800px) {
   .nav_mob_container {
     display: none;
   }
 
-  /* ** nav -- desktop** */
   .nav_desk_container {
     width: 100vw;
     height: 50px;
@@ -1234,7 +1193,6 @@ function stayInUserDropDown(value: string) {
     width: 200px;
     padding: 10px 20px 25px 10px;
     color: var(--grayish-text-color-2);
-    /* background-color: #fff; */
     background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: 0px 0px 5px #a75da0;
@@ -1405,7 +1363,6 @@ function stayInUserDropDown(value: string) {
     top: 0;
     padding: 15px 20px 25px;
     color: var(--color-subtext-title);
-    /* background-color: #fff; */
     background-color: var(--color-text-question);
     border-radius: 5px;
     box-shadow: -2px -1px 5px #a75da0;
@@ -1434,20 +1391,6 @@ function stayInUserDropDown(value: string) {
     border-bottom: 1px solid #a75da0;
     color: var(--bg-button-2);
   }
-
-  /* .nav_right_side .login_desk {
-    cursor: pointer;
-    width: min-content;
-    padding-top: 1px;
-    border: 1px solid transparent;
-    transition: all 1s ease;
-  }
-
-  .nav_right_side .login_desk:hover {
-    color: #24775b;
-    padding: 0 8px;
-    border: 1px solid #24775b;
-  } */
 }
 
 @keyframes anim-login-menu {

@@ -26,7 +26,7 @@ onMounted(() => {
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })

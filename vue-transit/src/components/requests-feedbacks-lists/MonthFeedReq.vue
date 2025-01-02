@@ -177,7 +177,6 @@
 </template>
 <style scoped>
 @media (min-width: 180px) {
-  /** template base ct **/
   .template_base_ct {
     width: 100%;
     padding: 0.5rem;
@@ -192,7 +191,6 @@
   }
 
   .feed_in .feed_title {
-    /* box-shadow: -2px 3px 3px #cbff9b; */
     box-shadow: -3px 3px 3px #b6fce2;
   }
 

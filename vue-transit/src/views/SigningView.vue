@@ -124,8 +124,6 @@
     @apply flex justify-center items-center;
   }
 
-  /** form **/
-
   .transit_registering {
     width: 100%;
     padding: 0.25rem 1rem 0.5rem;
@@ -158,7 +156,6 @@
     background-color: #333;
   }
 
-  /** account  media **/
   .account_wrapper {
     width: 100%;
     padding: 0.5rem 1rem;

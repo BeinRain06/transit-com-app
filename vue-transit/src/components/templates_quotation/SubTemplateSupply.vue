@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import ModalPromptButton from '../modals/ModalPromptForButton.vue'
 import { playOnClickBtn } from '../snippets-function-ts/playClickButton'
 import { SubTemplateStore } from '@/stores/subtemplate-store'
 
@@ -24,11 +23,6 @@ interface ITemplate {
 }
 
 const props = defineProps<{ label: string; isDocPage?: boolean }>()
-
-const arrParagraphs: Ref<string[]> = ref([
-  'Your Performance and Request will be thoroughly analyze before Reply.',
-  'Are you sure you want to confirm the request ?'
-])
 
 const labelIn: ComputedRef<ISubText> = computed(() => {
   let subText: ISubText = {
@@ -72,24 +66,18 @@ const arrToUseTemplate: ComputedRef<ITemplate> = computed(() => {
 })
 
 function addRowTemplate() {
-  // create a new row obj and push into **arrTempMob**
-  // add **button minus** when clicked for the first time (v-if --isMinus)
+  console.log()
 }
 
 function removeRowTemplate() {
-  //remove the last item row until the count row remains === 3
-  //when count == 3 remove **button minus** (v-if -isMinus)
+  console.log()
 }
 
 function handleApplyOrEdit(isBtnApply: boolean) {
-  const baseFtSize = 13
-
-  playOnClickBtn(baseFtSize)
-
   if (isBtnApply) {
-    //do some action --APPLY--
+    console.log()
   } else {
-    //do something --EDIT--
+    console.log()
   }
 }
 </script>
@@ -103,7 +91,7 @@ function handleApplyOrEdit(isBtnApply: boolean) {
         <div class="py-1 sm:py-4 sm:mt-8">
           <span class="font-semibold">Template</span>
         </div>
-        <!--  HERE WE ARE -->
+
         <div class="rsc_template_mob block py-2 sm:hidden">
           <ul class="rsc_mob_in" v-if="!props.isDocPage">
             <li
@@ -263,7 +251,7 @@ function handleApplyOrEdit(isBtnApply: boolean) {
               </div>
             </li>
           </ul>
-          <!-- Next Step after HERE WE ARE -->
+
           <div class="rsc_template_button">
             <div class="rsc_display_toggle">
               <div class="see_template">
@@ -343,7 +331,6 @@ function handleApplyOrEdit(isBtnApply: boolean) {
     font-size: calc(14px + 0.15vw);
   }
 
-  /** template **/
   .rsc_main_question {
     width: 100%;
     font-size: calc(12px + 0.15vw);
@@ -358,8 +345,6 @@ function handleApplyOrEdit(isBtnApply: boolean) {
     border-radius: 5px;
     @apply border border-solid border-gray-300;
   }
-
-  /** see template **/
 
   .mini_tab_infos {
     padding: 1rem 0.75rem;
@@ -427,7 +412,6 @@ function handleApplyOrEdit(isBtnApply: boolean) {
     @apply w-1/5 h-full flex justify-center items-center px-2;
   }
 
-  /** template supply desk**/
   .rsc_main_template .rsc_column {
     width: 100%;
     margin: 1rem 0;

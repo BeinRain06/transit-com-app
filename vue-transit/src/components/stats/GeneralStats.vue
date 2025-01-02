@@ -6,12 +6,12 @@
         <div class="label_section_title p-1 text-center krub-medium-italic">
           <h3>DEPARTMENT</h3>
         </div>
-        <!-- quaterly stats -->
+
         <div class="dpt_quaterly_stats mt-8 mx-auto">
           <div class="dpt_title mb-4 p-1 text-center roboto-light">
             <h2>Regulation Law</h2>
           </div>
-          <!-- HERE WE ARE -->
+
           <div class="circle_track_wrap">
             <div class="py-2 mt-6">
               <h3><span class="lato-bold"> Aug - Oct </span></h3>
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <!-- months stats -->
+
       <div class="month_track mt-12 sm:mt-16">
         <div class="month_content w-full mb-10 flex justify-center items-center">
           <ul class="dpt_month_track">
@@ -58,7 +58,7 @@
                   <span class="text_score roboto-light">pts</span>
                 </div>
               </div>
-              <!-- stars ratings -->
+
               <div class="stars_ratings_container my-1">
                 <div class="star_rating">
                   <div class="star" data-rate="1"></div>
@@ -71,7 +71,7 @@
             </li>
           </ul>
         </div>
-        <!-- feedbacks requests month account -->
+
         <div class="feed_req_container">
           <div class="month_label text-center p-1">
             <h3 class="font-bold">Month Stats</h3>

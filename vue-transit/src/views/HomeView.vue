@@ -3,7 +3,6 @@
   <div id="home_design" class="w-full">
     <div class="mainstream_section roboto-regular">
       <div id="hero_section" class="hero_section">
-        <!-- hero city connect -->
         <div class="hero_ct_connect">
           <div class="promise_logo_wrap mb-2">
             <div class="promise_logo">
@@ -29,7 +28,6 @@
           </div>
         </div>
 
-        <!-- hero city stick -->
         <div class="hero_ct_stick">
           <div class="promise_text_wrap">
             <h2 class="crete-round-regular">transit-app vision</h2>
@@ -225,7 +223,6 @@
     color: var(--color-subtitle-footer);
   }
 
-  /* hero section */
   .hero_ct_connect {
     width: 100%;
     padding: 0 5%;
@@ -326,8 +323,6 @@
     opacity: 1;
   }
 
-  /* hero ct_stick */
-
   .hero_ct_stick {
     width: 90%;
     margin: 2rem auto 0;
@@ -359,7 +354,6 @@
     background-size: cover;
   }
 
-  /* benefits section */
   .benefits_wrap {
     padding-top: 1rem;
     width: min(90%, 390px);
@@ -379,7 +373,7 @@
     place-items: center;
     text-align: center;
   }
-  /* how it works */
+
   .works_step_wrap {
     padding-top: 10px;
     width: min(90%, 390px);
@@ -402,8 +396,6 @@
     place-items: center;
     text-align: center;
   }
-
-  /* footer */
 
   .footer_wrap {
     background-color: var(--bg-secondary);
@@ -510,8 +502,6 @@
 }
 
 @media (min-width: 720px) {
-  /* hero section */
-
   h4 {
     padding: 1rem 0 1.5rem;
     font-size: calc(15px + 0.12vw);
@@ -531,7 +521,6 @@
     margin: 2rem auto 1rem;
   }
 
-  /* benefits section */
   .benefits_wrap {
     width: 90%;
     padding-top: 3rem;
@@ -579,7 +568,6 @@
     grid-area: track;
   }
 
-  /* how it works */
   .works_step_wrap {
     width: 96%;
     padding-top: 1rem;
@@ -605,8 +593,6 @@
     align-items: start;
   }
 
-  /* footer */
-
   .footer_wrap {
     padding: 2.5rem 0 1rem;
   }
@@ -623,7 +609,6 @@
 
   .foot_space_design .elegant_goal {
     width: 100%;
-    /*   padding-bottom: 1.5rem; */
     @apply flex flex-col justify-start items-start;
   }
 
@@ -653,7 +638,6 @@
     text-align: left;
   }
 
-  /* hero section */
   .hero_ct_connect {
     height: 75vh;
   }
@@ -662,7 +646,6 @@
     top: -7%;
   }
 
-  /* benefits section */
   #benefits_wrap {
     grid-template-columns: repeat(4, 1fr);
   }

@@ -11,22 +11,18 @@ const modelDays: ComputedRef<any> = computed(() => {
 
 function confirmChange(isConfirm: boolean) {
   if (isConfirm) {
-    // **disable** input tag hours_range
-    // **lock** choose button
-    // make appear **submit** button
+    console.log()
   } else {
-    // **enable** input tag hours_range
-    // **unlock** choose button
-    // make disappear **submit** button
+    console.log()
   }
 }
 
 function openModalDays() {
-  // set choose box wrap to true or false(**modalStatus**)
+  console.log()
 }
 
 function handleSelectionDay() {
-  // select atrribute day clicked (data-day-call)
+  console.log()
 }
 </script>
 
@@ -114,7 +110,6 @@ function handleSelectionDay() {
 </template>
 <style scoped>
 @media (min-width: 180px) {
-  /** day **/
   .day_box {
     width: 100%;
     margin: 1rem auto;
@@ -137,7 +132,6 @@ function handleSelectionDay() {
     @apply bg-pink-200;
   }
 
-  /** hours **/
   .hours_range_wrap input::placeholder {
     font-style: italic;
   }

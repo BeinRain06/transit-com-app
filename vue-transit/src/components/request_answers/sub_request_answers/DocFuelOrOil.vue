@@ -27,7 +27,7 @@ const dataGetLiquid = computed(() => {
       <div style="font-size: calc(12px + 0.27vw)">
         <SubSecondaryTitle label="details" />
       </div>
-      <!--details liquid-->
+
       <div class="details_liquid_demand w-full py-2 mb-4">
         <div class="details_car">
           <div class="liquid_demand_item my-2">
@@ -106,7 +106,7 @@ const dataGetLiquid = computed(() => {
           </div>
         </div>
       </div>
-      <!--Request id-->
+
       <div class="my-2">
         <RequestOrFeedReference
           element="request"
@@ -114,7 +114,7 @@ const dataGetLiquid = computed(() => {
           :id-fetch="dataGetLiquid.referenceGet"
         />
       </div>
-      <!--Date-->
+
       <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
         <p>
           <span>Date :</span> <span class="mx-2">{{ dataGetLiquid.date }}</span>
@@ -159,8 +159,6 @@ const dataGetLiquid = computed(() => {
     @apply flex flex-col justify-center items-start  border border-solid border-gray-300;
   }
 
-  /** specs liquid **/
-
   .demand_spec_liquid {
     height: 6.4rem;
     @apply w-full flex flex-col justify-start gap-2 my-2;
@@ -169,8 +167,6 @@ const dataGetLiquid = computed(() => {
   .spec_liquid_elt {
     @apply w-full flex justify-start gap-2;
   }
-
-  /** city wrap **/
 
   .city_input {
     width: 100%;
@@ -239,7 +235,6 @@ const dataGetLiquid = computed(() => {
 
   .liquid_ref_wrap {
     width: 100%;
-    /*  grid-area: quantity; */
     display: flex;
     grid-auto-columns: 50%;
     grid-template-columns: 1fr;
@@ -249,7 +244,6 @@ const dataGetLiquid = computed(() => {
 
   .city_wrap {
     width: 100%;
-    /*  grid-area: city; */
   }
 }
 </style>

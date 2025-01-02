@@ -4,8 +4,6 @@ import type { Ref, ComputedRef } from 'vue'
 import SubSecondaryTitle from '@/components/mini-tags-components/SubSecondaryTitle.vue'
 import RequestOrFeedReference from '@/components/mini-tags-components/RequestOrFeedReference.vue'
 
-import { playOnClickBtn } from '@/components/snippets-function-ts/playClickButton'
-
 const fuelAsInput: Ref<HTMLInputElement | undefined> = ref()
 const oilAsInput: Ref<HTMLInputElement | undefined> = ref()
 
@@ -40,13 +38,13 @@ let isSubmitted: Ref<boolean> = ref(false)
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
 
 function handleSubmit() {
-  /* playOnClickBtn(13) */
+  console.log()
 }
 </script>
 <template>
@@ -124,7 +122,7 @@ function handleSubmit() {
         </div>
         <div class="fuel_wrap_submittion w-full mx-auto">
           <div class="btn_wrap_submit">
-            <button class="btn_submit btn_gen_green">Submit</button>
+            <button class="btn_submit btn_gen_green" @click="handleSubmit">Submit</button>
           </div>
           <div class="modal_liquid_box my-4 w-full">
             <div class="modal_liquid_ct">
@@ -178,8 +176,6 @@ function handleSubmit() {
     @apply border border-solid border-gray-300;
   }
 
-  /** specs liquid **/
-
   .demand_spec_liquid {
     height: 8rem;
     @apply w-full flex flex-col justify-start gap-2 mt-8 mb-6;
@@ -189,8 +185,6 @@ function handleSubmit() {
     @apply w-full flex justify-start gap-2 my-2;
   }
 
-  /** city wrap **/
-
   .city_input {
     width: 100%;
     height: 2rem;
@@ -199,7 +193,6 @@ function handleSubmit() {
     @apply border border-solid border-gray-300;
   }
 
-  /** submit **/
   .btn_wrap_submit {
     position: relative;
     width: calc(100%);

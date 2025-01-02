@@ -55,7 +55,7 @@ const totalPrice = computed(() => {
         {{ dataGetMaintTools.toolsNessity }}
       </p>
     </div>
-    <!--SubtemplateSupply Response-->
+
     <div class="subtemplate_supply">
       <div class="resources_template_content">
         <div class="rsc_main_question">
@@ -65,7 +65,7 @@ const totalPrice = computed(() => {
           <div class="py-1 sm:py-4 sm:mt-8">
             <span class="font-semibold">Template</span>
           </div>
-          <!--HERE WE ARE MOB-->
+
           <div class="rsc_template_mob block py-2 sm:hidden">
             <div class="table_result_wrap">
               <div class="result_gen_title py-2">
@@ -124,7 +124,7 @@ const totalPrice = computed(() => {
               </div>
             </div>
           </div>
-          <!--HERE WE ARE DESK-->
+
           <div class="rsc_template_desk w-full hidden sm:block">
             <div class="table_result_wrap my-4">
               <div class="result_gen_title py-2">
@@ -169,7 +169,7 @@ const totalPrice = computed(() => {
         </div>
       </div>
     </div>
-    <!--Employee Infos-->
+
     <hr class="w-full border border-dashed border-gray-300 mb-2" />
     <form class="employee_details my-4 md:my-8">
       <div class="employee_infos_wrap w-full">
@@ -183,7 +183,7 @@ const totalPrice = computed(() => {
         </div>
       </div>
     </form>
-    <!--Request id-->
+
     <div>
       <RequestOrFeedReference
         element="request"
@@ -191,7 +191,7 @@ const totalPrice = computed(() => {
         :id-fetch="dataGetMaintTools.referenceGet"
       />
     </div>
-    <!--Date-->
+
     <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
       <p>
         <span>Date :</span> <span class="mx-2">{{ dataGetMaintTools.date }}</span>
@@ -218,22 +218,18 @@ const totalPrice = computed(() => {
     font-size: calc(12px + 0.25vw);
   }
 
-  /**maintenance container **/
   .maintenance_tools_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
 
-  /** template **/
   .rsc_main_question {
     width: 100%;
     font-size: calc(12px + 0.15vw);
     padding: 0.5rem 0;
     @apply flex justify-start items-center;
   }
-
-  /** see template **/
 
   .mini_tab_infos {
     padding: 1rem 0.75rem;
@@ -284,7 +280,6 @@ const totalPrice = computed(() => {
     text-align: right;
   }
 
-  /** employee details **/
   .employee_info {
     @apply w-full mb-4 flex flex-col gap-2;
     font-size: calc(14px + 0.25vw);
@@ -297,7 +292,6 @@ const totalPrice = computed(() => {
 }
 
 @media (min-width: 460px) {
-  /**maintenance container **/
   .maintenance_tools_container {
     width: 100vw;
     padding: 2.2rem 2rem 1rem;
@@ -320,13 +314,10 @@ const totalPrice = computed(() => {
     @apply w-1/5 h-full flex justify-center items-center px-2;
   }
 
-  /**maintenance container **/
   .maintenance_tools_container {
     width: 100vw;
     max-width: 1045px;
   }
-
-  /** template supply desk**/
 
   .table_result_view .table_head_title {
     width: 100%;
@@ -362,8 +353,6 @@ const totalPrice = computed(() => {
   .table_element_infos li:nth-of-type(3) {
     text-align: center;
   }
-
-  /** employee details **/
 
   .employee_infos_wrap {
     display: flex;

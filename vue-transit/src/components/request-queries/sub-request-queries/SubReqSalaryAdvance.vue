@@ -44,29 +44,29 @@ const listTwoParagraghs: Ref<string[]> = ref([
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
 
 function handleConfirm() {
-  // actions --CONFIRMATION--
+  console.log()
 }
 
 function handleCancel() {
-  // actions --CANCELLATION--
+  console.log()
 }
 
 function handleValidation() {
-  // actions --VALIDATION--
+  console.log()
 }
 
 function handleSubmit() {
-  // actions --SUBMITTION--
+  console.log()
 }
 
 function handleEndModalContainer() {
-  // actions --CLOSE MODAL CONTAINER--
+  console.log()
 }
 </script>
 <template>
@@ -156,7 +156,7 @@ function handleEndModalContainer() {
             <div class="money_display_content"><span>1345</span> <span>$(dollars)</span></div>
           </div>
         </div>
-        <!--Here we are-->
+
         <div class="means_to_refund">
           <div class="question_refund w-full flex flex-col justify-center items-center gap-2">
             <span class="roboto-light">How do you intend to refund this advancement</span>
@@ -241,15 +241,11 @@ function handleEndModalContainer() {
     width: min-content;
   }
 
-  /** container **/
-
   .salary_advance_content {
     width: 100w;
     padding: 2rem 0.75rem 1rem;
     margin: 0 auto;
   }
-
-  /**formal information **/
 
   .get_formal_information {
     width: 100%;
@@ -299,8 +295,6 @@ function handleEndModalContainer() {
     width: 100%;
   }
 
-  /** validate request box **/
-
   .validate_req_box {
     width: 60%;
     margin: 1.5rem auto;
@@ -333,14 +327,10 @@ function handleEndModalContainer() {
     gap: 1rem;
   }
 
-  /** container **/
-
   .salary_advance_content {
     width: 100w;
     max-width: 1060px;
   }
-
-  /**formal information **/
 
   .formal_info_item {
     margin: 2rem 0 1rem;
@@ -351,8 +341,6 @@ function handleEndModalContainer() {
     margin: 0 auto;
     gap: 1rem;
   }
-
-  /**intend display **/
 
   .intend_display_content {
     width: 92%;

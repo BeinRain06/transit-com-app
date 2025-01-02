@@ -37,8 +37,6 @@ async function handleStateMenu() {
   <main class="main_container" ref="mainRef" @click="async () => handleStateMenu()">
     <RouterView />
   </main>
-
-  <!-- <RouterView /> -->
 </template>
 
 <style scoped>

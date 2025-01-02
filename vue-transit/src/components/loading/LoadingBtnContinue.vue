@@ -31,7 +31,6 @@
   transform: translate(-50%, -50%);
   width: 100%;
   aspect-ratio: 1;
-  /* border: 1px solid black; */
   animation: anim-loading 3s linear infinite forwards;
 }
 
@@ -42,7 +41,6 @@
   transform: translate(-50%, -50%) rotate(45deg);
   width: 110%;
   height: 110%;
-  /*  background-color: #ffacac; */
 }
 
 .box_circle,

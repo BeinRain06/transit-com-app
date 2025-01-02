@@ -1,41 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Ref } from 'vue'
-import { playOnClickBtn, grabElementStyleButton } from '../snippets-function-ts/playClickButton'
-import ModalPromptButton from '../modals/ModalPromptForButton.vue'
-
 const props = defineProps<{
   labelDpt: string
 }>()
-
-const arrParagraphs: Ref<string[]> = ref([
-  'Your Purchase Order is about to be send/registered to accounting service',
-  'Do you want to confirm ?'
-])
-
-function handleEndModal(isBtnValid: boolean) {
-  if (isBtnValid) {
-    //do something --OK--
-  } else {
-    //do something --NO--
-  }
-}
-
-function handleApplication(isBtnValid: boolean): any {
-  const baseFtSize = 13
-
-  playOnClickBtn(baseFtSize)
-
-  if (isBtnValid) {
-    //do some action --VALIDATION--
-  } else {
-    //do something --REJECTION--
-  }
-}
-
-function handleValidation() {
-  //do some action
-}
 </script>
 <template>
   <div class="proposal_container">

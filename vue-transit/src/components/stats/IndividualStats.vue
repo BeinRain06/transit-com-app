@@ -3,7 +3,6 @@
   <section id="individual_statistics" class="w-full">
     <div class="stats_card_wrap m-4">
       <div class="stats_card_content w-full roboto-regular">
-        <!-- employee sectors -->
         <div class="employee_sector mt-4">
           <div class="department_name w-1/2 mx-auto mb-8 grid place-items-center">
             <div class="mb-8">
@@ -28,7 +27,7 @@
             </li>
           </ul>
         </div>
-        <!-- actiity tracks -->
+
         <div class="activities_track mt-6 sm:mt-12">
           <div class="index_score_wrap sm:mb-8">
             <div class="index_score_ct">
@@ -40,7 +39,7 @@
               </div>
             </div>
           </div>
-          <!-- stars ratings -->
+
           <div class="ratings_last_activity mt-10">
             <div class="stars_rating_wrap">
               <div class="star_rating">
@@ -118,14 +117,6 @@
   </section>
 </template>
 <style scoped>
-/* * {
-  box-sizing: border-box;
-}
-
-div {
-  width: 100%;
-} */
-
 ul {
   list-style: none;
 }
@@ -168,7 +159,6 @@ ul {
     font-size: calc(14px + 0.3vw);
   }
 
-  /* container */
   .stats_card_wrap {
     width: 100%;
     padding: 1rem 0 1.5rem;
@@ -176,7 +166,6 @@ ul {
     background-color: #ebebeb;
   }
 
-  /* employee sector */
   .employee_print {
     width: 100%;
     margin: 0 auto;
@@ -204,8 +193,6 @@ ul {
     width: 100%;
     height: 100%;
   }
-
-  /* activity tracks */
 
   .activities_track {
     padding: 0.5rem;
@@ -254,7 +241,6 @@ ul {
     @apply flex justify-center items-center bg-gray-200;
   }
 
-  /* ratings */
   .ratings_last_activity {
     @apply flex justify-between;
   }
@@ -267,7 +253,6 @@ ul {
   }
 
   .stars_rating_wrap .star_rating {
-    /* width: min(90%, 350px); */
     width: min(90%, 210px);
     height: 100px;
     display: flex;
@@ -306,8 +291,7 @@ ul {
     background: #ffea00;
     transform: rotateX(0);
   }
-  /* feedbacks month
-   */
+
   .track_feed_req {
     width: 100%;
     display: grid;
@@ -321,7 +305,6 @@ ul {
     @apply w-full flex flex-col justify-center items-center;
   }
 
-  /* more infos */
   .year_stats .list_record {
     width: 100%;
     display: grid;
@@ -359,8 +342,6 @@ ul {
     justify-self: start;
   }
 
-  /*
-  categorize employee */
   .category_post {
     width: min(50%, 6.4rem);
     padding: 2px 5px;
@@ -399,12 +380,9 @@ ul {
     font-size: calc(15px + 0.28vw);
   }
 
-  /* container */
   .stats_card_wrap {
     padding: 1rem 1rem 2rem;
   }
-
-  /* employee sector */
 
   .employee_print {
     grid-auto-rows: 140px 80px;
@@ -416,13 +394,11 @@ ul {
     padding: 0.5rem 0 1.5rem;
   }
 
-  /* activity tracks */
   .index_score_ct {
     width: 12rem;
     height: 12rem;
   }
 
-  /* ratings */
   .ratings_last_activity {
     width: 86%;
     @apply flex justify-between;
@@ -446,13 +422,11 @@ ul {
     font-size: cal(12px + 0.25vw);
   }
 
-  /* container */
   .stats_card_wrap {
     max-width: 780px;
     padding: 1rem 1rem 3rem;
   }
 
-  /* employee sector */
   .employee_print {
     grid-template-areas: 'picture name';
     grid-template-columns: repeat(2, 1fr);
@@ -474,7 +448,6 @@ ul {
     align-items: center;
   }
 
-  /* activity tracks */
   .index_score_ct {
     width: 15rem;
     height: 15rem;

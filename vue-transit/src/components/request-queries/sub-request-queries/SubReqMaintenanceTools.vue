@@ -13,7 +13,7 @@ let isSubmitted: Ref<boolean> = ref(false)
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
@@ -74,14 +74,13 @@ const referenceGet: ComputedRef<string> = computed(() => {
   .text_size_one {
     font-size: calc(12px + 0.25vw);
   }
-  /**container **/
+
   .maintenance_tools_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
 
-  /** employee details **/
   .employee_info {
     @apply w-full mb-4 flex flex-col gap-2;
     font-size: calc(14px + 0.25vw);
@@ -92,15 +91,12 @@ const referenceGet: ComputedRef<string> = computed(() => {
     border-radius: 5px;
   }
 
-  /** send request **/
-
   .send_req_box .text_info {
     @apply w-full flex flex-col justify-center text-center gap-2;
   }
 }
 
 @media (min-width: 460px) {
-  /**container **/
   .maintenance_tools_container {
     width: 100vw;
     padding: 2.2rem 2rem 1rem;
@@ -109,12 +105,10 @@ const referenceGet: ComputedRef<string> = computed(() => {
 }
 
 @media (min-width: 768px) {
-  /**container **/
   .maintenance_tools_container {
     width: 100vw;
     max-width: 1045px;
   }
-  /** employee details **/
 
   .employee_infos_wrap {
     display: flex;

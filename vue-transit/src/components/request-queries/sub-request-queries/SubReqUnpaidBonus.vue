@@ -41,13 +41,10 @@ const promptParagraphsTwo: Ref<string[]> = ref([
   'Thanks You for trusting the company'
 ])
 
-/* You will be soon reached out by accounting or human integrations service */
-/*     Thanks You for trusting the company */
-
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
@@ -125,27 +122,19 @@ const radioBonus: IRadioBonusItem = reactive({
 })
 
 function handleRadioToggle(i: number) {
-  // do something
-  // --> map radioBonus array and add class "active" to the clicked box --SWITCH--
+  console.log()
 }
 
 function handleClaim() {
-  const baseFtSize = 13
-  /*  playOnClickBtn(baseFtSize) */
-
-  // do something
-  // --> open the modal confirm container(isClaimConfirmed set to **true**)
+  console.log()
 }
 
 function handleSubmit() {
-  const baseFtSize = 13
-  /*  playOnClickBtn(baseFtSize) */
-
-  // --> couple actions --SUBMITTION--
+  console.log()
 }
 
 function handleEndModalContainer() {
-  // --> couple actions --RESET--, --CLOSE MODAL CONTAINER--
+  console.log()
 }
 </script>
 <template>
@@ -276,15 +265,12 @@ function handleEndModalContainer() {
     list-style: none;
   }
 
-  /** container **/
-
   .unpaid_bonus_content {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
 
-  /** bonus track wrap **/
   .joining_item {
     @apply w-full my-4 flex justify-start items-center gap-2;
   }
@@ -300,7 +286,6 @@ function handleEndModalContainer() {
 }
 
 @media (min-width: 520px) {
-  /** actons ongoing **/
   .actions_on_process {
     margin: 2.5rem 0 1rem;
     height: max-content;
@@ -308,8 +293,6 @@ function handleEndModalContainer() {
 }
 
 @media (min-width: 768px) {
-  /** container **/
-
   .unpaid_bonus_content {
     width: 100vw;
     max-width: 1100px;

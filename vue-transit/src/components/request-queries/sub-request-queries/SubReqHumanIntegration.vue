@@ -45,17 +45,17 @@ const arrInfosDays: Ref<IModelDays[]> = ref([
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
 
 function handleSubmit() {
-  // actions --SUBMITTION--
+  console.log()
 }
 
 function handleEndModalContainer() {
-  // actions --CLOSE MODAL CONTAINER--
+  console.log()
 }
 </script>
 <template>
@@ -207,7 +207,7 @@ function handleEndModalContainer() {
               <ChooseDaysHours v-model="arrInfosDays" />
             </div>
           </div>
-          <!--Here we are-->
+
           <div class="submit_board_btn w-full h-20 flex justify-center items-center">
             <button class="btn_submit" @click="handleSubmit">submit</button>
           </div>
@@ -254,14 +254,11 @@ function handleEndModalContainer() {
     font-size: calc(12px + 0.15vw);
   }
 
-  /** container **/
   .req_integration_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
-
-  /** about two agent **/
 
   .inside_dpt .dpt_structure {
     @apply w-full py-2 flex flex-col items-center gap-2;
@@ -281,7 +278,6 @@ function handleEndModalContainer() {
     @apply bg-red-100;
   }
 
-  /**office post **/
   .ofice_sandbox {
     @apply w-full my-2 flex flex-col text-center gap-2;
   }
@@ -296,8 +292,6 @@ function handleEndModalContainer() {
   .peer_group .peer_elt_position {
     @apply w-full text-center;
   }
-
-  /** matter cooked **/
 
   .specify_problem .problem_on_fire {
     border-radius: 5px;
@@ -321,12 +315,9 @@ function handleEndModalContainer() {
     @apply w-full border border-solid border-gray-300;
   }
 
-  /** time spinning **/
   .time_spinning_choice {
     @apply bg-pink-200;
   }
-
-  /** submit **/
 
   .btn_submit {
     width: 100%;
@@ -374,7 +365,6 @@ function handleEndModalContainer() {
     font-size: calc(15px + 0.15vw);
   }
 
-  /** container **/
   .req_integration_container {
     width: 100vw;
     max-width: 1100px;
@@ -394,18 +384,13 @@ function handleEndModalContainer() {
     @apply w-full py-2 flex flex-col items-center gap-2;
   }
 
-  /**office post **/
   .ofice_sandbox {
     @apply w-full h-20 gap-4;
   }
 
-  /** matter cooked **/
-
   .specify_problem .problem_on_fire {
     @apply w-full my-6;
   }
-
-  /** submit **/
 
   .btn_submit {
     width: 100%;

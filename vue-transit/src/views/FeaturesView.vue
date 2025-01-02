@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-import router from '../router/index.ts'
+import { ref, reactive } from 'vue'
+import type { Ref } from 'vue'
 
 type ModalType = {
   content_1: string
   content_2: string
-  content_3?: string
+  content_3?: string | undefined
 }
 
 type ModalFeedType = {
-  msg: string
-  buttonLabel: string
+  msg_a: string
+  msg_b: string
+  msg_c: string
 }
 
 const modal = reactive<ModalType>({
@@ -25,7 +26,7 @@ const modalFeed = reactive<ModalFeedType>({
   msg_c: 'monthly feeds'
 })
 
-const isFeatureA: boolean = ref(true)
+const isFeatureA: Ref<boolean> = ref(true)
 
 const modFeatures = ref()
 
@@ -48,17 +49,18 @@ function selectedFeature(label: string) {
       modal.content_1 = 'SEND A FEEDBACK'
       modal.content_2 = 'ASK FOR FEEDBACK'
       modal.content_3 = 'BROWSE FEEDS'
+      break
     default:
       throw Error('something went wrong in selectedFeature')
   }
 }
 
-function routingModal(e, id: number, label_1: string, label_2?: string) {
+function routingModal(e: Event, id: number, label_1: string | undefined, label_2?: string) {
   console.log(e.target)
   if (id === 1) {
-    // router push
+    console.log(label_1)
   } else {
-    // router push
+    console.log(label_2)
   }
 }
 
@@ -120,14 +122,14 @@ function closeModal() {
             <div
               id="modal_base_1"
               class="modal_base_A flex_row_center"
-              @click.prevent="(e) => routingModal(e, 1, modal.content_1)"
+              @click.prevent="(e: Event) => routingModal(e, 1, modal.content_1)"
             >
               <h4 class="modal_title text-center">{{ modal.content_1 }}</h4>
             </div>
             <div
               id="modal_base_2"
               class="modal_base_A flex_row_center"
-              @click.prevent="(e) => routingModal(e, 2, modal.content_2)"
+              @click.prevent="(e: Event) => routingModal(e, 2, modal.content_2)"
             >
               <h4 class="modal_title text-center">{{ modal.content_2 }}</h4>
             </div>
@@ -264,8 +266,6 @@ function closeModal() {
     outline: 3px solid rgb(243, 243, 243);
     animation: anim-emergency-btn 2s ease reverse infinite;
   }
-
-  /** modal features **/
 
   .modal_features {
     position: absolute;

@@ -11,7 +11,7 @@ const selectTag: Ref<any> = ref()
 
 const testOff = ref<boolean>(false)
 
-const myCategory = computed(() => {
+const myCategory: ComputedRef<any> = computed(() => {
   const newValue = selectTag.value.value
   return newValue
 })
@@ -107,10 +107,8 @@ const myCategory = computed(() => {
                 <div class="loading_circle"></div>
               </div>
             </div>
-            <!--Here we are  -> next template-->
-            <SubEngineRepairComponents label="devices/appliances" />
 
-            <!-- this represent the real if-else game for matching sub request-->>
+            <SubEngineRepairComponents label="devices/appliances" />
 
             <div class="real_sub_game" v-if="testOff">
               <div v-if="myCategory === 'tools'">

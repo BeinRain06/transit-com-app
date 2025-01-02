@@ -2,7 +2,6 @@
 <template>
   <main id="reply_feed">
     <div class="reply_feed_container">
-      <!-- Feedback Recap SecTion -->
       <div class="reply_feed_content w-full h-full">
         <div class="feedback_raised_reason p-2 mt-2 lg:mt-6 mb-4">
           <div
@@ -78,10 +77,8 @@
             </ul>
           </div>
         </div>
-        <!-- horizontal line -->
         <hr class="my-2 border-2 border-dashed border-gray-300" style="padding: 3px" />
 
-        <!-- Respond Feedback Fill SecTion -->
         <div id="answer_section" class="py-2 mt-6 mb-4">
           <div class="answer_section_container">
             <div
@@ -140,7 +137,7 @@
             </div>
           </div>
         </div>
-        <!--next section details in -> response to feedback-->
+
         <div class="details_response w-full">
           <div class="inline-flex items-center my-1 p-1">
             <h3 class="title_reply lg:text-lg">details</h3>
@@ -333,8 +330,6 @@
     @apply border-2 border-solid border-gray-200;
   }
 
-  /** answer section **/
-
   .park_resolution {
     width: 100%;
     margin: 0 auto;
@@ -344,7 +339,6 @@
     width: 100%;
     padding: 0.25rem;
     display: grid;
-    /* grid-auto-columns: 8rem calc(100% - 12rem) 1.5rem; */
     grid-auto-columns: 100%;
     grid-auto-rows: 1.4rem 2rem;
     gap: 0.35rem;
@@ -376,10 +370,6 @@
     border: 2px solid transparent;
     outline: none;
   }
-
-  /* .text_res_wrap #resolution_1.res_content_text {
-    width: 100%;
-  } */
 
   .text_res_wrap .add_res_toggle {
     position: absolute;
@@ -415,8 +405,6 @@
     border: 1px solid transparent;
     box-shadow: 0px 0px 3px #702f4f;
   }
-
-  /** details response **/
 
   .details_response .detail_symbol_wrap {
     width: 1.3rem;
@@ -457,7 +445,6 @@
     @apply border border-solid border-gray-200;
   }
 
-  /** answer section **/
   .btn_section_ans {
     position: relative;
     top: 0.1rem;
@@ -470,8 +457,6 @@
     outline-offset: -3px;
     @apply bg-yellow-600 text-white grid place-content-center rounded-md;
   }
-
-  /** case further contact **/
 
   .others_means_contact {
     width: 100%;
@@ -508,8 +493,6 @@
     border: 1px solid transparent;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   }
-
-  /** send feedback **/
 
   .btn_send_feedback {
     width: 70%;
@@ -600,8 +583,6 @@
   .late_answer {
     width: 60%;
     box-shadow: -2px 1px 3px #a5557d;
-
-    /*  margin: 0 auto; */
   }
 
   .details_img_files .details_files_ct {

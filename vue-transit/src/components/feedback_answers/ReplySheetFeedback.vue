@@ -138,7 +138,7 @@
             </div>
           </div>
         </div>
-        <!--next section details in -> response to feedback-->
+
         <div class="details_response w-full">
           <div class="inline-flex items-center my-1 p-1">
             <h3 class="title_reply lg:text-lg">details answer</h3>
@@ -340,8 +340,6 @@
     @apply border-2 border-solid border-gray-200;
   }
 
-  /** answer section **/
-
   .park_resolution {
     width: 100%;
     margin: 1.5rem auto;
@@ -351,7 +349,6 @@
     width: 100%;
     padding: 0.25rem;
     display: grid;
-    /* grid-auto-columns: 8rem calc(100% - 12rem) 1.5rem; */
     grid-auto-columns: 100%;
     grid-auto-rows: 1.4rem auto;
     gap: 1rem;
@@ -383,10 +380,6 @@
     border: 2px solid transparent;
     outline: none;
   }
-
-  /* .text_res_wrap #resolution_1.res_content_text {
-    width: 100%;
-  } */
 
   .text_res_wrap .add_res_toggle {
     position: absolute;
@@ -421,18 +414,6 @@
     justify-content: left;
     align-items: center;
   }
-
-  /* .late_answer {
-    width: 100%;
-    height: 3rem;
-    padding: 10px;
-    display: flex;
-    outline: none;
-    border: 1px solid transparent;
-    box-shadow: 0px 0px 3px #702f4f;
-  } */
-
-  /** details response **/
 
   .details_response .detail_symbol_wrap {
     width: 1.3rem;
@@ -473,7 +454,6 @@
     @apply border border-solid border-gray-200;
   }
 
-  /** answer section **/
   .div_direction_ans {
     position: relative;
     top: 0.1rem;
@@ -487,8 +467,6 @@
     outline-offset: -3px;
     @apply bg-yellow-600 text-white grid place-content-center rounded-md;
   }
-
-  /** case further contact **/
 
   .others_means_contact {
     width: 100%;
@@ -526,10 +504,7 @@
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   }
 
-  /** end feedback **/
-
   .feedback_end_reply {
-    /*  --end-state-bg: rgb(119, 158, 83); */
     --end-state-bg: rgb(120, 226, 7);
     --end-state-color: #f4f4f4;
     @apply w-full h-full flex justify-between items-center;

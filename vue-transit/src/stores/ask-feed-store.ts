@@ -63,13 +63,13 @@ export const useAskFeedStore = defineStore('askfeed', {
     selectMonthsArrFeed(label: string) {
       switch (label) {
         case 'current-month':
-          //something that affect new value **monthsConsultFeed**
+          console.log()
           break
         case 'last-month':
-          //something that affect new value **monthsConsultFeed**
+          console.log()
           break
         case 'past-three-months':
-          //something that affect new value **monthsConsultFeed**
+          console.log()
           break
         default:
           throw Error('unexpected case error selecting months array feedback')

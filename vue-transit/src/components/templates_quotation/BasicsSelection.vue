@@ -125,8 +125,6 @@ const work_posts = ref<string[]>([
     @apply flex flex-col justify-center items-center w-full;
   }
 
-  /** service office **/
-
   .service_office {
     width: 100%;
   }
@@ -189,7 +187,6 @@ const work_posts = ref<string[]>([
     grid-area: maint;
   }
 
-  /** button next **/
   .stage_btn_wrap {
     width: 100%;
     margin: 0.75rem auto 0;
@@ -200,8 +197,6 @@ const work_posts = ref<string[]>([
     padding: 0.25rem 0;
     @apply text-gray-50 bg-gray-500;
   }
-
-  /** priority stage **/
 
   .priority_wrap ul {
     padding: 0.25rem 0.5rem;
@@ -226,8 +221,6 @@ const work_posts = ref<string[]>([
   #high_prior.prior_item {
     @apply bg-yellow-300;
   }
-
-  /** recipient **/
 
   .recipient_info {
     margin: 0.5rem 0;
@@ -301,7 +294,6 @@ const work_posts = ref<string[]>([
     @apply text-blue-800;
   }
 
-  /** button settings **/
   .btn_settings_wrap {
     position: relative;
     top: -0.25rem;

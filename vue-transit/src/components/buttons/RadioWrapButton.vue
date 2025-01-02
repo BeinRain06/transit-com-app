@@ -36,7 +36,6 @@ const props = defineProps<{
 </template>
 <style scoped>
 @media (min-width: 180px) {
-  /** radio stuff**/
   .list_radio_stuff {
     width: 100%;
     display: grid;
@@ -54,7 +53,7 @@ const props = defineProps<{
     place-items: center;
     text-align: center;
   }
-  /** radio inner box **/
+
   .radio_inner_box {
     width: 14px;
     height: 14px;

@@ -36,8 +36,6 @@ const props = defineProps<{
         </ul>
       </div>
 
-      <!--display page SubCheckBox-->
-
       <div class="box_check_wrap w-full" v-if="props.isDisplay">
         <ul class="box_check_city w-full flex justify-center items-center gap-1">
           <li

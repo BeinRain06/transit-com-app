@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useTemplateRef, reactive, computed } from 'vue'
+import { ref, useTemplateRef, reactive } from 'vue'
 import type { Ref } from 'vue'
 import { useAskFeedStore } from '@/stores/ask-feed-store'
 
@@ -65,7 +65,7 @@ function reasonFetched(refElt: string | undefined) {
 
   platformFeed.base = []
 
-  fetchReasons.map((item, i) => {
+  fetchReasons.map((item) => {
     if (item.domain === refElt) {
       //new elt arr content
       const newArr = item.archive
@@ -160,7 +160,6 @@ async function handleSubjectMatter(e: Event, i: number, item: string) {
                       <p class="reason_item leading-relaxed flex flex-wrap max-w-lg">
                         {{ item }}
                       </p>
-                      <!-- style Next -->
                       <div class="input_checkbox_subject" toggle="false" ref="checkboxSubjectRef">
                         <div class="subject_checkbox">&#9745;</div>
                       </div>
@@ -420,7 +419,6 @@ async function handleSubjectMatter(e: Event, i: number, item: string) {
   }
 
   .input_checkbox_subject[toggle='false'] .subject_checkbox {
-    /*   --webkit-appearance: none; */
     position: relative;
     top: 0;
     width: 12px;
@@ -431,32 +429,9 @@ async function handleSubjectMatter(e: Event, i: number, item: string) {
     transition: all 650ms ease;
   }
 
-  /* .input_checkbox_subject[data-toggle='false'] .subject_checkbox::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
-    font-size: calc(13px + 0, 12vw);
-    outline: none;
-    border-radius: 5px;
-    visibility: hidden;
-    opacity: 0;
-    border: 1px solid #6d6e70;
-    transition: all 1s ease;
-  } */
-
   .input_checkbox_subject[toggle='true'] .subject_checkbox {
     border: 1px solid #a75da0;
   }
-
-  /*  .input_checkbox_subject .subject_checkbox[data-toggle='true']::before {
-    color: var(--bg-button-2);
-    visibility: visible;
-    opacity: 1;
-  } */
 
   .details_feed .text_paragraph {
     outline: none;

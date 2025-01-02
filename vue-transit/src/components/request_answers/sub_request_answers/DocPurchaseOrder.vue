@@ -37,7 +37,6 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-  <!--SubTemplateSupply Response-->
   <div class="subtemplate_supply">
     <div class="resources_template_content">
       <div class="rsc_main_question">
@@ -52,7 +51,6 @@ const totalPrice = computed(() => {
         <div class="py-1 sm:py-4 sm:mt-8">
           <span class="font-semibold">Template</span>
         </div>
-        <!--HERE WE ARE MOB-->
         <div class="rsc_template_mob block py-2 sm:hidden">
           <div class="table_result_wrap">
             <div class="result_gen_title py-2">
@@ -111,7 +109,7 @@ const totalPrice = computed(() => {
             </div>
           </div>
         </div>
-        <!--HERE WE ARE DESK-->
+
         <div class="rsc_template_desk w-full hidden sm:block">
           <div class="table_result_wrap my-4">
             <div class="result_gen_title py-2">
@@ -153,7 +151,7 @@ const totalPrice = computed(() => {
             </div>
           </div>
         </div>
-        <!--request id-->
+
         <div class="mt-10 mb-2">
           <RequestOrFeedReference
             element="request"
@@ -161,7 +159,7 @@ const totalPrice = computed(() => {
             :id-fetch="dataGetPurchaseOrder.referenGet"
           />
         </div>
-        <!--Date-->
+
         <div class="krub-light-italic my-2 md:mt-4 md:mb-2" style="font-size: calc(12px + 0.15vw)">
           <p>
             <span>Date :</span> <span class="mx-2">{{ dataGetPurchaseOrder.date }}</span>
@@ -188,15 +186,12 @@ const totalPrice = computed(() => {
     font-size: calc(16px + 0.22vw);
   }
 
-  /** template **/
   .rsc_main_question {
     width: 100%;
     font-size: calc(12px + 0.15vw);
     padding: 0.5rem 0;
     @apply flex justify-start items-center;
   }
-
-  /** see template **/
 
   .mini_tab_infos {
     padding: 1rem 0.75rem;
@@ -269,8 +264,6 @@ const totalPrice = computed(() => {
   .rsc_sweet_add {
     @apply w-1/5 h-full flex justify-center items-center px-2;
   }
-
-  /** template supply desk**/
 
   .table_result_view .table_head_title {
     width: 100%;

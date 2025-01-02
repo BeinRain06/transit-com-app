@@ -29,13 +29,13 @@ const paragraphsModal: Ref<string[]> = ref([
 const referenceGet: ComputedRef<string> = computed(() => {
   let newRef: string = ''
   if (isSubmitted.value) {
-    //after request registering sendback **request id** and affect --newRef-- var
+    console.log()
   }
   return newRef
 })
 
 function handlePurchaseOrder() {
-  // actions to submit or cancel purchase_order
+  console.log()
 }
 </script>
 <template>
@@ -112,14 +112,12 @@ function handlePurchaseOrder() {
 </template>
 <style scoped>
 @media (min-width: 180px) {
-  /** container  **/
   .purchase_order_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
 
-  /** infos request **/
   .info_req_item {
     @apply w-full py-2 flex flex-col gap-2;
   }
@@ -131,7 +129,6 @@ function handlePurchaseOrder() {
 }
 
 @media (min-width: 460px) {
-  /** container  **/
   .purchase_order_container {
     padding: 2.2rem 2rem 1rem;
     margin: 0 auto;
@@ -139,14 +136,12 @@ function handlePurchaseOrder() {
 }
 
 @media (min-width: 768px) {
-  /** container  **/
   .purchase_order_container {
     max-width: 1040px;
     padding: 2.2rem 2rem 1rem;
     margin: 0 auto;
   }
 
-  /** infos request **/
   .info_req_wrap {
     margin: 0.5rem auto 1rem;
     display: grid;

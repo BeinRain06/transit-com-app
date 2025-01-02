@@ -12,9 +12,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
@@ -30,14 +27,13 @@ const router = createRouter({
       component: () => import('../views/SigningView.vue')
     },
 
-    // feedbacks
     {
       path: '/feedbacks/queries/form',
       name: 'ask_form_feed',
       component: () => import('../components/feedback_queries/AskFormFeedback.vue')
     },
+
     {
-      // not Yet USED (designed to be access in Research / print PREVIEW)
       path: '/feedbacks/queries/template',
       name: 'ask_template_feed',
       component: () => import('../components/feedback_queries/AskSheetFeedback.vue')
@@ -48,7 +44,6 @@ const router = createRouter({
       component: () => import('../components/feedback_answers/ReplyFormFeedBack.vue')
     },
     {
-      // not Yet USED (designed to be access in Research / print PREVIEW)
       path: '/feedbacks/answers/template',
       name: 'reply_template_feed',
       component: () => import('../components/feedback_answers/ReplySheetFeedback.vue')
@@ -65,7 +60,6 @@ const router = createRouter({
       component: () => import('../components/requests-feedbacks-lists/MonthFeedReq.vue')
     },
 
-    // requests
     {
       path: '/requests/list/last_and_current_month',
       name: 'month_list_requests',
@@ -126,7 +120,6 @@ const router = createRouter({
         import('../components/request-queries/sub-request-queries/SupplyResources.vue')
     },
 
-    // user stats
     {
       path: '/user/stats/:department/:userId',
       name: 'individual_stats',

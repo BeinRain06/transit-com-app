@@ -27,7 +27,7 @@ const dataGetAdvance = computed(() => {
       <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-10">
         <SubSecondaryTitle label="salary" />
       </div>
-      <!--HERE WE ARE-->
+
       <div class="details_worker w-full">
         <div class="get_formal_information">
           <div class="Personal infos h-10 w-full px-2 justify-start">
@@ -55,7 +55,7 @@ const dataGetAdvance = computed(() => {
           </div>
         </div>
       </div>
-      <!--HERE WE ARE NEXT-->
+
       <div class="details_money_management w-full md:py-8">
         <div
           class="amount_to_release w-full mt-8 mb-4 flex flex-col justify-center items-center gap-4"
@@ -72,7 +72,7 @@ const dataGetAdvance = computed(() => {
             </div>
           </div>
         </div>
-        <!--Here we are-->
+
         <div class="means_to_refund">
           <div class="question_refund w-full flex flex-col justify-center items-center gap-1">
             <span class="roboto-light text-center sm:text-left"
@@ -106,7 +106,7 @@ const dataGetAdvance = computed(() => {
             </div>
           </div>
         </div>
-        <!--request id-->
+
         <div class="mt-4">
           <RequestOrFeedReference
             element="request"
@@ -114,7 +114,7 @@ const dataGetAdvance = computed(() => {
             :id-fetch="dataGetAdvance.referenceGet"
           />
         </div>
-        <!--Date-->
+
         <div class="krub-light-italic mt-4 mb-2" style="font-size: calc(12px + 0.15vw)">
           <p class="text-right">
             <span>Date :</span> <span class="mx-2">{{ dataGetAdvance.date }}</span>
@@ -138,15 +138,11 @@ const dataGetAdvance = computed(() => {
     font-size: calc(13px + 0.25vw);
   }
 
-  /** container **/
-
   .salary_advance_content {
     width: 100w;
     padding: 2rem 0.75rem 1rem;
     margin: 0 auto;
   }
-
-  /**formal information **/
 
   .get_formal_information {
     width: 100%;
@@ -199,14 +195,11 @@ const dataGetAdvance = computed(() => {
     font-size: calc(14px + 0.22vw);
   }
 
-  /** container **/
-
   .salary_advance_content {
     width: 100w;
     max-width: 1060px;
   }
 
-  /**general information **/
   .fieldset {
     width: 90%;
     margin: 0.5rem 0;
@@ -239,7 +232,6 @@ const dataGetAdvance = computed(() => {
     grid-area: reason;
     grid-column: 1 / span 4;
   }
-  /**intend display **/
 
   .intend_display_content {
     width: 92%;

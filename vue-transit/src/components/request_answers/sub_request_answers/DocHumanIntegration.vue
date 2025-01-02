@@ -79,7 +79,7 @@ const occurenceLabName = computed(() => {
       <div class="text_secondary_title w-full mt-4 mb-2 flex justify-center items-center sm:h-16">
         <SubSecondaryTitle label="human" />
       </div>
-      <!--About the two Agents-->
+
       <div class="about_two_agent w-full my-3 lg:my-8">
         <div class="department_concerned_people w-full">
           <ul class="inside_dpt w-full">
@@ -143,7 +143,7 @@ const occurenceLabName = computed(() => {
           </ul>
         </div>
       </div>
-      <!--Matter Cooked-->
+
       <div class="matter_cooked text_situation w-full mt-6 mb-4 sm:mt-16 sm:mb-4">
         <div class="specify_problem w-full mb-2">
           <span class="roboto-light text-blue-800"
@@ -151,7 +151,7 @@ const occurenceLabName = computed(() => {
           >
           <p class="problem_on_fire">{{ dataGetIntegration.generalMatterIdea }}</p>
         </div>
-        <!--Describe what is going on-->
+
         <div class="w-10 py-2 mt-8 mb-2">
           <span class="krub-regular-italic" style="color: rgb(192, 59, 174)">Describe</span>
         </div>
@@ -198,7 +198,7 @@ const occurenceLabName = computed(() => {
               </ul>
             </div>
           </div>
-          <!--Attempt to solve the problem-->
+
           <div class="w-10 py-2 mt-8 mb-2">
             <span class="krub-regular-italic" style="color: rgb(192, 59, 174)">Tentatives</span>
           </div>
@@ -246,7 +246,7 @@ const occurenceLabName = computed(() => {
               <p class="italic ml-1 mt-1">
                 (in case Our resources will to plan a shadow discussion with you.)
               </p>
-              <!--scheduled Days and Hours-->
+
               <div class="integration_timer w-full mt-4 mb-8">
                 <ul class="days_in_week w-full my-2">
                   <li
@@ -279,7 +279,7 @@ const occurenceLabName = computed(() => {
           </div>
         </div>
       </div>
-      <!--Request id-->
+
       <div>
         <RequestOrFeedReference
           element="request"
@@ -287,7 +287,7 @@ const occurenceLabName = computed(() => {
           :id-fetch="dataGetIntegration.referenceGet"
         />
       </div>
-      <!--Date-->
+
       <div class="krub-light-italic mb-2 md:mb-4" style="font-size: calc(12px + 0.15vw)">
         <p>
           <span>Date :</span> <span class="mx-2">{{ dataGetIntegration.date }}</span>
@@ -324,14 +324,11 @@ const occurenceLabName = computed(() => {
     font-size: calc(12px + 0.15vw);
   }
 
-  /** integration container **/
   .req_integration_container {
     width: 100vw;
     padding: 2rem 1rem 1rem;
     margin: 0 auto;
   }
-
-  /** about two agent **/
 
   .inside_dpt .dpt_structure {
     @apply w-full py-2 flex flex-col items-center gap-2;
@@ -352,7 +349,6 @@ const occurenceLabName = computed(() => {
     @apply bg-red-100;
   }
 
-  /**office post **/
   .ofice_sandbox {
     @apply w-full my-2 flex flex-col text-center gap-2;
   }
@@ -367,8 +363,6 @@ const occurenceLabName = computed(() => {
   .peer_group .peer_elt_position {
     @apply w-full text-center;
   }
-
-  /** matter cooked **/
 
   .specify_problem .problem_on_fire {
     border-radius: 5px;
@@ -392,7 +386,6 @@ const occurenceLabName = computed(() => {
     @apply w-full border border-solid border-gray-300;
   }
 
-  /** time spinning **/
   .time_spinning_choice {
     @apply bg-pink-200;
   }
@@ -429,7 +422,6 @@ const occurenceLabName = computed(() => {
     font-size: calc(15px + 0.15vw);
   }
 
-  /** integration container **/
   .req_integration_container {
     width: 100vw;
     max-width: 960px;
@@ -449,12 +441,9 @@ const occurenceLabName = computed(() => {
     @apply w-full py-2 flex flex-col items-center gap-2;
   }
 
-  /**office post **/
   .ofice_sandbox {
     @apply w-full h-28  gap-4;
   }
-
-  /** matter cooked **/
 
   .specify_problem .problem_on_fire {
     @apply w-full my-6;
