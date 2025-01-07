@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server main bundle page client-server communication transit/app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BeinRain06/transit-com-app.git"
+  },
+  "author": "Ngouend Gerard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BeinRain06/transit-com-app/issues"
+  },
+  "homepage": "https://github.com/BeinRain06/transit-com-app#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
