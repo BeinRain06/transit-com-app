@@ -1,0 +1,91 @@
+const express = require("express");
+const router = express.Router();
+const cors = require("cors");
+const dotenv = require("dotenv");
+const path = require("path");
+const favicon = require("serve-favicon");
+const axios = require("axios");
+
+/* console.log("HA ! :", path.join(__dirname, "..")); */
+
+/* CODE_SOURCE_EXAMPLE :
+https://permify.co/post/oauth-20-implementation-nodejs-expressjs/ */
+
+dotenv.config({ path: path.join(__dirname, "..") });
+
+router.use(favicon(path.join(__dirname, "../", "public", "favicon.ico")));
+
+router.use(cors());
+
+/* AUTHENTICATION OAUTH 2.0 */
+
+const GOOGLE_OAUTH_URL = process.env.GOOGLE_OAUTH_URL;
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_CALLBACK_URL = "http3%A//localhost:8000/google/callback";
+const GOOGLE_OAUTH_SCOPES = [
+  "https3%A//www.googleapis.com/auth/userinfo.email",
+  "https3%A//www.googleapis.com/auth/userinfo.profile",
+];
+
+const GOOGLE_ACCESS_TOKEN_URL = process.env.GOOGLE_ACCESS_TOKEN_URL;
+
+// redirect to google consent screen page
+router.get("/", function (req, res) {
+  const state = "some_state";
+  const scopes = GOOGLE_OAUTH_SCOPES.join(" ");
+
+  const GOOGLE_OAUTH_CONSENT_SCREEN_URL = `${GOOGLE_OAUTH_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_CALLBACK_URL}&access_type=offline&response_type=code&state=${state}&scopes=${scopes}`;
+
+  res.redirect(GOOGLE_OAUTH_CONSENT_SCREEN_URL);
+});
+
+// GET the token response
+router.get("/google/callback", async function (req, res) {
+  /* <--authorization code--> */
+
+  const { code } = req.query;
+
+  const data = {
+    code,
+    client_id: GOOGLE_CLIENT_ID,
+    client_secret: GOOGLE_CLIENT_SECRET,
+    redirect_uri: "http://localhost:8000/google/callback",
+    grant_type: "authorization_code",
+  };
+
+  console.log("authorization_code: ", data);
+
+  /* <-- exchange authorization code for access_token and id_token -->  */
+
+  const access_token_data = await axios
+    .post(GOOGLE_ACCESS_TOKEN_URL, {
+      data: data,
+    })
+    .then((res) => res.json())
+    .catch((err) => console.log("ERROR CALLBACK GOOGLE :", err));
+
+  /* <-- verify and extract information in the GOOGLE ID TOKEN -->  */
+
+  const { id_token } = access_token_data;
+
+  const token_info_response = axios.get(
+    `${process.env.GOOGLE_TOKEN_INFO_URL}?id_token=${id_token}`
+  );
+  console.log("token_info_response: ", token_info_response);
+
+  /* -- REALLY NEXT STEP */
+
+  //   1. --> build the SQL User Database Model in another file (user.js)
+
+  //   2. HERE --> find if the user already exist in the database and allow an APP(transit-app-com) authentication using JWT Token to send a <token> for **user session**
+
+  //   3. HERE -->  if the user does not exist create the user with the right SQL command and apply the step 2
+
+  //  4. HERE -->  send back the <token> , userinfo.email, userinfo.id in a **COOKIE** to your front-end app
+
+  res.json({ sucess: true, data: token_info_response });
+});
+
+module.exports = router;

@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from 'vue'
+import retrieveMediaApi from '../api-media-call/RetrieveMediaApi.js'
+
+function handleMediaLogin(label: string) {
+  //do something
+
+  retrieveMediaApi(label)
+}
+</script>
 <template>
   <main id="transit_signing">
     <div class="signing_wrap">
@@ -62,28 +71,44 @@
             <div></div>
           </div>
           <div class="account_wrapper">
-            <div id="google_link" class="account_detail flex_row_center">
+            <div
+              id="google_link"
+              class="account_detail flex_row_center cursor-pointer"
+              @click="handleMediaLogin('google')"
+            >
               <img
                 src="../assets/images/icons8-google.svg"
                 class="w-6 h-6 object-cover opacity-95"
                 alt="sorry google !"
               />
             </div>
-            <div id="linkedin_link" class="account_detail flex_row_center">
+            <div
+              id="linkedin_link"
+              class="account_detail flex_row_center cursor-pointer"
+              @click="handleMediaLogin('linkedin')"
+            >
               <img
                 src="../assets/images/icons8-linkedin.svg"
                 class="w-7 h-7 object-cover opacity-95"
                 alt="sorry linkedIn !"
               />
             </div>
-            <div id="facebook_link" class="account_detail flex_row_center">
+            <div
+              id="facebook_link"
+              class="account_detail flex_row_center cursor-pointer"
+              @click="handleMediaLogin('facebook')"
+            >
               <img
                 src="../assets/images/icons8-facebook.svg"
                 class="w-8 h-8 object-cover opacity-95"
                 alt="sorry facebook !"
               />
             </div>
-            <div id="twitter_link" class="account_detail flex_row_center">
+            <div
+              id="twitter_link"
+              class="account_detail flex_row_center cursor-pointer"
+              @click="handleMediaLogin('twitter')"
+            >
               <img
                 src="../assets/images/icons8-twitterx.svg"
                 class="w-7 h-7 object-cover opacity-95"

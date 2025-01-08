@@ -4,7 +4,10 @@ const path = require("path");
 const dotenv = require("dotenv");
 const favicon = require("serve-favicon");
 const axios = require("axios");
-const oauthRouter = require("./authentication-router/media");
+
+const googleOauthRouter = require("./authentication-media-router/google-route.js");
+const facebookOauthRouter = require("./authentication-media-router/facebook-route.js");
+const twitterOauthRouter = require("./authentication-media-router/twitter-route.js");
 
 dotenv.config();
 
@@ -22,7 +25,9 @@ var corOptions = {
 
 app.use(cors(corOptions));
 
-app.use("/media/auth", oauthRouter);
+app.use("/first/media", googleOauthRouter);
+app.use("/second/media", facebookOauthRouter);
+app.use("/third/media", twitterOauthRouter);
 
 app.get("/", (req, res) => {
   res.send(" ready ! openeed URL Server");

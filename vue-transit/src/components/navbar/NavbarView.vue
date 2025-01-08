@@ -46,8 +46,10 @@ function handleActSearch(value: string) {
     searchDeskRef.value?.classList.remove('active_bar_research')
   }
 }
-function handleLogSignRedirect() {
+async function handleLogSignRedirect() {
   // do something ...
+  await router.push({ path: '/sign' })
+  stateMenuIn.value = false
 }
 
 async function handleMenu() {
@@ -462,14 +464,14 @@ function stayInUserDropDown(value: string) {
                   <div
                     id="submenu_login"
                     class="column_sub_end cursor-pointer"
-                    @click="handleLogSignRedirect"
+                    @click="async () => handleLogSignRedirect()"
                   >
                     <h5>Login</h5>
                   </div>
                   <div
                     id="submenu_sign_up"
                     class="column_sub_end cursor-pointer my-2"
-                    @click="handleLogSignRedirect"
+                    @click="async () => handleLogSignRedirect()"
                   >
                     <h5>Sign Up</h5>
                   </div>
@@ -509,7 +511,13 @@ function stayInUserDropDown(value: string) {
         </li>
         <li class="login_area">
           <div class="login_session">
-            <div id="login_mob" class="btn_login" @click.prevent="handleLogSignRedirect">login</div>
+            <div
+              id="login_mob"
+              class="btn_login"
+              @click.prevent="async () => handleLogSignRedirect()"
+            >
+              login
+            </div>
           </div>
         </li>
       </ul>
