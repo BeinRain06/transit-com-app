@@ -6,12 +6,10 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const axios = require("axios");
 
-/* console.log("HA ! :", path.join(__dirname, "..")); */
-
 /* CODE_SOURCE_EXAMPLE :
 https://permify.co/post/oauth-20-implementation-nodejs-expressjs/ */
 
-dotenv.config({ path: path.join(__dirname, "..") });
+dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
 router.use(favicon(path.join(__dirname, "../", "public", "favicon.ico")));
 
@@ -23,20 +21,20 @@ const GOOGLE_OAUTH_URL = process.env.GOOGLE_OAUTH_URL;
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_CALLBACK_URL = "http3%A//localhost:8000/google/callback";
+const GOOGLE_CALLBACK_URL = "http%3A//localhost:8000/google/callback";
 const GOOGLE_OAUTH_SCOPES = [
-  "https3%A//www.googleapis.com/auth/userinfo.email",
-  "https3%A//www.googleapis.com/auth/userinfo.profile",
+  "https%3A//www.googleapis.com/auth/userinfo.email",
+  "https%3A//www.googleapis.com/auth/userinfo.profile",
 ];
 
 const GOOGLE_ACCESS_TOKEN_URL = process.env.GOOGLE_ACCESS_TOKEN_URL;
 
 // redirect to google consent screen page
 router.get("/", function (req, res) {
-  const state = "some_state";
+  const state = "50d235";
   const scopes = GOOGLE_OAUTH_SCOPES.join(" ");
 
-  const GOOGLE_OAUTH_CONSENT_SCREEN_URL = `${GOOGLE_OAUTH_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_CALLBACK_URL}&access_type=offline&response_type=code&state=${state}&scopes=${scopes}`;
+  const GOOGLE_OAUTH_CONSENT_SCREEN_URL = `${GOOGLE_OAUTH_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_CALLBACK_URL}&access_type=offline&response_type=code&state=${state}&scope=${scopes}`;
 
   res.redirect(GOOGLE_OAUTH_CONSENT_SCREEN_URL);
 });
@@ -69,6 +67,8 @@ router.get("/google/callback", async function (req, res) {
   /* <-- verify and extract information in the GOOGLE ID TOKEN -->  */
 
   const { id_token } = access_token_data;
+
+  console.log("id_token: ", id_token);
 
   const token_info_response = axios.get(
     `${process.env.GOOGLE_TOKEN_INFO_URL}?id_token=${id_token}`
