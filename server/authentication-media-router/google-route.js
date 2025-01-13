@@ -21,7 +21,8 @@ const GOOGLE_OAUTH_URL = process.env.GOOGLE_OAUTH_URL;
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_CALLBACK_URL = "http%3A//localhost:8000/google/callback";
+const GOOGLE_CALLBACK_URL =
+  "http%3A//localhost:8000/first/media/google/callback";
 const GOOGLE_OAUTH_SCOPES = [
   "https%3A//www.googleapis.com/auth/userinfo.email",
   "https%3A//www.googleapis.com/auth/userinfo.profile",
@@ -31,7 +32,7 @@ const GOOGLE_ACCESS_TOKEN_URL = process.env.GOOGLE_ACCESS_TOKEN_URL;
 
 // redirect to google consent screen page
 router.get("/", function (req, res) {
-  const state = "50d235";
+  const state = "some_state";
   const scopes = GOOGLE_OAUTH_SCOPES.join(" ");
 
   const GOOGLE_OAUTH_CONSENT_SCREEN_URL = `${GOOGLE_OAUTH_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_CALLBACK_URL}&access_type=offline&response_type=code&state=${state}&scope=${scopes}`;
@@ -42,14 +43,13 @@ router.get("/", function (req, res) {
 // GET the token response
 router.get("/google/callback", async function (req, res) {
   /* <--authorization code--> */
-
   const { code } = req.query;
 
   const data = {
     code,
     client_id: GOOGLE_CLIENT_ID,
     client_secret: GOOGLE_CLIENT_SECRET,
-    redirect_uri: "http://localhost:8000/google/callback",
+    redirect_uri: "http://localhost:8000/first/media/google/callback",
     grant_type: "authorization_code",
   };
 
@@ -57,12 +57,13 @@ router.get("/google/callback", async function (req, res) {
 
   /* <-- exchange authorization code for access_token and id_token -->  */
 
-  const access_token_data = await axios
-    .post(GOOGLE_ACCESS_TOKEN_URL, {
-      data: data,
-    })
-    .then((res) => res.json())
-    .catch((err) => console.log("ERROR CALLBACK GOOGLE :", err));
+  console.log("typeof url :", typeof GOOGLE_ACCESS_TOKEN_URL);
+
+  const access_token_data = await axios({
+    method: "post",
+    url: GOOGLE_ACCESS_TOKEN_URL,
+    data: data,
+  }).then((res) => res.data);
 
   /* <-- verify and extract information in the GOOGLE ID TOKEN -->  */
 
@@ -70,10 +71,15 @@ router.get("/google/callback", async function (req, res) {
 
   console.log("id_token: ", id_token);
 
-  const token_info_response = axios.get(
+  const token_info_response = await axios.get(
     `${process.env.GOOGLE_TOKEN_INFO_URL}?id_token=${id_token}`
   );
+
   console.log("token_info_response: ", token_info_response);
+
+  res
+    .status(token_info_response.status)
+    .json({ success: "token_info fetch successfully !" });
 
   /* -- REALLY NEXT STEP */
 
@@ -85,7 +91,7 @@ router.get("/google/callback", async function (req, res) {
 
   //  4. HERE -->  send back the <token> , userinfo.email, userinfo.id in a **COOKIE** to your front-end app
 
-  res.json({ sucess: true, data: token_info_response });
+  /*  res.json({ sucess: true, data: token_info_response }); */
 });
 
 module.exports = router;
