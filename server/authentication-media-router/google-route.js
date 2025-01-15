@@ -30,6 +30,8 @@ const GOOGLE_OAUTH_SCOPES = [
 
 const GOOGLE_ACCESS_TOKEN_URL = process.env.GOOGLE_ACCESS_TOKEN_URL;
 
+// < -- GOOGLE AUTHENTICATION OAUTH 2.0 -- >
+
 // redirect to google consent screen page
 router.get("/", function (req, res) {
   const state = "some_state";
@@ -56,8 +58,6 @@ router.get("/google/callback", async function (req, res) {
   console.log("authorization_code: ", data);
 
   /* <-- exchange authorization code for access_token and id_token -->  */
-
-  console.log("typeof url :", typeof GOOGLE_ACCESS_TOKEN_URL);
 
   const access_token_data = await axios({
     method: "post",
