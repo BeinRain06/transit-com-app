@@ -94,3 +94,9 @@ resource_3 : LinkedIn OAuth 2.0 social login guide
  */
 
 /* http://localhost:8000/third/media/linkedin/callback */
+
+/* *<--PROBLEMS with LinkedIn -->**
+   issue : ^^This application is not allowed to create application tokens^^
+
+   Link : https://stackoverflow.com/questions/50626514/linkedin-this-application-is-not-allowed-to-create-application-tokens
+*/
